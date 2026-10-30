@@ -1,6 +1,7 @@
 // API Client for Unstuck & Keneca Matching Engine
 
-const API_BASE_URL = "http://192.168.2.196:2000";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:2000";
 
 // Default Ontario Tech campus coordinates (North Oshawa campus)
 export const DEFAULT_CAMPUS_LOCATION = {
