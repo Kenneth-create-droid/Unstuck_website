@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "dependencies": {
+    "h3-js": "^4.5.0",
+    "redis": "^4.7.1"
+  }
+}

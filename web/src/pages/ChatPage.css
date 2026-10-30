@@ -1,0 +1,118 @@
+.unstuck-chat-page{min-height:100vh;background:#f8f9fa;display:flex;justify-content:center;padding:24px 16px;box-sizing:border-box}.unstuck-chat-panel{width:100%;max-width:900px;height:calc(100vh - 48px);min-height:400px;display:flex;flex-direction:column;background:white;border:1px solid #e9ecef;border-radius:16px;overflow:hidden;box-shadow:0 12px 36px rgba(24,42,88,.06)}.unstuck-chat-header{display:grid;grid-template-columns:100px 1fr 100px;align-items:center;padding:14px 18px;border-bottom:1px solid #e9ecef}.unstuck-chat-contact{text-align:center;display:flex;flex-direction:column;gap:4px}.unstuck-chat-contact strong{color:#182a58;font-size:18px}.unstuck-chat-contact span{font-size:12px;color:#28a745;font-weight:600}.unstuck-chat-online{display:inline-block;width:7px;height:7px;border-radius:50%;background:#28a745;margin-right:4px}.unstuck-chat-header-actions{display:flex;justify-content:flex-end}.unstuck-chat-done{display:flex;align-items:center;gap:5px;border:0;background:#182a58;color:white;border-radius:8px;padding:9px 12px;font-weight:700;cursor:pointer}.unstuck-chat-messages{flex:1;min-height:0;overflow-y:auto;padding:18px 16px}.unstuck-chat-empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#adb5bd;text-align:center}.unstuck-chat-empty h3{margin:14px 0 4px;color:#182a58}.unstuck-chat-empty p{margin:0;color:#8e8e93}.unstuck-chat-message-row{display:flex;margin-bottom:10px}.unstuck-chat-message-row.mine{justify-content:flex-end}.unstuck-chat-message-row.theirs{justify-content:flex-start}.unstuck-chat-bubble{max-width:min(78%,500px);padding:10px 14px;border-radius:18px;background:#fff;border:1px solid #e9ecef;border-bottom-left-radius:5px;overflow-wrap:anywhere}.unstuck-chat-message-row.mine .unstuck-chat-bubble{background:#182a58;color:white;border-color:#182a58;border-bottom-left-radius:18px;border-bottom-right-radius:5px}.unstuck-chat-bubble p{white-space:pre-wrap;margin:0;font-size:16px;line-height:1.4}.unstuck-chat-bubble time{display:block;margin-top:5px;font-size:10px;color:#8e8e93;text-align:right}.unstuck-chat-message-row.mine time{color:#d7dcea}.unstuck-chat-composer{display:flex;align-items:flex-end;gap:9px;padding:12px;border-top:1px solid #e9ecef}.unstuck-chat-composer textarea{flex:1;min-width:0;min-height:44px;max-height:120px;resize:vertical;box-sizing:border-box;background:#f1f3f5;border:1px solid transparent;border-radius:22px;padding:12px 16px;font:inherit;outline:none}.unstuck-chat-composer textarea:focus{border-color:#182a58}.unstuck-chat-composer button{flex-shrink:0;width:44px;height:44px;border:0;border-radius:50%;display:grid;place-items:center;background:#182a58;color:white;cursor:pointer}.unstuck-chat-composer button:disabled,.unstuck-chat-done:disabled{opacity:.45;cursor:not-allowed}.unstuck-chat-state{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;color:#182a58}.unstuck-chat-state p{color:#6c757d}.unstuck-chat-state button{border:0;border-radius:8px;background:#182a58;color:white;padding:10px 18px;cursor:pointer}.unstuck-spin{animation:unstuck-chat-spin 1s linear infinite}@keyframes unstuck-chat-spin{to{transform:rotate(360deg)}}.unstuck-chat-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.42);display:grid;place-items:center;padding:16px;z-index:9999}.unstuck-chat-modal{width:min(100%,460px);background:white;border-radius:16px;padding:24px;box-shadow:0 18px 50px rgba(0,0,0,.2)}.unstuck-chat-modal h2{margin:0 0 10px;color:#182a58;font-size:21px}.unstuck-chat-modal p{color:#6c757d}.unstuck-chat-modal-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-top:22px}.unstuck-chat-modal-actions button{border:1px solid #d5d9df;background:white;border-radius:8px;padding:10px 12px;cursor:pointer}.unstuck-chat-modal-actions button.primary{background:#182a58;color:white;border-color:#182a58}@media(max-width:600px){.unstuck-chat-page{padding:0}.unstuck-chat-panel{height:100dvh;min-height:0;border-radius:0;border:0}.unstuck-chat-header{grid-template-columns:70px 1fr 70px;padding:12px}.unstuck-chat-done{padding:8px 9px}.unstuck-chat-bubble{max-width:85%}}
+
+.unstuck-chat-welcome {
+  max-width: 380px;
+  margin: 24px auto;
+  padding: 24px;
+  text-align: center;
+  background: #f0f4ff;
+  border: 1px solid #dbe4ff;
+  border-radius: 18px;
+}
+
+.unstuck-chat-welcome-emoji {
+  font-size: 34px;
+}
+
+.unstuck-chat-welcome h3 {
+  color: #182a58;
+  margin: 12px 0 8px;
+}
+
+.unstuck-chat-welcome p {
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.unstuck-chat-welcome button {
+  margin-top: 16px;
+  background: #182a58;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.unstuck-chat-welcome button:hover {
+  background: #243d7a;
+}
+
+.unstuck-chat-inactivity-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #64748b;
+  text-align: center;
+}
+
+.unstuck-chat-inactivity-notice svg {
+  flex-shrink: 0;
+}
+
+.unstuck-thankyou-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.unstuck-thankyou-modal {
+  background: white;
+  border-radius: 18px;
+  padding: 32px 26px;
+  width: 100%;
+  max-width: 390px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.unstuck-thankyou-icon {
+  width: 64px;
+  height: 64px;
+  background: #dcfce7;
+  color: #16a34a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.unstuck-thankyou-modal h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.unstuck-thankyou-modal p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.unstuck-thankyou-modal button {
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.unstuck-thankyou-modal button:hover {
+  background: #1d4ed8;
+}

@@ -1,0 +1,117 @@
+
+/* Unstuck Navigation */
+
+.unstuck-navbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.unstuck-navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 112px;
+}
+
+.unstuck-navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.unstuck-navbar-icon {
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #182a58, #2455c5);
+  color: white;
+}
+
+.unstuck-navbar-title {
+  display: block;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 850;
+  line-height: 1.1;
+  letter-spacing: -1.2px;
+  color: #182a58;
+}
+
+.unstuck-navbar-subtitle {
+  display: block;
+  margin-top: 6px;
+  font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ed5c00;
+}
+
+.unstuck-navbar-profile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 24px;
+  background: #182a58;
+  color: white;
+  border-radius: 999px;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.unstuck-navbar-profile:hover {
+  background: #243e7d;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .unstuck-navbar-inner {
+    min-height: 82px;
+    gap: 12px;
+  }
+
+  .unstuck-navbar-brand {
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .unstuck-navbar-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 12px;
+  }
+
+  .unstuck-navbar-title {
+    font-size: 1.65rem;
+  }
+
+  .unstuck-navbar-subtitle {
+    font-size: 0.65rem;
+    letter-spacing: 0.25px;
+  }
+
+  .unstuck-navbar-profile {
+    padding: 11px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .unstuck-navbar-subtitle {
+    font-size: 0.57rem;
+  }
+
+  .unstuck-navbar-profile {
+    padding: 10px;
+    gap: 5px;
+  }
+}
