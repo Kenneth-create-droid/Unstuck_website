@@ -24,8 +24,12 @@ export async function apiRequest(endpoint, method = "GET", body = null) {
   const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
   const data = await response.json().catch(() => ({}));
 
- if (!response.ok) {
-  const error = new Error(`Failed to fetch chat messages (${response.status})`);
+if (!response.ok) {
+  const error = new Error(
+    data.message ||
+    data.error ||
+    `Request failed (${response.status})`
+  );
   error.status = response.status;
   throw error;
 }
@@ -89,6 +93,25 @@ export async function getUserProfile(userId) {
   return apiRequest(`/profile?userId=${userId}`, "GET");
 }
 
+// ---------------- STUDENT COURSES APIS ----------------
+
+// Save the courses selected during signup
+export async function saveMyCourses(userId, courses) {
+  return apiRequest(
+    `/api/users/${encodeURIComponent(userId)}/courses`,
+    "PUT",
+    { courses }
+  );
+}
+
+// Retrieve the courses saved by a student
+export async function getMyCourses(userId) {
+  return apiRequest(
+    `/api/users/${encodeURIComponent(userId)}/courses`,
+    "GET"
+  );
+}
+
 // ---------------- KENECA ENGINE & REDIS SPATIAL APIS ----------------
 
 export async function activateLocation({ userId, lat, lng }) {
@@ -119,10 +142,18 @@ export async function getUserStatus(userId) {
   return apiRequest(`/api/user/status?userId=${userId}`, "GET");
 }
 
-export async function submitHelpRequest({ userId, subject, description, lat, lng }) {
+export async function submitHelpRequest({
+  userId,
+  subject,
+  courseCode,
+  description,
+  lat,
+  lng
+}) {
   return apiRequest("/api/request/submit", "POST", {
     userId,
-    subject: subject || "General Course Help",
+    subject: subject || "General Campus Help",
+    courseCode: courseCode || null,
     description: description.trim(),
     lat: Number(lat),
     lng: Number(lng)

@@ -1386,18 +1386,131 @@ Request: ${description || ""}
 
 // ---------------------- DISPATCH & REQUEST ROUTES ----------------------
 
+const SUPPORTED_COURSES = new Set([
+  "ENGR 4111U",
+  "SOFE 4790U",
+  "SOFE 4590U",
+  "SOFE 4640U",
+  "SOFE 4850U",
+  "ARTE 4110U"
+]);
+
+// ---------------------- STUDENT COURSE ROUTES ----------------------
+
+// Get the courses selected by a student
+app.get("/api/users/:userId/courses", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!/^\d+$/.test(userId)) {
+      return res.status(400).json({
+        message: "Invalid user ID."
+      });
+    }
+
+    const result = await db.query(
+      `SELECT course_code
+       FROM user_courses
+       WHERE user_id = $1
+       ORDER BY course_code`,
+      [userId]
+    );
+
+    return res.json({
+      courses: result.rows.map((row) => row.course_code)
+    });
+  } catch (error) {
+    console.error("Failed to retrieve courses:", error);
+    return res.status(500).json({
+      message: "Unable to retrieve courses."
+    });
+  }
+});
+
+// Save the courses selected during signup
+app.put("/api/users/:userId/courses", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { courses } = req.body;
+
+    if (!/^\d+$/.test(userId)) {
+      return res.status(400).json({
+        message: "Invalid user ID."
+      });
+    }
+
+    if (
+      !Array.isArray(courses) ||
+      !courses.every((code) => SUPPORTED_COURSES.has(code))
+    ) {
+      return res.status(400).json({
+        message: "Invalid course selection."
+      });
+    }
+
+    const uniqueCourses = [...new Set(courses)];
+
+    const existingUser = await db.query(
+      "SELECT id FROM users WHERE id = $1",
+      [userId]
+    );
+
+    if (existingUser.rows.length === 0) {
+      return res.status(404).json({
+        message: "Student not found."
+      });
+    }
+
+    const connection = await db.connect();
+
+    try {
+      await connection.query("BEGIN");
+
+      await connection.query(
+        "DELETE FROM user_courses WHERE user_id = $1",
+        [userId]
+      );
+
+      for (const courseCode of uniqueCourses) {
+        await connection.query(
+          `INSERT INTO user_courses (user_id, course_code)
+           VALUES ($1, $2)`,
+          [userId, courseCode]
+        );
+      }
+
+      await connection.query("COMMIT");
+    } catch (error) {
+      await connection.query("ROLLBACK");
+      throw error;
+    } finally {
+      connection.release();
+    }
+
+    return res.json({
+      success: true,
+      courses: uniqueCourses
+    });
+  } catch (error) {
+    console.error("Failed to save courses:", error);
+    return res.status(500).json({
+      message: "Unable to save courses."
+    });
+  }
+});
 // Submit Help Request Endpoint
 // ---------------------- SUBMIT HELP REQUEST ----------------------
 
 app.post("/api/request/submit", async (req, res) => {
   try {
     const {
-      userId,
-      subject,
-      description,
-      lat,
-      lng
-    } = req.body;
+  userId,
+  subject,
+  courseCode,
+  description,
+  lat,
+  lng
+} = req.body;
 
 
     // ------------------------------------------
@@ -1415,6 +1528,24 @@ app.post("/api/request/submit", async (req, res) => {
         message: "Missing required request information."
       });
     }
+
+    // ------------------------------------------
+// VALIDATE SELECTED COURSE
+// ------------------------------------------
+
+const selectedCourse = courseCode || null;
+
+if (
+  selectedCourse !== null &&
+  (
+    typeof selectedCourse !== "string" ||
+    !SUPPORTED_COURSES.has(selectedCourse)
+  )
+) {
+  return res.status(400).json({
+    message: "Invalid course selection."
+  });
+}
 
 
     // ------------------------------------------
@@ -1435,17 +1566,16 @@ app.post("/api/request/submit", async (req, res) => {
     // 3. CREATE REDIS JOB AS ANALYZING
     // ------------------------------------------
 
-    await setDispatchJob(postId, {
-      postId,
-      userId: String(userId),
-      subject:
-        subject || "General Course Help",
-      description:
-        description.trim(),
-      startingCell,
-      status: "ANALYZING",
-      currentRing: "0"
-    });
+   await setDispatchJob(postId, {
+  postId,
+  userId: String(userId),
+  subject: subject || "General Campus Help",
+  courseCode: selectedCourse || "",
+  description: description.trim(),
+  startingCell,
+  status: "ANALYZING",
+  currentRing: "0"
+});
 
 
     // ------------------------------------------

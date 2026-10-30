@@ -1,4 +1,5 @@
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { 
   ArrowRight, 
@@ -18,6 +19,9 @@ import Footer from "../components/Footer";
 import CampusHexMap from "../components/CampusHexMap";
 
 export default function LandingPage() {
+  const { user } = useAuth();
+  const isLoggedIn = Boolean(user?.id);
+
   return (
     <div className="web-viewport">
       <Navbar />
@@ -43,15 +47,26 @@ export default function LandingPage() {
                 the closest available peer to you in minutes—without broadcast notification spam.
               </p>
 
-              <div className="hero-cta-group">
-                <Link to="/signup" className="btn btn-primary" style={{ padding: "0.85rem 1.75rem", fontSize: "1rem" }}>
-                  Join Campus Network
-                  <ArrowRight size={18} />
-                </Link>
-                <Link to="/login" className="btn btn-secondary" style={{ padding: "0.85rem 1.5rem", fontSize: "1rem" }}>
-                  Sign In with Student Email
-                </Link>
-              </div>
+             <div className="hero-cta-group">
+  <Link
+    to={isLoggedIn ? "/home" : "/signup"}
+    className="btn btn-primary"
+    style={{ padding: "0.85rem 1.75rem", fontSize: "1rem" }}
+  >
+    {isLoggedIn ? "Go to My Home" : "Join Campus Network"}
+    <ArrowRight size={18} />
+  </Link>
+
+  {!isLoggedIn && (
+    <Link
+      to="/login"
+      className="btn btn-secondary"
+      style={{ padding: "0.85rem 1.5rem", fontSize: "1rem" }}
+    >
+      Sign In with Student Email
+    </Link>
+  )}
+</div>
 
               {/* Quick Metrics */}
               <div className="hero-stats-row">

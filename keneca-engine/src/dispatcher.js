@@ -4,6 +4,8 @@ import {
   updateDispatchJob
 } from "./redis/dispatchState.js";
 
+import { db } from "../../backend/db.js";
+
 import {
   updateUserStatus,
   getUserStatus
@@ -20,6 +22,52 @@ import {
 // Helper delay to give searching.tsx telemetry pacing between H3 k-ring expansions
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+async function prioritizeCourseCandidates(candidates, courseCode) {
+  // General campus requests keep the original distance-based ranking.
+  if (!courseCode || candidates.length === 0) {
+    return candidates;
+  }
+
+  const candidateIds = candidates.map((user) => String(user.id));
+
+  try {
+    const result = await db.query(
+      `
+      SELECT DISTINCT user_id
+      FROM user_courses
+      WHERE course_code = $1
+        AND user_id = ANY($2::integer[])
+      `,
+      [courseCode, candidateIds]
+    );
+
+    const sameCourseIds = new Set(
+      result.rows.map((row) => String(row.user_id))
+    );
+
+    // Preserve the original scoring order within each group.
+    const sameCourseCandidates = candidates.filter((user) =>
+      sameCourseIds.has(String(user.id))
+    );
+
+    const otherCandidates = candidates.filter(
+      (user) => !sameCourseIds.has(String(user.id))
+    );
+
+    console.log(
+      `[Dispatcher] ${sameCourseCandidates.length} same-course helpers, ` +
+      `${otherCandidates.length} fallback helpers for ${courseCode}`
+    );
+
+    return [...sameCourseCandidates, ...otherCandidates];
+
+  } catch (error) {
+    console.error("[Dispatcher] Course prioritization failed:", error);
+
+    // If the course lookup fails, preserve existing matching behavior.
+    return candidates;
+  }
+}
 async function propagateRing(post) {
   const postStatus = await getDispatchJob(post.id);
   
@@ -67,6 +115,7 @@ async function dispatchPost(post) {
   const postStatus = await getDispatchJob(post.id);
   if (!postStatus || postStatus.status === "CANCELLED") return null;
 
+  const courseCode = postStatus.courseCode || null;
   // Sync state to Redis only if it's not already updated
   if (postStatus.currentRing !== currentRingStr || postStatus.status !== "SEARCHING") {
     await updateDispatchJob(post.id, {
@@ -117,17 +166,21 @@ async function dispatchPost(post) {
   return null;
 });
   
-  const resolvedUsers = await Promise.all(userCheckPromises);
-  const validCandidates = resolvedUsers.filter(Boolean);
+ const resolvedUsers = await Promise.all(userCheckPromises);
+const validCandidates = resolvedUsers.filter(Boolean);
 
+const prioritizedCandidates = await prioritizeCourseCandidates(
+  validCandidates,
+  courseCode
+);
   // If all candidates in this ring were unavailable or already seen, expand ring instantly
   if (validCandidates.length === 0) {
     return await propagateRing(post);
   }
 
   // 3. Process available candidates
-  for (let i = 0; i < validCandidates.length; i++) {
-    const currentUser = validCandidates[i];
+ for (let i = 0; i < prioritizedCandidates.length; i++) {
+  const currentUser = prioritizedCandidates[i];
     const currentUserId = currentUser.id.toString();
 
     // Check again before offering in case the client cancelled mid-loop

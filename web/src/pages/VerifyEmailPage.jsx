@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { CheckCircle, AlertCircle } from "lucide-react";
 import { verifyEmail, resendVerificationCode } from "../api";
 import AuthLayout from "../components/AuthLayout";
+import { useAuth } from "../context/AuthContext";
 
 export default function VerifyEmailPage() {
   const [searchParams] = useSearchParams();
@@ -15,6 +16,7 @@ export default function VerifyEmailPage() {
   const [cooldown, setCooldown] = useState(0);
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const { login } = useAuth();
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -24,32 +26,46 @@ export default function VerifyEmailPage() {
     return () => clearInterval(timer);
   }, [cooldown]);
 
-  const handleVerify = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccessMsg("");
+ const handleVerify = async (e) => {
+  e.preventDefault();
+  setError("");
+  setSuccessMsg("");
 
-    if (!code.trim() || code.trim().length !== 6) {
-      setError("Please enter the 6-digit verification code.");
-      return;
-    }
+  if (!/^\d{6}$/.test(code.trim())) {
+    setError("Please enter the 6-digit verification code.");
+    return;
+  }
 
-    try {
-      setLoading(true);
-      const data = await verifyEmail({ email, code });
+  try {
+    setLoading(true);
 
-      if (data.success) {
-        setSuccessMsg("Email verified successfully! Redirecting to login...");
-        setTimeout(() => {
-          navigate("/login");
-        }, 1500);
-      }
-    } catch (err) {
-      setError(err.message || "Invalid or expired verification code.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    const data = await verifyEmail({ email, code: code.trim() });
+
+   if (data.success) {
+  if (!data.user?.id) {
+    setError(
+      "Email verified successfully. Please sign in to continue."
+    );
+    navigate("/login", { replace: true });
+    return;
+  }
+
+  // The backend must establish a valid authenticated session.
+  // A user object alone is not proof of authentication.
+  login(data.user);
+
+  setSuccessMsg(
+    "Account verified! Let's personalize your Unstuck experience."
+  );
+
+  navigate("/select-courses", { replace: true });
+}
+  } catch (err) {
+    setError(err.message || "Invalid or expired verification code.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleResend = async () => {
     if (cooldown > 0 || resending) return;

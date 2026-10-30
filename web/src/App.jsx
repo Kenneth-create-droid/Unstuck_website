@@ -12,6 +12,9 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import ChatPage from "./pages/ChatPage";
+import CourseSelectionPage from "./pages/CourseSelectionPage";
+
+import ScrollToTop from "./components/ScrollToTop";
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -35,6 +38,8 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
+
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -45,7 +50,14 @@ export default function App() {
           <Route path="/verify-reset-code" element={<VerifyResetCodePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
+
+          <Route
+            path="/select-courses"
+            element={<CourseSelectionPage />}
+          />
+
           <Route path="/search" element={<SearchPage />} />
+
           <Route
             path="/home"
             element={
@@ -54,6 +66,7 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

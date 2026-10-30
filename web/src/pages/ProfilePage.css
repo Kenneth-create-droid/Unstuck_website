@@ -143,6 +143,77 @@
   margin-bottom: 28px;
 }
 
+/* =========================================
+   MY COURSES - ALL SCREEN SIZES
+   ========================================= */
+
+.unstuck-profile-courses {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  margin-bottom: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #e9ecef;
+  text-align: left;
+}
+
+.unstuck-profile-courses-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  color: #182a58;
+}
+
+.unstuck-profile-courses-heading h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #182a58;
+}
+
+.unstuck-profile-course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.unstuck-profile-course-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 14px 16px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+}
+
+.unstuck-profile-course-item strong {
+  display: block;
+  color: #182a58;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.unstuck-profile-course-item span {
+  display: block;
+  color: #6c757d;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.unstuck-profile-logout {
+  margin-top: 8px;
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+
 @media (max-width: 480px) {
   .unstuck-profile-nav {
     padding: 16px;
@@ -159,4 +230,91 @@
   .unstuck-profile-info h1 {
     font-size: 22px;
   }
+
+  .unstuck-profile-courses-heading h2 {
+    font-size: 18px;
+  }
+
+    .unstuck-profile-course-item {
+    padding: 12px 14px;
+  }
+}
+
+/* Edit Courses button */
+
+
+/* Edit Courses button */
+
+.unstuck-profile-edit-courses {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 9px 14px;
+  border: 1px solid #dbe3f0;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #182a58;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.unstuck-profile-edit-courses:hover {
+  background: #f1f5f9;
+}
+
+/* Cancel and Save Changes */
+
+.unstuck-profile-course-actions {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.unstuck-profile-course-cancel,
+.unstuck-profile-course-save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  padding: 13px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.unstuck-profile-course-cancel {
+  background: #ffffff;
+  color: #182a58;
+  border: 1px solid #dbe3f0;
+}
+
+.unstuck-profile-course-cancel:hover {
+  background: #f1f5f9;
+}
+
+.unstuck-profile-course-save {
+  background: #182a58;
+  color: #ffffff;
+  border: 1px solid #182a58;
+}
+
+.unstuck-profile-course-save:hover {
+  background: #253c78;
+}
+
+.unstuck-profile-course-cancel:disabled,
+.unstuck-profile-course-save:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }

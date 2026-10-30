@@ -43,18 +43,23 @@ import "./HomePageSimple.css";
 const LOCATION_SYNC_MS = 30 * 1000;
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:2000";
 
-const QUICK_TOPICS = [
-  "Calculus 1 (MATH 1010)",
-  "Linear Algebra (MATH 2050)",
-  "Operating Systems (CSCI 3020)",
-  "Data Structures & Algorithms",
-  "Software Engineering (SOFE)",
-  "Physics (PHY 1010)"
+const REQUEST_COURSES = [
+  { code: "", name: "General Campus Help (No Course)" },
+  { code: "ENGR 4111U", name: "Capstone Systems Design I" },
+  { code: "SOFE 4790U", name: "Distributed Systems" },
+  { code: "SOFE 4590U", name: "Embedded Systems" },
+  { code: "SOFE 4640U", name: "Mobile Application Development" },
+  { code: "SOFE 4850U", name: "User Experience Design" },
+  { code: "ARTE 4110U", name: "Deep Learning Architecture and Algorithms" }
 ];
 
 export default function HomePage() {
   const { user, logout, refreshProfile } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
 
   // Availability & Location State
   const [isAvailable, setIsAvailable] = useState(false);
@@ -73,6 +78,7 @@ export default function HomePage() {
   const [countdown, setCountdown] = useState(null);
   const enteringChatRef = useRef(false);
   const mountedRef = useRef(true);
+  const [selectedCourse, setSelectedCourse] = useState("");
  
 
   // Help Request Modal State (Requester mode)
@@ -330,7 +336,10 @@ export default function HomePage() {
       });
       const res = await submitHelpRequest({
         userId: user.id,
-        subject: subject || "General Course Help",
+        subject: selectedCourse
+          ? REQUEST_COURSES.find(c => c.code === selectedCourse)?.name
+          : "General Campus Help",
+        courseCode: selectedCourse || null,
         description,
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -339,7 +348,8 @@ export default function HomePage() {
       if (res.success && res.postId) {
         setShowRequestModal(false);
         navigate(`/search?postId=${encodeURIComponent(res.postId)}`);
-        setSubject("");
+       setSubject("");
+        setSelectedCourse("");
         setDescription("");
       }
     } catch (err) {
@@ -566,8 +576,43 @@ export default function HomePage() {
             <div className="unstuck-card-title"><MessageSquare size={22} /><h2>Ask for help on campus</h2></div>
             <p className="unstuck-card-hint">Stuck on a course concept or trying to find a campus room? Tell us what you need.</p>
             <form onSubmit={handleCreateRequest}>
-              <textarea
-                className="unstuck-help-textarea"
+
+  <div style={{ marginBottom: "1rem" }}>
+    <label
+      htmlFor="request-course"
+      style={{
+        display: "block",
+        fontWeight: 600,
+        fontSize: "0.9rem",
+        marginBottom: "0.5rem"
+      }}
+    >
+      Course (Optional)
+    </label>
+
+    <select
+      id="request-course"
+      className="form-input-box"
+      value={selectedCourse}
+      onChange={(e) => setSelectedCourse(e.target.value)}
+      disabled={submittingReq}
+      style={{
+        width: "100%",
+        marginBottom: "0.25rem"
+      }}
+    >
+      {REQUEST_COURSES.map((course) => (
+        <option key={course.code || "general"} value={course.code}>
+          {course.code
+            ? `${course.code} — ${course.name}`
+            : course.name}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  <textarea
+    className="unstuck-help-textarea"
                 placeholder="e.g. Does anyone know where SCI1120U is, or can someone explain this calculus concept?"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}

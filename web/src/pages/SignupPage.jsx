@@ -4,10 +4,12 @@ import { Eye, EyeOff, UserPlus, AlertCircle, CheckCircle } from "lucide-react";
 import { signupUser } from "../api";
 import AuthLayout from "../components/AuthLayout";
 
+import { useAuth } from "../context/AuthContext";
 const ALLOWED_DOMAINS = ["ontariotechu.net", "ontariotechu.ca", "gmail.com"];
 
 export default function SignupPage() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -55,12 +57,15 @@ export default function SignupPage() {
         return;
       }
 
-      if (data.success) {
-        setSuccessMsg(data.message || "Account created successfully! Redirecting to login...");
-        setTimeout(() => {
-          navigate("/login");
-        }, 1500);
-      }
+      if (data.success && data.user?.id) {
+  login(data.user);
+
+  navigate("/select-courses", {
+    replace: true
+  });
+
+  return;
+}
     } catch (err) {
       setError(err.message || "Failed to create account. Please try again.");
     } finally {
