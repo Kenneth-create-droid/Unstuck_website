@@ -9,30 +9,35 @@ export const DEFAULT_CAMPUS_LOCATION = {
   lng: -78.8960
 };
 
+
 export async function apiRequest(endpoint, method = "GET", body = null) {
+  const token = localStorage.getItem("unstuck_token");
+
   const options = {
     method,
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {})
     }
   };
 
-  if (body) {
+  if (body !== null) {
     options.body = JSON.stringify(body);
   }
 
   const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
   const data = await response.json().catch(() => ({}));
 
-if (!response.ok) {
-  const error = new Error(
-    data.message ||
-    data.error ||
-    `Request failed (${response.status})`
-  );
-  error.status = response.status;
-  throw error;
-}
+  if (!response.ok) {
+    const error = new Error(
+      data.message ||
+      data.error ||
+      `Request failed (${response.status})`
+    );
+
+    error.status = response.status;
+    throw error;
+  }
 
   return data;
 }
@@ -89,8 +94,10 @@ export async function resetPassword({ email, code, newPassword }) {
   });
 }
 
-export async function getUserProfile(userId) {
-  return apiRequest(`/profile?userId=${userId}`, "GET");
+export function getUserProfile(userId) {
+  return apiRequest(
+    `/api/user/profile?userId=${encodeURIComponent(userId)}`
+  );
 }
 
 // ---------------- STUDENT COURSES APIS ----------------
@@ -190,38 +197,17 @@ export async function cancelHelpRequest({ postId }) {
 
 // Fetch messages for an active Unstuck chat session
 export async function getChatMessages(postId, userId) {
-  const response = await fetch(
-    `${API_BASE_URL}/api/chat/messages?postId=${encodeURIComponent(postId)}&userId=${encodeURIComponent(userId)}`
+  return apiRequest(
+    `/api/chat/messages?postId=${encodeURIComponent(postId)}&userId=${encodeURIComponent(userId)}`
   );
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch chat messages (${response.status})`);
-  }
-
-  return response.json();
 }
 // Redispatch a help request after a chat session
 export async function redispatchMatch(postId, userId) {
-  const response = await fetch(`${API_BASE_URL}/api/chat/redispatch`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      postId,
-      userId,
-    }),
+  return apiRequest("/api/chat/redispatch", "POST", {
+    postId,
+    userId
   });
-
-  const data = await response.json();
-
-  if (!response.ok || data.success === false) {
-    throw new Error(data.error || data.message || "Redispatch failed");
-  }
-
-  return data;
 }
-
 
 // Get chat session for requester or helper
 export async function getChatSession(postId, userId) {

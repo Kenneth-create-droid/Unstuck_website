@@ -1,6 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { AlertCircle, Check, LoaderCircle, MessageCircle, Send } from "lucide-react";
+import {
+  AlertCircle,
+  Check,
+  LoaderCircle,
+  MessageCircle,
+  Paperclip,
+  Send
+} from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import {
   getChatSession,
@@ -23,6 +30,9 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
+
+  const fileInputRef = useRef(null);
+const [uploading, setUploading] = useState(false);
   const [completing, setCompleting] = useState(false);
   const [showDone, setShowDone] = useState(false);
   const bottomRef = useRef(null);
@@ -31,7 +41,7 @@ export default function ChatPage() {
   const closedRef = useRef(false);
   const pollingRef = useRef(false);
 
-  const INACTIVITY_LIMIT = 5 * 60 * 1000;
+ const INACTIVITY_LIMIT = 60 * 60 * 1000;
 
 const lastActivityRef = useRef(Date.now());
 const latestMessageIdRef = useRef(null);
@@ -161,6 +171,106 @@ const loadMessages = useCallback(async () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages.length]);
 
+  const handleAttachmentDownload = async (attachment) => {
+  if (!postId || !attachment?.publicId) return;
+
+  try {
+    const token = localStorage.getItem("unstuck_token");
+    if (!token) throw new Error("Please log in again.");
+
+    const query = new URLSearchParams({
+      postId,
+      publicId: attachment.publicId
+    });
+
+    const response = await fetch(
+      `http://localhost:2000/api/chat/attachment?${query}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Unable to download attachment.");
+    }
+
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = attachment.name || "attachment";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch (error) {
+    window.alert(error.message || "Download failed.");
+  }
+};
+
+  const handleFileUpload = async (file) => {
+  if (!file || !postId || !userId || uploading || closedRef.current) return;
+
+  if (file.size > 10 * 1024 * 1024) {
+    window.alert("Files must be 10 MB or smaller.");
+    return;
+  }
+
+  setUploading(true);
+
+  try {
+    const formData = new FormData();
+    formData.append("postId", postId);
+    formData.append("userId", userId);
+    formData.append("file", file);
+
+    const token = localStorage.getItem("unstuck_token");
+
+    if (!token) {
+      throw new Error("Please log in again.");
+    }
+
+    const response = await fetch(
+      "http://localhost:2000/api/chat/upload",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "File upload failed.");
+    }
+
+    // The backend creates a chat message for the attachment.
+    if (data.chatMessage) {
+      setMessages((previous) =>
+        previous.some((m) => String(m.id) === String(data.chatMessage.id))
+          ? previous
+          : [...previous, data.chatMessage]
+      );
+    }
+
+    lastActivityRef.current = Date.now();
+
+    console.log("[Chat] Attachment uploaded:", data.attachment?.name);
+  } catch (error) {
+    console.error("[Chat] Upload failed:", error);
+    window.alert(error.message || "Unable to upload attachment.");
+  } finally {
+    setUploading(false);
+  }
+};
+
   const handleSend = async (event) => {
     event.preventDefault();
     const text = messageText.trim();
@@ -262,7 +372,7 @@ if (inactiveFor >= INACTIVITY_LIMIT) {
           <div className="unstuck-chat-inactivity-notice">
                 <AlertCircle size={14} />
                 <span>
-                    Chats inactive for 5 minutes will be automatically closed.
+                    Chats inactive for 1hr will be automatically closed.
                 </span>
                 </div>
           {messages.length === 0 && (
@@ -293,7 +403,27 @@ if (inactiveFor >= INACTIVITY_LIMIT) {
             const mine = String(item.senderId) === userId;
             return <div className={`unstuck-chat-message-row ${mine ? "mine" : "theirs"}`} key={item.id}>
               <div className="unstuck-chat-bubble">
-                <p>{item.message}</p>
+                {item.message && <p>{item.message}</p>}
+
+                {item.attachment?.publicId && (
+                  <button
+                    type="button"
+                    className="unstuck-chat-attachment"
+                    onClick={() => handleAttachmentDownload(item.attachment)}
+                    title="Download attachment"
+                  >
+                    <Paperclip size={17} />
+                    <span>
+                      {item.attachment.name || "Attachment"}
+                      {Number.isFinite(Number(item.attachment.size)) && (
+                        <small>
+                          {" "}
+                          ({(Number(item.attachment.size) / 1024).toFixed(1)} KB)
+                        </small>
+                      )}
+                    </span>
+                  </button>
+                )}
                 <time>{item.sentAt ? new Date(Number(item.sentAt)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : ""}</time>
               </div>
             </div>;
@@ -301,6 +431,36 @@ if (inactiveFor >= INACTIVITY_LIMIT) {
           <div ref={bottomRef} />
         </div>
         <form className="unstuck-chat-composer" onSubmit={handleSend}>
+
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".jpg,.jpeg,.png,.webp,.pdf,.docx,.txt"
+            style={{ display: "none" }}
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+
+              if (file) {
+                handleFileUpload(file);
+              }
+
+              e.target.value = "";
+            }}
+          />
+
+          <button
+            type="button"
+            aria-label="Attach file"
+            title="Attach a file"
+            disabled={uploading || completing}
+            onClick={() => fileInputRef.current?.click()}
+          >
+                      {uploading ? (
+              <LoaderCircle className="unstuck-spin" size={19} />
+            ) : (
+              <Paperclip size={19} />
+            )}
+          </button>
           <textarea aria-label="Message" placeholder="Type a message..." value={messageText} maxLength={1000} rows={1} onChange={(e) => setMessageText(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); e.currentTarget.form?.requestSubmit(); } }} />
           <button type="submit" aria-label="Send message" disabled={!messageText.trim() || sending}>{sending ? <LoaderCircle className="unstuck-spin" size={19} /> : <Send size={19} />}</button>
         </form>
@@ -324,7 +484,7 @@ if (inactiveFor >= INACTIVITY_LIMIT) {
   <>
     <h2>Chat Timed Out</h2>
     <p>
-      This chat was automatically closed after 5 minutes
+      This chat was automatically closed after 1 hour
       of inactivity. Thank you for being part of the
       Unstuck community! We're always here when you
       need a helping hand.

@@ -1,4 +1,5 @@
 import { client } from "./redisClient.js";
+import crypto from "node:crypto";
 
 // Active chats are temporary.
 // This TTL prevents abandoned chat data from living forever.
@@ -50,7 +51,8 @@ async function getChatSession(postId) {
 // ADD MESSAGE
 // ------------------------------------------
 
-async function addChatMessage(postId, senderId, message) {
+
+async function addChatMessage(postId, senderId, message, attachment = null) {
   const messagesKey = `chat:${postId}:messages`;
   const chatKey = `chat:${postId}`;
 
@@ -60,23 +62,29 @@ async function addChatMessage(postId, senderId, message) {
     throw new Error("Chat session does not exist.");
   }
 
+  const hasText = typeof message === "string" && message.trim().length > 0;
+
+  if (!hasText && !attachment) {
+    throw new Error("A message or attachment is required.");
+  }
+
+  const now = Date.now();
+
   const chatMessage = {
-    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    id: crypto.randomUUID(),
     senderId: String(senderId),
-    message: String(message),
-    sentAt: Date.now()
+    type: attachment ? "file" : "text",
+    message: hasText ? message.trim() : "",
+    ...(attachment ? { attachment } : {}),
+    sentAt: now
   };
 
-  await client.rPush(
-    messagesKey,
-    JSON.stringify(chatMessage)
-  );
+  await client.rPush(messagesKey, JSON.stringify(chatMessage));
 
   await client.hSet(chatKey, {
-    lastActivityAt: Date.now().toString()
+    lastActivityAt: String(now)
   });
 
-  // Refresh expiration while the chat is being used.
   await client.expire(chatKey, CHAT_TTL_SECONDS);
   await client.expire(messagesKey, CHAT_TTL_SECONDS);
 

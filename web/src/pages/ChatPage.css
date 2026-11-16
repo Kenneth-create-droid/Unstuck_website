@@ -116,3 +116,31 @@
 .unstuck-thankyou-modal button:hover {
   background: #1d4ed8;
 }
+
+.unstuck-chat-attachment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.unstuck-chat-attachment span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.unstuck-chat-attachment:hover {
+  opacity: 0.8;
+}
+
+.unstuck-chat-attachment small {
+  opacity: 0.7;
+}

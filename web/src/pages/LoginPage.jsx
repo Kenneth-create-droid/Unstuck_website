@@ -28,12 +28,12 @@ export default function LoginPage() {
       setLoading(true);
       const data = await loginUser({ email, password });
 
-      if (data && data.user) {
-        login(data.user);
-        navigate("/home");
-      } else {
-        setError(data.message || "Invalid credentials.");
-      }
+      if (data && data.user && data.token) {
+  login(data.user, data.token);
+  navigate("/home");
+} else {
+  setError(data?.message || "Login failed. Authentication token missing.");
+}
     } catch (err) {
       setError(err.message || "Failed to log in. Please check your credentials.");
     } finally {

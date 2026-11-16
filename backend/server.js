@@ -2,7 +2,14 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
+import multer from "multer";
+import { fileTypeFromBuffer } from "file-type";
+import cloudinary from "./config/cloudinary.js";
+
+import { requireAuth } from "./middleware/auth.js";
+
 import OpenAI from "openai";
+import jwt from "jsonwebtoken";
 
 import { Resend } from "resend";
 import bcrypt from "bcrypt";
@@ -67,10 +74,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Test PostgreSQL Connection
-// Test PostgreSQL Connection
-
-
+// Temporary in-memory storage for chat attachments.
+// Maximum file size: 10 MB.
+const chatUpload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024,
+    files: 1
+  }
+});
 
 
 app.get("/", (req, res) => {
@@ -79,7 +91,7 @@ app.get("/", (req, res) => {
 
 const PORT = 2000;
 
-const CHAT_INACTIVITY_LIMIT = 5 * 60 * 1000;
+const CHAT_INACTIVITY_LIMIT = 60 * 60 * 1000;
 const activeChatTimers = new Map();
 // ---------------------- AUTH ROUTES ----------------------
 
@@ -1144,12 +1156,26 @@ app.post("/login", async (req, res) => {
               });
             }
 
-        const { password: _, ...userWithoutPassword } = user;
 
-        return res.status(200).json({
-            message: "Login successful",
-            user: userWithoutPassword
-        });
+const { password: _, ...userWithoutPassword } = user;
+
+// Generate a signed authentication token.
+const token = jwt.sign(
+  {
+    userId: String(user.id)
+  },
+  process.env.JWT_SECRET,
+  {
+    expiresIn: "24h"
+  }
+);
+
+return res.status(200).json({
+  message: "Login successful",
+  user: userWithoutPassword,
+  token
+});
+
 
     } catch (error) {
         console.error("Error during login", error);
@@ -2109,6 +2135,524 @@ app.get("/api/debug/spatial", async (req, res) => {
 
 // ---------------------- CHAT ROUTES ----------------------
 
+// Check whether a chat is currently closing.
+async function isChatClosing(postId) {
+  const key = `chat:closing:${postId}`;
+
+  const closing = await client.get(key);
+
+  return closing === "1";
+}
+
+// Temporary attachment tracking for each chat.
+async function trackChatAttachment(postId, attachment) {
+  const key = `chat:attachments:${postId}`;
+
+  await client.hSet(
+    key,
+    attachment.publicId,
+    JSON.stringify(attachment)
+  );
+
+  // Register this chat for attachment cleanup.
+await client.sAdd("chat:attachment-cleanup-pending", String(postId));
+
+}
+
+// Retrieve attachment metadata belonging to a specific chat.
+async function getTrackedChatAttachment(postId, publicId) {
+  const key = `chat:attachments:${postId}`;
+
+  const storedAttachment = await client.hGet(
+    key,
+    publicId
+  );
+
+  if (!storedAttachment) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(storedAttachment);
+  } catch (error) {
+    console.error(
+      "[Chat] Invalid attachment metadata:",
+      error
+    );
+
+    return null;
+  }
+}
+
+// Delete all Cloudinary attachments belonging to a chat.
+async function deleteChatAttachments(postId) {
+  const key = `chat:attachments:${postId}`;
+
+  const attachments = await client.hGetAll(key);
+
+  for (const [publicId, metadata] of Object.entries(attachments)) {
+    const attachment = JSON.parse(metadata);
+
+    const result = await cloudinary.uploader.destroy(publicId, {
+      resource_type: "raw",
+      type: "authenticated",
+      invalidate: true
+    });
+
+    if (result.result !== "ok" && result.result !== "not found") {
+      throw new Error(
+        `Failed to delete attachment: ${publicId}`
+      );
+    }
+
+    // Remove tracking only after Cloudinary confirms deletion.
+    await client.hDel(key, publicId);
+  }
+
+  // Remove the chat from the cleanup registry only
+// after all tracked attachments have been deleted.
+const remainingAttachments = await client.hLen(
+  `chat:attachments:${postId}`
+);
+
+if (remainingAttachments === 0) {
+  await client.sRem(
+    "chat:attachment-cleanup-pending",
+    String(postId)
+  );
+}
+
+  console.log(`[Chat] Attachment cleanup completed for ${postId}`);
+}
+
+// Retry attachment cleanup for chats that are no longer active.
+async function recoverAbandonedChatAttachments() {
+  const pendingChats = await client.sMembers(
+    "chat:attachment-cleanup-pending"
+  );
+
+  console.log(
+    `[Chat] Found ${pendingChats.length} chats with tracked attachments.`
+  );
+
+  for (const postId of pendingChats) {
+    try {
+      const job = await getDispatchJob(postId);
+
+      // Never delete attachments from an active matched chat.
+      if (job && job.status === "MATCHED") {
+        continue;
+      }
+
+      await deleteChatAttachments(postId);
+
+      console.log(
+        `[Chat] Recovered abandoned attachments for ${postId}`
+      );
+    } catch (error) {
+      console.error(
+        `[Chat] Failed to recover attachments for ${postId}:`,
+        error
+      );
+    }
+  }
+}
+
+// Run attachment recovery when the backend starts.
+setTimeout(() => {
+  recoverAbandonedChatAttachments().catch((error) => {
+    console.error("[Chat] Startup attachment recovery failed:", error);
+  });
+}, 5000);
+
+// Retry abandoned attachment cleanup every 5 minutes.
+setInterval(() => {
+  recoverAbandonedChatAttachments().catch((error) => {
+    console.error("[Chat] Periodic attachment recovery failed:", error);
+  });
+}, 5 * 60 * 1000);
+
+// Generate a short-lived signed URL for an authenticated attachment.
+function getPrivateAttachmentUrl(attachment) {
+  if (
+    !attachment ||
+    typeof attachment.publicId !== "string" ||
+    attachment.resourceType !== "raw"
+  ) {
+    throw new Error("Invalid attachment metadata.");
+  }
+
+  const expiresAt = Math.floor(Date.now() / 1000) + 60;
+
+  return cloudinary.url(attachment.publicId, {
+    resource_type: "raw",
+    type: "authenticated",
+    sign_url: true,
+    secure: true,
+    expires_at: expiresAt
+  });
+}
+
+// Supported chat attachment formats.
+const ALLOWED_CHAT_FILE_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "application/pdf",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "text/plain"
+]);
+
+async function validateChatAttachment(file) {
+  if (!file || !Buffer.isBuffer(file.buffer)) {
+    return { valid: false, message: "No attachment provided." };
+  }
+
+  const detected = await fileTypeFromBuffer(file.buffer);
+
+  // Plain text files do not have a reliable binary signature.
+  if (!detected && file.mimetype === "text/plain") {
+    const decoded = new TextDecoder("utf-8", {
+      fatal: true
+    });
+
+    try {
+      decoded.decode(file.buffer);
+
+      if (file.buffer.includes(0)) {
+        throw new Error("Binary content detected");
+      }
+
+      return { valid: true, mime: "text/plain" };
+    } catch {
+      return { valid: false, message: "Invalid text file." };
+    }
+  }
+
+  if (!detected || !ALLOWED_CHAT_FILE_TYPES.has(detected.mime)) {
+    return {
+      valid: false,
+      message: "Unsupported attachment format."
+    };
+  }
+
+  return { valid: true, mime: detected.mime };
+}
+
+// Retrieve an attachment from an active matched chat.
+app.get("/api/chat/attachment", requireAuth, async (req, res) => {
+  try {
+    const { postId, publicId } = req.query;
+
+    if (
+      typeof postId !== "string" ||
+      !postId.trim() ||
+      typeof publicId !== "string" ||
+      !publicId.trim()
+    ) {
+      return res.status(400).json({
+        message: "postId and publicId are required."
+      });
+    }
+
+    // Verify that the chat is still active.
+    const job = await getDispatchJob(postId);
+
+    if (!job || job.status !== "MATCHED") {
+      return res.status(409).json({
+        message: "This chat is no longer active."
+      });
+    }
+
+    // Reject uploads if the chat is being closed.
+if (await isChatClosing(postId)) {
+  return res.status(409).json({
+    message: "This chat is closing. Attachments are no longer accepted."
+  });
+}
+
+    // Only the requester and matched helper can access attachments.
+    const requesterId = String(job.userId);
+    const helperId = String(job.matchedUserId);
+
+    if (
+      req.authUserId !== requesterId &&
+      req.authUserId !== helperId
+    ) {
+      return res.status(403).json({
+        message: "You are not authorized to access this attachment."
+      });
+    }
+
+    // Confirm that the attachment belongs to this chat.
+    const attachment = await getTrackedChatAttachment(
+      postId,
+      publicId
+    );
+
+    if (!attachment || attachment.publicId !== publicId) {
+      return res.status(404).json({
+        message: "Attachment not found."
+      });
+    }
+
+    // Actual Cloudinary file delivery will be implemented next.
+    // Retrieve the authenticated attachment from Cloudinary.
+const privateUrl = getPrivateAttachmentUrl(attachment);
+
+const cloudinaryResponse = await fetch(privateUrl, {
+  redirect: "error",
+  signal: AbortSignal.timeout(15000)
+});
+
+if (!cloudinaryResponse.ok) {
+  console.error(
+    "[Chat] Cloudinary download failed:",
+    cloudinaryResponse.status
+  );
+
+  return res.status(502).json({
+    message: "Unable to retrieve attachment from storage."
+  });
+}
+
+// Convert the response into a buffer.
+const fileBuffer = Buffer.from(
+  await cloudinaryResponse.arrayBuffer()
+);
+
+// Verify the downloaded size against the stored metadata.
+if (
+  fileBuffer.length !== attachment.size ||
+  fileBuffer.length > 10 * 1024 * 1024
+) {
+  return res.status(502).json({
+    message: "Attachment size verification failed."
+  });
+}
+
+      // Deliver the file through our authenticated backend.
+      res.setHeader("Content-Type", attachment.mime);
+      res.setHeader("Content-Length", fileBuffer.length);
+      res.setHeader("Cache-Control", "private, no-store");
+      res.setHeader("X-Content-Type-Options", "nosniff");
+      res.setHeader(
+        "Content-Disposition",
+        "attachment; filename=\"attachment\""
+      );
+
+return res.status(200).send(fileBuffer);
+
+  } catch (error) {
+    console.error("[Chat] Attachment access failed:", error);
+
+    return res.status(500).json({
+      message: "Failed to retrieve attachment."
+    });
+  }
+});
+
+// Upload a temporary attachment to an active chat.
+app.post(
+  "/api/chat/upload",
+  requireAuth,
+
+  (req, res, next) => {
+    chatUpload.single("file")(req, res, (error) => {
+      if (error instanceof multer.MulterError) {
+        if (error.code === "LIMIT_FILE_SIZE") {
+          return res.status(413).json({
+            message: "Attachment exceeds the 10 MB limit."
+          });
+        }
+
+        return res.status(400).json({
+          message: "Invalid attachment upload."
+        });
+      }
+
+      if (error) {
+        return next(error);
+      }
+
+      next();
+    });
+  },
+
+  async (req, res) => {
+try {
+      const { postId, userId } = req.body;
+
+      // 1. Validate required information.
+      if (!postId || !userId || !req.file) {
+        return res.status(400).json({
+          message: "postId, userId and file are required."
+        });
+      }
+
+      // 2. Verify the authenticated student's identity.
+      if (String(userId) !== req.authUserId) {
+        return res.status(403).json({
+          message: "You are not authorized to upload as this student."
+        });
+      }
+
+      // 3. Verify the chat is active.
+      const job = await getDispatchJob(postId);
+
+      if (!job || job.status !== "MATCHED") {
+        return res.status(409).json({
+          message: "This chat is no longer active."
+        });
+      }
+
+      // 4. Verify the student belongs to this chat.
+      const requesterId = String(job.userId);
+      const helperId = String(job.matchedUserId);
+
+      if (
+        req.authUserId !== requesterId &&
+        req.authUserId !== helperId
+      ) {
+        return res.status(403).json({
+          message: "You are not a participant in this chat."
+        });
+      }
+
+      // 5. Validate the actual file contents.
+      const validation = await validateChatAttachment(req.file);
+
+      if (!validation.valid) {
+        return res.status(400).json({
+          message: validation.message
+        });
+      }
+
+      // Upload the validated attachment to private Cloudinary storage.
+const publicId = `attachment_${crypto.randomUUID()}`;
+
+const resourceType = "raw";
+
+const cloudinaryResult = await new Promise((resolve, reject) => {
+  const uploadStream = cloudinary.uploader.upload_stream(
+    {
+      folder: `unstuck/chat-attachments/${postId}`,
+      public_id: publicId,
+      resource_type: resourceType,
+      type: "authenticated",
+      overwrite: false
+    },
+    (error, result) => {
+      if (error) return reject(error);
+      resolve(result);
+    }
+  );
+
+  uploadStream.end(req.file.buffer);
+});
+
+// Recheck the chat after Cloudinary finishes uploading.
+const latestJob = await getDispatchJob(postId);
+
+if (
+  !latestJob ||
+  latestJob.status !== "MATCHED" ||
+  await isChatClosing(postId)
+) {
+  // The chat closed while the file was uploading.
+  await cloudinary.uploader.destroy(
+    cloudinaryResult.public_id,
+    {
+      resource_type: "raw",
+      type: "authenticated",
+      invalidate: true
+    }
+  );
+
+  return res.status(409).json({
+    message: "The chat closed while the attachment was uploading."
+  });
+}
+
+// Save attachment metadata in Redis for this chat.
+const attachment = {
+  publicId: cloudinaryResult.public_id,
+  name: req.file.originalname,
+  mime: validation.mime,
+  size: req.file.size,
+  resourceType: "raw",
+  uploadedBy: req.authUserId,
+  uploadedAt: new Date().toISOString()
+};
+
+try {
+  await trackChatAttachment(postId, attachment);
+} catch (trackingError) {
+  // Avoid leaving an untracked file in Cloudinary.
+  try {
+    await cloudinary.uploader.destroy(
+      cloudinaryResult.public_id,
+      {
+        resource_type: "raw",
+        type: "authenticated"
+      }
+    );
+  } catch (cleanupError) {
+    console.error(
+      "[Chat] Failed to clean up untracked attachment:",
+      cleanupError
+    );
+  }
+
+  throw trackingError;
+}
+
+// Register the uploaded file as a chat message.
+const attachmentMessage = await addChatMessage(
+  postId,
+  req.authUserId,
+  "",
+  {
+    publicId: attachment.publicId,
+    name: attachment.name,
+    mime: attachment.mime,
+    size: attachment.size
+  }
+);
+
+// Reset the one-hour inactivity timer after a file upload.
+const lastActivity = Date.now();
+
+await updateDispatchJob(postId, {
+  lastChatActivity: String(lastActivity)
+});
+
+scheduleChatInactivity(postId, lastActivity);
+
+
+// Do not expose the Cloudinary delivery URL to the frontend.
+return res.status(201).json({
+  success: true,
+  message: "Attachment uploaded successfully.",
+  attachment: {
+    publicId: attachment.publicId,
+    name: attachment.name,
+    mime: attachment.mime,
+    size: attachment.size
+  },
+  chatMessage: attachmentMessage
+});
+
+    } catch (error) {
+      console.error("[Chat] Attachment validation failed:", error);
+
+      return res.status(500).json({
+        message: "Failed to validate attachment."
+      });
+    }
+  }
+);
+
 
 function clearChatInactivityTimer(postId) {
   const key = String(postId);
@@ -2167,11 +2711,21 @@ async function closeInactiveChat(postId, expectedActivity) {
     }
   }
 
+  // Prevent new attachments while redispatching.
+await client.set(
+  `chat:closing:${postId}`,
+  "1",
+  { EX: 3600 }
+);
+
+  // Delete temporary attachments when the chat expires.
+await deleteChatAttachments(postId);
+
   await deleteChatSession(postId);
   await removeUserFromDispatchHistory(postId);
   await deleteDispatchJob(postId);
 
-  console.log(`[Chat] ${postId} closed after 5 minutes of inactivity.`);
+  console.log(`[Chat] ${postId} closed after 1 hour of inactivity.`);
 }
 
 function scheduleChatInactivity(postId, lastActivity) {
@@ -2199,9 +2753,18 @@ function scheduleChatInactivity(postId, lastActivity) {
 
 
 // Get active chat session
-app.get("/api/chat/session", async (req, res) => {
+app.get("/api/chat/session", requireAuth, async (req, res) => {
+
+
   try {
     const { postId, userId } = req.query;
+
+     // Verify that the requested user matches the authenticated student.
+    if (String(userId) !== req.authUserId) {
+      return res.status(403).json({
+        message: "You are not authorized to access this chat session."
+      });
+    }
 
     // ------------------------------------------
     // 1. VALIDATE REQUIRED PARAMETERS
@@ -2346,9 +2909,16 @@ console.log(
 });
 
 // Send a chat message
-app.post("/api/chat/message", async (req, res) => {
+app.post("/api/chat/message", requireAuth, async (req, res) => {
   try {
     const { postId, userId, message } = req.body;
+
+    // Verify that the sender matches the authenticated student.
+if (String(userId) !== req.authUserId) {
+  return res.status(403).json({
+    message: "You are not authorized to send messages as this student."
+  });
+}
 
     // ------------------------------------------
     // 1. VALIDATE INPUT
@@ -2438,9 +3008,16 @@ scheduleChatInactivity(postId, lastActivity);
 });
 
 // Get all messages for an active chat
-app.get("/api/chat/messages", async (req, res) => {
+app.get("/api/chat/messages", requireAuth, async (req, res) => {
   try {
     const { postId, userId } = req.query;
+
+    // Verify that the user matches the authenticated student.
+if (String(userId) !== req.authUserId) {
+  return res.status(403).json({
+    message: "You are not authorized to read these chat messages."
+  });
+}
 
     // ------------------------------------------
     // 1. VALIDATE INPUT
@@ -2508,9 +3085,16 @@ app.get("/api/chat/messages", async (req, res) => {
 });
 
 // Complete a matched help request
-app.post("/api/chat/complete", async (req, res) => {
+app.post("/api/chat/complete", requireAuth, async (req, res) => {
   try {
     const { postId, userId } = req.body;
+
+    // Verify the requester is the authenticated student.
+if (String(userId) !== req.authUserId) {
+  return res.status(403).json({
+    message: "You are not authorized to complete this request."
+  });
+}
 
     // ------------------------------------------
     // 1. VALIDATE INPUT
@@ -2601,6 +3185,16 @@ app.post("/api/chat/complete", async (req, res) => {
     // 8. DELETE TEMPORARY CHAT
     // ------------------------------------------
 
+    // Mark this chat as closing before deleting attachments.
+          await client.set(
+            `chat:closing:${postId}`,
+            "1",
+            { EX: 3600 }
+          );
+
+    // Delete temporary attachments before removing the chat.
+await deleteChatAttachments(postId);
+
     await deleteChatSession(postId);
 
     console.log(
@@ -2642,9 +3236,16 @@ app.post("/api/chat/complete", async (req, res) => {
 
 // Redispatch a matched request when the requester says
 // their issue was NOT resolved
-app.post("/api/chat/redispatch", async (req, res) => {
+app.post("/api/chat/redispatch", requireAuth, async (req, res) => {
   try {
     const { postId, userId } = req.body;
+
+    // Verify that the requester is the authenticated student.
+if (String(userId) !== req.authUserId) {
+  return res.status(403).json({
+    message: "You are not authorized to redispatch this request."
+  });
+}
 
     // ------------------------------------------
     // 1. VALIDATE INPUT
@@ -2715,9 +3316,18 @@ app.post("/api/chat/redispatch", async (req, res) => {
       postID: ""
     });
 
+            // Prevent new attachments while redispatching.
+        await client.set(
+          `chat:closing:${postId}`,
+          "1",
+          { EX: 3600 }
+        );
+
     // ------------------------------------------
     // 7. DELETE OLD CHAT
     // ------------------------------------------
+    // Delete attachments from the previous chat before redispatching.
+await deleteChatAttachments(postId);
 
     await deleteChatSession(postId);
 

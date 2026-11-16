@@ -6,7 +6,8 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+const [token, setToken] = useState(null);
+const [loading, setLoading] = useState(true);
   
 
   useEffect(() => {
@@ -15,6 +16,12 @@ export function AuthProvider({ children }) {
       if (stored) {
         setUser(JSON.parse(stored));
       }
+
+      const storedToken = localStorage.getItem("unstuck_token");
+
+          if (storedToken) {
+            setToken(storedToken);
+          }
     } catch (e) {
       console.error("Failed to parse stored user session", e);
     } finally {
@@ -22,10 +29,18 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const login = (userData) => {
-    setUser(userData);
-    localStorage.setItem("unstuck_user", JSON.stringify(userData));
-  };
+  const login = (userData, authToken) => {
+  setUser(userData);
+  localStorage.setItem("unstuck_user", JSON.stringify(userData));
+
+  if (authToken) {
+    setToken(authToken);
+    localStorage.setItem("unstuck_token", authToken);
+  } else {
+    setToken(null);
+    localStorage.removeItem("unstuck_token");
+  }
+};
 
   const logout = async () => {
     if (user?.id) {
@@ -36,7 +51,10 @@ export function AuthProvider({ children }) {
       }
     }
     setUser(null);
-    localStorage.removeItem("unstuck_user");
+setToken(null);
+
+localStorage.removeItem("unstuck_user");
+localStorage.removeItem("unstuck_token");
   };
 
   const refreshProfile = async () => {
@@ -54,7 +72,9 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, refreshProfile, loading }}>
+   <AuthContext.Provider
+  value={{ user, token, login, logout, refreshProfile, loading }}
+>
       {children}
     </AuthContext.Provider>
   );
