@@ -16,9 +16,14 @@ import {
   completeMatch,
   redispatchMatch,
 } from "../api";
+
 import "./ChatPage.css";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:2000";
+
 export default function ChatPage() {
+
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const postId = params.get("postId");
