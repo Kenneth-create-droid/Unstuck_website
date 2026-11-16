@@ -184,7 +184,7 @@ const loadMessages = useCallback(async () => {
     });
 
     const response = await fetch(
-      `http://localhost:2000/api/chat/attachment?${query}`,
+     `${API_BASE_URL}/api/chat/attachment?${query}`,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -235,7 +235,7 @@ const loadMessages = useCallback(async () => {
     }
 
     const response = await fetch(
-      "http://localhost:2000/api/chat/upload",
+   `${API_BASE_URL}/api/chat/upload`,
       {
         method: "POST",
         headers: {
