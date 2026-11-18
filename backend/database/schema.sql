@@ -86,4 +86,22 @@ CREATE TABLE IF NOT EXISTS user_skills (
 
 DELETE FROM users;
 
+SELECT
+    u.id,
+    u.firstname,
+    u.lastname,
+    COUNT(DISTINCT he.offer_id) FILTER (
+        WHERE he.event_type = 'OFFER_SENT'
+    ) AS total_offers,
+    COUNT(DISTINCT he.offer_id) FILTER (
+        WHERE he.event_type = 'ACCEPTED'
+           OR he.event_type = 'PASSED'
+           OR he.event_type = 'TIMED_OUT'
+    ) AS resolved_offers
+FROM users u
+LEFT JOIN helper_events he
+    ON u.id = he.helper_id
+GROUP BY u.id, u.firstname, u.lastname
+ORDER BY u.id;
+
 
