@@ -9,3 +9,6 @@ dist/
 build/
 .expo/
 *.log
+
+# Local backup files
+*.bak

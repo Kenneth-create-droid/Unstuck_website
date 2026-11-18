@@ -2,9 +2,14 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
+import { logHelperEvent } from "./helperEventLogger.js";
+
+import { calculateReliabilityScore } from "./reliabilityScoring.js";
+
 import multer from "multer";
 import { fileTypeFromBuffer } from "file-type";
 import cloudinary from "./config/cloudinary.js";
+import fs from "node:fs";
 
 import { requireAuth } from "./middleware/auth.js";
 
@@ -39,10 +44,10 @@ const VERIFY_ATTEMPT_WINDOW_SECONDS = 60;
 // PostgreSQL DB Connection
 import { db } from "./db.js";
 
-import { 
-  addUserToSpatialIndex, 
-  removeUserFromSpatialIndex, 
-  moveUserLocation 
+import {
+  addUserToSpatialIndex,
+  removeUserFromSpatialIndex,
+  moveUserLocation
 } from "../keneca-engine/src/spatialIndexManager.js";
 
 import {
@@ -64,11 +69,45 @@ import { getUserStatus, updateUserStatus } from "../keneca-engine/src/redis/user
 
 // Dispatch History Tracking
 // Dispatch History Tracking
-import { 
+import {
   addUserToDispatchHistory,
   usersInDispatchHistory,
   removeUserFromDispatchHistory
 } from "../keneca-engine/src/redis/dispatchHistory.js";
+
+async function recordHelperResponseEvent({
+  helperId,
+  postId,
+  offerId,
+  eventType
+}) {
+  try {
+    if (!offerId) {
+      console.warn(
+        `[Event Logger] Missing offer ID for ${eventType}, post ${postId}`
+      );
+      return;
+    }
+
+    const event = await logHelperEvent({
+      helperId,
+      postId,
+      offerId,
+      eventType
+    });
+
+    if (event) {
+      console.log(
+        `[Event Logger] ${eventType} recorded for helper ${helperId}`
+      );
+    }
+  } catch (error) {
+    console.error(
+      `[Event Logger] Failed to record ${eventType}:`,
+      error
+    );
+  }
+}
 const app = express();
 
 app.use(cors());
@@ -147,30 +186,40 @@ app.post("/signup", async (req, res) => {
     // 6. Hash password BEFORE temporarily storing signup information
     const passwordHash = await bcrypt.hash(password, 12);
 
-    if (DEV_SKIP_EMAIL_VERIFICATION) {
+   if (DEV_SKIP_EMAIL_VERIFICATION) {
+  const newUser = await db.query(
+    `INSERT INTO users(firstname, lastname, email, password)
+     VALUES ($1, $2, $3, $4)
+     RETURNING id, firstname, lastname, email, created_at`,
+    [
+      firstname.trim(),
+      lastname.trim(),
+      normalizedEmail,
+      passwordHash
+    ]
+  );
 
-    const newUser = await db.query(
-        `
-        INSERT INTO users(firstname, lastname, email, password)
-        VALUES ($1, $2, $3, $4)
-        RETURNING id, firstname, lastname, email, created_at
-        `,
-        [
-            firstname.trim(),
-            lastname.trim(),
-            normalizedEmail,
-            passwordHash
-        ]
-    );
+  const createdUser = newUser.rows[0];
 
-
-    return res.status(201).json({
-        success: true,
-        requiresVerification: false,
-        user: newUser.rows[0],
-        message: "Account created (development mode)."
-    });
+  // Establish an authenticated session for development signup.
+  const token = jwt.sign(
+    {
+      userId: String(createdUser.id)
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "24h"
     }
+  );
+
+  return res.status(201).json({
+    success: true,
+    requiresVerification: false,
+    user: createdUser,
+    token,
+    message: "Account created (development mode)."
+  });
+}
 
     // 7. Store pending signup in Redis
     const verificationKey = `signup:verification:${normalizedEmail}`;
@@ -511,12 +560,32 @@ app.post("/signup/verify", async (req, res) => {
     ]);
 
 
-    return res.status(201).json({
-      success: true,
-      message:
-        "Email verified. Account created successfully.",
-      user: newUser.rows[0]
-    });
+    // --------------------------------------------------
+// 8. GENERATE AUTHENTICATION TOKEN
+// --------------------------------------------------
+
+const verifiedUser = newUser.rows[0];
+
+const token = jwt.sign(
+  {
+    userId: String(verifiedUser.id)
+  },
+  process.env.JWT_SECRET,
+  {
+    expiresIn: "24h"
+  }
+);
+
+// --------------------------------------------------
+// 9. RETURN USER AND TOKEN
+// --------------------------------------------------
+
+return res.status(201).json({
+  success: true,
+  message: "Email verified. Account created successfully.",
+  user: verifiedUser,
+  token
+});
 
   } catch (error) {
 
@@ -1255,7 +1324,7 @@ app.post("/api/location/deactivate", async (req, res) => {
         String(job.currentCandidateId) === userIdStr
       ) {
         console.log(`[Deactivate] Candidate ${userIdStr} deactivated location mid-offer. Revoking post ${activePostId}...`);
-        
+
         await updateDispatchJob(activePostId, {
           status: "SEARCHING",
           currentCandidateId: "",
@@ -1412,14 +1481,19 @@ Request: ${description || ""}
 
 // ---------------------- DISPATCH & REQUEST ROUTES ----------------------
 
-const SUPPORTED_COURSES = new Set([
-  "ENGR 4111U",
-  "SOFE 4790U",
-  "SOFE 4590U",
-  "SOFE 4640U",
-  "SOFE 4850U",
-  "ARTE 4110U"
-]);
+const coursesFile = new URL("./data/courses.json", import.meta.url);
+
+const COURSE_CATALOGUE = JSON.parse(
+  fs.readFileSync(coursesFile, "utf8")
+);
+
+const SUPPORTED_COURSES = new Set(
+  COURSE_CATALOGUE.map((course) => course.code)
+);
+
+console.log(
+  `[Courses] Loaded ${SUPPORTED_COURSES.size} Ontario Tech courses.`
+);
 
 // ---------------------- STUDENT COURSE ROUTES ----------------------
 
@@ -1524,15 +1598,149 @@ app.put("/api/users/:userId/courses", async (req, res) => {
     });
   }
 });
+
+
+ // ---------------------- STUDENT SKILLS ROUTES ----------------------
+
+const MAX_USER_SKILLS = 20;
+
+// Retrieve a student's selected skills.
+app.get("/api/users/:userId/skills", requireAuth, async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!/^\d+$/.test(userId)) {
+      return res.status(400).json({
+        message: "Invalid user ID."
+      });
+    }
+
+    if (String(userId) !== String(req.authUserId)) {
+      return res.status(403).json({
+        message: "You can only view your own skills."
+      });
+    }
+
+    const result = await db.query(
+      `SELECT skill_name
+       FROM user_skills
+       WHERE user_id = $1
+       ORDER BY skill_name`,
+      [userId]
+    );
+
+    return res.json({
+      skills: result.rows.map((row) => row.skill_name)
+    });
+  } catch (error) {
+    console.error("[Skills] Failed to retrieve skills:", error);
+    return res.status(500).json({
+      message: "Unable to retrieve skills."
+    });
+  }
+});
+
+// Replace a student's selected skills.
+app.put("/api/users/:userId/skills", requireAuth, async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { skills } = req.body;
+
+    if (!/^\d+$/.test(userId)) {
+      return res.status(400).json({
+        message: "Invalid user ID."
+      });
+    }
+
+    if (String(userId) !== String(req.authUserId)) {
+      return res.status(403).json({
+        message: "You can only update your own skills."
+      });
+    }
+
+    if (
+      !Array.isArray(skills) ||
+      skills.length > MAX_USER_SKILLS ||
+      !skills.every(
+        (skill) =>
+          typeof skill === "string" &&
+          skill.trim().length > 0 &&
+          skill.trim().length <= 100
+      )
+    ) {
+      return res.status(400).json({
+        message: "Invalid skill selection."
+      });
+    }
+
+    const uniqueSkills = [
+      ...new Set(
+        skills.map((skill) =>
+          skill.trim().toLowerCase()
+        )
+      )
+    ];
+
+    const connection = await db.connect();
+
+    try {
+      await connection.query("BEGIN");
+
+      const userResult = await connection.query(
+        "SELECT id FROM users WHERE id = $1 FOR UPDATE",
+        [userId]
+      );
+
+      if (userResult.rows.length === 0) {
+        await connection.query("ROLLBACK");
+        return res.status(404).json({
+          message: "Student not found."
+        });
+      }
+
+      await connection.query(
+        "DELETE FROM user_skills WHERE user_id = $1",
+        [userId]
+      );
+
+      for (const skill of uniqueSkills) {
+        await connection.query(
+          `INSERT INTO user_skills (user_id, skill_name)
+           VALUES ($1, $2)`,
+          [userId, skill]
+        );
+      }
+
+      await connection.query("COMMIT");
+    } catch (error) {
+      await connection.query("ROLLBACK");
+      throw error;
+    } finally {
+      connection.release();
+    }
+
+    return res.json({
+      success: true,
+      skills: uniqueSkills
+    });
+  } catch (error) {
+    console.error("[Skills] Failed to save skills:", error);
+    return res.status(500).json({
+      message: "Unable to save skills."
+    });
+  }
+});
+
 // Submit Help Request Endpoint
 // ---------------------- SUBMIT HELP REQUEST ----------------------
 
 app.post("/api/request/submit", async (req, res) => {
   try {
-    const {
+   const {
   userId,
   subject,
   courseCode,
+  requestedSkill,
   description,
   lat,
   lng
@@ -1573,6 +1781,28 @@ if (
   });
 }
 
+// ------------------------------------------
+// VALIDATE REQUESTED SKILL
+// ------------------------------------------
+
+if (
+  requestedSkill !== undefined &&
+  requestedSkill !== null &&
+  (
+    typeof requestedSkill !== "string" ||
+    requestedSkill.trim().length > 100
+  )
+) {
+  return res.status(400).json({
+    message: "Invalid requested skill."
+  });
+}
+
+const selectedSkill =
+  typeof requestedSkill === "string"
+    ? requestedSkill.trim().toLowerCase()
+    : "";
+
 
     // ------------------------------------------
     // 2. CREATE POST ID + STARTING CELL
@@ -1597,8 +1827,11 @@ if (
   userId: String(userId),
   subject: subject || "General Campus Help",
   courseCode: selectedCourse || "",
+  requestedSkill: selectedSkill,
   description: description.trim(),
   startingCell,
+  lat: String(lat),
+lng: String(lng),
   status: "ANALYZING",
   currentRing: "0"
 });
@@ -1666,7 +1899,7 @@ if (
 // UNSTUCK-SPECIFIC POLICY CHECK
 // ----------------------------------------
 
-// we will comment out this part so when we pay for credits we will use it 
+// we will comment out this part so when we pay for credits we will use it
 
  console.log(
   `[Policy] Checking Unstuck policy for ${postId}...`
@@ -1710,7 +1943,7 @@ console.log(
         return;
       }
 
-      
+
 
       // ----------------------------------------
 // REQUEST APPROVED
@@ -1771,6 +2004,8 @@ console.log(
             id: postId,
             startingCell,
             userId,
+            lat: Number(lat),
+            lng: Number(lng),
             current_Ring: 0
           }).catch((error) => {
             console.error(
@@ -1784,7 +2019,7 @@ console.log(
       // 5B. REQUEST APPROVED
       // ----------------------------------------
 
-      
+
 
 
 
@@ -1916,7 +2151,16 @@ app.post("/api/request/respond", async (req, res) => {
         });
       }
 
+      await recordHelperResponseEvent({
+          helperId: candidateId,
+          postId,
+          offerId: job.offerId,
+          eventType: "PASSED"
+        });
+
+
       console.log(`[Dispatch] Helper ${candidateId} passed ${postId}`);
+
 
       return res.status(200).json({
         success: true,
@@ -1924,7 +2168,7 @@ app.post("/api/request/respond", async (req, res) => {
       });
     }
 
-    const matchedAt = Date.now();
+   const matchedAt = Date.now();
 
 await updateDispatchJob(postId, {
   status: "MATCHED",
@@ -1932,7 +2176,22 @@ await updateDispatchJob(postId, {
   lastChatActivity: String(matchedAt)
 });
 
+// A redispatched request reuses the original postId.
+// Clear the previous chat's closing flag after the new match.
+await client.del(`chat:closing:${postId}`);
+
 scheduleChatInactivity(postId, matchedAt);
+
+scheduleChatInactivity(postId, matchedAt);
+
+    await recordHelperResponseEvent({
+      helperId: candidateId,
+      postId,
+      offerId: job.offerId,
+      eventType: "ACCEPTED"
+    });
+
+
 
     console.log(`[Dispatch] Helper ${candidateId} accepted ${postId}`);
 
@@ -2844,7 +3103,7 @@ const otherUserId =
 
 const otherUserResult = await db.query(
   `
-    SELECT id, firstname, lastname
+    SELECT id, firstname, lastname, people_helped
     FROM users
     WHERE id = $1
   `,
@@ -2858,6 +3117,11 @@ if (otherUserResult.rows.length === 0) {
 }
 
 const otherUser = otherUserResult.rows[0];
+const includeProfile = req.query.includeProfile === "true";
+
+const otherUserReliability = includeProfile
+  ? await calculateReliabilityScore(otherUserId)
+  : null;
 
     // ------------------------------------------
     // 6. RETURN CHAT SESSION
@@ -2892,10 +3156,23 @@ console.log(
             status: job.status,
 
             otherUser: {
-              id: String(otherUser.id),
-              firstname: otherUser.firstname,
-              lastname: otherUser.lastname
-            }
+  id: String(otherUser.id),
+  firstname: otherUser.firstname,
+  lastname: otherUser.lastname,
+
+  ...(includeProfile && {
+    peopleHelped: Number(otherUser.people_helped || 0),
+
+    reliabilityScore: otherUserReliability.reliabilityScore,
+    responseScore: otherUserReliability.responseScore,
+    completionScore: otherUserReliability.completionScore,
+
+    reliabilityEstablished:
+      otherUserReliability.stats.resolvedOffers >= 10
+  })
+}
+
+
           }
         });
 
@@ -3159,6 +3436,13 @@ if (String(userId) !== req.authUserId) {
 
     clearChatInactivityTimer(postId);
 
+    await recordHelperResponseEvent({
+  helperId,
+  postId,
+  offerId: job.offerId,
+  eventType: "COMPLETED"
+});
+
     // ------------------------------------------
     // 6. GIVE HELPER CREDIT IN POSTGRESQL
     // ------------------------------------------
@@ -3307,6 +3591,14 @@ if (String(userId) !== req.authUserId) {
 
     clearChatInactivityTimer(postId);
 
+    // Record that the requester chose to find another helper.
+          await recordHelperResponseEvent({
+            helperId: oldHelperId,
+            postId,
+            offerId: job.offerId,
+            eventType: "REDISPATCHED"
+          });
+
     // ------------------------------------------
     // 6. RELEASE OLD HELPER
     // ------------------------------------------
@@ -3354,15 +3646,22 @@ await deleteChatAttachments(postId);
     // ------------------------------------------
 
     const redispatchPost = {
-      id: postId,
-      userId: job.userId,
-      subject: job.subject || "General Course Help",
-      description: job.description || "",
-      startingCell: job.startingCell,
+  id: postId,
+  userId: job.userId,
+  subject: job.subject || "General Campus Help",
+  description: job.description || "",
+  startingCell: job.startingCell,
 
-      // Continue from the ring we already reached.
-      current_Ring: Number(job.currentRing || 0)
-    };
+  lat: Number(job.lat),
+  lng: Number(job.lng),
+
+  // Preserve course and skill requirements
+  courseCode: job.courseCode || "",
+  requestedSkill: job.requestedSkill || "",
+
+  // Continue from the ring we already reached.
+  current_Ring: Number(job.currentRing || 0)
+};
 
     console.log(
       `[Chat] Redispatching request ${postId}. Previous helper: ${oldHelperId}`
@@ -3400,9 +3699,23 @@ await deleteChatAttachments(postId);
 
 // ---------------------- USER PROFILE ROUTE ----------------------
 
-app.get("/api/user/profile", async (req, res) => {
+app.get("/api/user/profile", requireAuth, async (req, res) => {
   try {
     const { userId } = req.query;
+
+    // Validate the requested user ID.
+if (!/^\d+$/.test(String(userId || ""))) {
+  return res.status(400).json({
+    message: "Invalid user ID."
+  });
+}
+
+// Students can only access their own private profile.
+if (String(userId) !== String(req.authUserId)) {
+  return res.status(403).json({
+    message: "You can only access your own profile."
+  });
+}
 
     if (!userId) {
       return res.status(400).json({
@@ -3431,7 +3744,16 @@ app.get("/api/user/profile", async (req, res) => {
       });
     }
 
-    return res.status(200).json(result.rows[0]);
+    const reliability = await calculateReliabilityScore(userId);
+
+return res.status(200).json({
+  ...result.rows[0],
+  reliabilityScore: reliability.reliabilityScore,
+  responseScore: reliability.responseScore,
+  completionScore: reliability.completionScore,
+  reliabilityStats: reliability.stats,
+  reliabilityEstablished: reliability.stats.resolvedOffers >= 10
+});
 
   } catch (error) {
     console.error("[Profile] Failed to load user profile:", error);

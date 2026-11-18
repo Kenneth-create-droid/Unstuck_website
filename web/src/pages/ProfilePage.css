@@ -318,3 +318,240 @@
   opacity: 0.6;
   cursor: wait;
 }
+
+
+.unstuck-profile-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.unstuck-profile-nav .unstuck-profile-logout {
+  width: auto;
+  margin: 0;
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .unstuck-profile-nav .unstuck-profile-logout {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================
+   RELIABILITY SCORE CARD
+   ========================================= */
+
+.unstuck-profile-reliability {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  padding: 22px 20px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 14px;
+  text-align: left;
+}
+
+.unstuck-profile-reliability-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: #182a58;
+}
+
+.unstuck-profile-reliability-heading h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #182a58;
+}
+
+.unstuck-profile-reliability-score {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 14px;
+  color: #182a58;
+}
+
+.unstuck-profile-reliability-score strong {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.unstuck-profile-reliability-score span {
+  font-size: 16px;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+/* Progress bar */
+
+.unstuck-profile-reliability-track {
+  width: 100%;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.unstuck-profile-reliability-fill {
+  height: 100%;
+  background: #21845b;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* Response and completion scores */
+
+.unstuck-profile-reliability-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.unstuck-profile-reliability-details > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 12px;
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+}
+
+.unstuck-profile-reliability-details span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.unstuck-profile-reliability-details strong {
+  font-size: 18px;
+  font-weight: 800;
+  color: #182a58;
+}
+
+/* New helpers */
+
+.unstuck-profile-reliability-new {
+  padding: 14px;
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+}
+
+.unstuck-profile-reliability-new strong {
+  display: block;
+  color: #182a58;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.unstuck-profile-reliability-new p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Mobile responsiveness */
+
+@media (max-width: 480px) {
+  .unstuck-profile-reliability {
+    padding: 18px 16px;
+  }
+
+  .unstuck-profile-reliability-score strong {
+    font-size: 34px;
+  }
+
+  .unstuck-profile-reliability-details {
+    gap: 8px;
+  }
+
+  .unstuck-profile-reliability-details > div {
+    padding: 12px 9px;
+  }
+
+  .unstuck-profile-reliability-details strong {
+    font-size: 16px;
+  }
+}
+
+/* Compact searchable skills editor */
+
+.unstuck-profile-skill-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.unstuck-profile-skill-options {
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid #d9e0ea;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.unstuck-profile-skill-options .unstuck-profile-course-item {
+  margin-bottom: 6px;
+}
+
+.unstuck-profile-skill-options .unstuck-profile-course-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Compact course and skill options */
+
+.unstuck-profile-skill-options {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.unstuck-profile-skill-options .unstuck-profile-course-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.unstuck-profile-skill-options .unstuck-profile-course-option input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+}
+
+.unstuck-profile-skill-options .unstuck-profile-course-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.unstuck-profile-skill-options .unstuck-profile-course-details strong {
+  font-size: 14px;
+}
+
+.unstuck-profile-skill-options .unstuck-profile-course-details span {
+  font-size: 12px;
+}
+
+

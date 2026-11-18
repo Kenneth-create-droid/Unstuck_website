@@ -17,6 +17,7 @@ async function setDispatchJob(postID, payload) {
     matchedUserId: "",
     createdAt: Date.now().toString(),
     sentAt: "",
+    offerId: "",
     expiresAt: ""
   };
 

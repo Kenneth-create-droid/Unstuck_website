@@ -9,6 +9,7 @@ import VerifyEmailPage from "./pages/VerifyEmailPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import VerifyResetCodePage from "./pages/VerifyResetCodePage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import SkillSelectionPage from "./pages/SkillSelectionPage";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import ChatPage from "./pages/ChatPage";
@@ -55,6 +56,15 @@ export default function App() {
             path="/select-courses"
             element={<CourseSelectionPage />}
           />
+
+                      <Route
+              path="/select-skills"
+              element={
+                <ProtectedRoute>
+                  <SkillSelectionPage />
+                </ProtectedRoute>
+              }
+            />
 
           <Route path="/search" element={<SearchPage />} />
 

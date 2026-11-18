@@ -1,0 +1,5394 @@
+[
+  {
+    "code": "ALSU 1101U",
+    "name": "Foundations for Academic Learning and Success"
+  },
+  {
+    "code": "ARTE 4100U",
+    "name": "Foundation Models and Generative AI"
+  },
+  {
+    "code": "ARTE 4110U",
+    "name": "Deep Learning Architecture and Algorithms"
+  },
+  {
+    "code": "ARTE 4200U",
+    "name": "AI Engineering and Machine Learning Operations"
+  },
+  {
+    "code": "AUTE 2010U",
+    "name": "Fundamentals of Automotive Engineering"
+  },
+  {
+    "code": "AUTE 3170U",
+    "name": "Automotive Component Design"
+  },
+  {
+    "code": "AUTE 3210U",
+    "name": "Automotive Vibrations"
+  },
+  {
+    "code": "AUTE 3290U",
+    "name": "Powertrain Design"
+  },
+  {
+    "code": "AUTE 3450U",
+    "name": "Combustion and Engines"
+  },
+  {
+    "code": "AUTE 3500U",
+    "name": "Automotive Instrumentation and Controls"
+  },
+  {
+    "code": "AUTE 4000U",
+    "name": "Special Topics in Automotive Engineering"
+  },
+  {
+    "code": "AUTE 4010U",
+    "name": "Vehicle Dynamics and Control"
+  },
+  {
+    "code": "AUTE 4060U",
+    "name": "Automotive Structural Design"
+  },
+  {
+    "code": "AUTE 4070U",
+    "name": "Chassis Systems Design"
+  },
+  {
+    "code": "AUTE 4080U",
+    "name": "Electric and Hybrid Vehicles"
+  },
+  {
+    "code": "AUTE 4090U",
+    "name": "Autonomous Vehicles"
+  },
+  {
+    "code": "AUTE 4100U",
+    "name": "Road Vehicle Aerodynamics"
+  },
+  {
+    "code": "AUTE 4600U",
+    "name": "Vehicle Systems Design"
+  },
+  {
+    "code": "BIOL 1000U",
+    "name": "Foundations in Bioscience"
+  },
+  {
+    "code": "BIOL 1010U",
+    "name": "Biology I: Molecular and Cellular Systems"
+  },
+  {
+    "code": "BIOL 1011U",
+    "name": "Introductory Cell and Molecular Biology"
+  },
+  {
+    "code": "BIOL 1020U",
+    "name": "Biology II: Diversity of Life and Principles of Ecology"
+  },
+  {
+    "code": "BIOL 1021U",
+    "name": "Introduction to Organismal Biology and Ecology"
+  },
+  {
+    "code": "BIOL 1841U",
+    "name": "Essentials of Biology"
+  },
+  {
+    "code": "BIOL 2010U",
+    "name": "Human Physiology"
+  },
+  {
+    "code": "BIOL 2020U",
+    "name": "Genetics and Molecular Biology"
+  },
+  {
+    "code": "BIOL 2030U",
+    "name": "Cell Biology"
+  },
+  {
+    "code": "BIOL 2050U",
+    "name": "Human Anatomy"
+  },
+  {
+    "code": "BIOL 2060U",
+    "name": "Fundamentals of Microbiology"
+  },
+  {
+    "code": "BIOL 2080U",
+    "name": "Biochemistry I"
+  },
+  {
+    "code": "BIOL 2090U",
+    "name": "Research in Biological Science I"
+  },
+  {
+    "code": "BIOL 2830U",
+    "name": "Microbiology for Health Science"
+  },
+  {
+    "code": "BIOL 3010U",
+    "name": "Laboratory Methods in Molecular Biology"
+  },
+  {
+    "code": "BIOL 3020U",
+    "name": "Principles of Pharmacology and Toxicology"
+  },
+  {
+    "code": "BIOL 3032U",
+    "name": "Advanced Microbiology"
+  },
+  {
+    "code": "BIOL 3040U",
+    "name": "Animal Physiology"
+  },
+  {
+    "code": "BIOL 3051U",
+    "name": "Developmental Biology"
+  },
+  {
+    "code": "BIOL 3060U",
+    "name": "Fundamentals of Neuroscience"
+  },
+  {
+    "code": "BIOL 3080U",
+    "name": "Biochemistry II"
+  },
+  {
+    "code": "BIOL 3090U",
+    "name": "Research in Biological Science II"
+  },
+  {
+    "code": "BIOL 3091U",
+    "name": "Research in Biological Science III"
+  },
+  {
+    "code": "BIOL 3110U",
+    "name": "Population Genetics"
+  },
+  {
+    "code": "BIOL 3610U",
+    "name": "Comparative Zoology"
+  },
+  {
+    "code": "BIOL 3620U",
+    "name": "Conservation Biology"
+  },
+  {
+    "code": "BIOL 3640U",
+    "name": "Plant Biology"
+  },
+  {
+    "code": "BIOL 3650U",
+    "name": "Fundamentals of Nutrition"
+  },
+  {
+    "code": "BIOL 3660U",
+    "name": "Ecology"
+  },
+  {
+    "code": "BIOL 3810U",
+    "name": "Introduction to the World Ocean"
+  },
+  {
+    "code": "BIOL 3820U",
+    "name": "Marine Ecology"
+  },
+  {
+    "code": "BIOL 3830U",
+    "name": "Coral Reef Ecology"
+  },
+  {
+    "code": "BIOL 3840U",
+    "name": "Marine Invertebrate Zoology"
+  },
+  {
+    "code": "BIOL 4010U",
+    "name": "Introduction to Environmental Research Methods"
+  },
+  {
+    "code": "BIOL 4020U",
+    "name": "Introduction to Environmental Toxicology"
+  },
+  {
+    "code": "BIOL 4030U",
+    "name": "Advanced Topics in Environmental Toxicology"
+  },
+  {
+    "code": "BIOL 4031U",
+    "name": "Infection and Immunity"
+  },
+  {
+    "code": "BIOL 4040U",
+    "name": "Applied Molecular Biology"
+  },
+  {
+    "code": "BIOL 4050U",
+    "name": "Advanced Topics in Pharmaceutical Biotechnology"
+  },
+  {
+    "code": "BIOL 4052U",
+    "name": "Advanced Developmental Biology Laboratory"
+  },
+  {
+    "code": "BIOL 4060U",
+    "name": "Functional Genomics and Proteomics"
+  },
+  {
+    "code": "BIOL 4070U",
+    "name": "Advanced Biochemistry"
+  },
+  {
+    "code": "BIOL 4080U",
+    "name": "Bioethics"
+  },
+  {
+    "code": "BIOL 4090U",
+    "name": "Applied Forensic Entomology"
+  },
+  {
+    "code": "BIOL 4410U",
+    "name": "Biology Thesis Project I"
+  },
+  {
+    "code": "BIOL 4420U",
+    "name": "Biology Thesis Project II"
+  },
+  {
+    "code": "BIOL 4430U",
+    "name": "Directed Studies in Biology"
+  },
+  {
+    "code": "BIOL 4620U",
+    "name": "Animal Behaviour"
+  },
+  {
+    "code": "BIOL 4660U",
+    "name": "Aquatic Ecology: Concepts and Environmental Applications"
+  },
+  {
+    "code": "BIOL 4820U",
+    "name": "Neuropharmacology"
+  },
+  {
+    "code": "BUSI 1010U",
+    "name": "Critical Thinking and Ethics"
+  },
+  {
+    "code": "BUSI 1020U",
+    "name": "Business Communications"
+  },
+  {
+    "code": "BUSI 1030U",
+    "name": "Writing and Critical Thinking"
+  },
+  {
+    "code": "BUSI 1130U",
+    "name": "Introduction to Financial Accounting"
+  },
+  {
+    "code": "BUSI 1450U",
+    "name": "Statistics for Business"
+  },
+  {
+    "code": "BUSI 1520U",
+    "name": "Introduction to Business Analytics"
+  },
+  {
+    "code": "BUSI 1600U",
+    "name": "Management of the Enterprise"
+  },
+  {
+    "code": "BUSI 1700U",
+    "name": "Introduction to Entrepreneurship"
+  },
+  {
+    "code": "BUSI 1915U",
+    "name": "Fundamentals of Business Mathematics"
+  },
+  {
+    "code": "BUSI 1916U",
+    "name": "Mathematical Analysis for Business"
+  },
+  {
+    "code": "BUSI 1917U",
+    "name": "Mathematics of Dependent Relationships in Business"
+  },
+  {
+    "code": "BUSI 2000U",
+    "name": "Collaborative Leadership"
+  },
+  {
+    "code": "BUSI 2020U",
+    "name": "New Topics in Business"
+  },
+  {
+    "code": "BUSI 2040U",
+    "name": "Information Systems"
+  },
+  {
+    "code": "BUSI 2050U",
+    "name": "Managerial Economics"
+  },
+  {
+    "code": "BUSI 2130U",
+    "name": "Intermediate Financial Accounting I"
+  },
+  {
+    "code": "BUSI 2180U",
+    "name": "Introduction to Managerial Accounting"
+  },
+  {
+    "code": "BUSI 2200U",
+    "name": "Marketing Management"
+  },
+  {
+    "code": "BUSI 2311U",
+    "name": "Organizational Behaviour"
+  },
+  {
+    "code": "BUSI 2312U",
+    "name": "Human Resources Management"
+  },
+  {
+    "code": "BUSI 2330U",
+    "name": "Managing Team Dynamics"
+  },
+  {
+    "code": "BUSI 2350U",
+    "name": "Developing Management Skills"
+  },
+  {
+    "code": "BUSI 2401U",
+    "name": "Principles of Finance"
+  },
+  {
+    "code": "BUSI 2402U",
+    "name": "Corporate Finance"
+  },
+  {
+    "code": "BUSI 2410U",
+    "name": "Managerial Finance"
+  },
+  {
+    "code": "BUSI 2500U",
+    "name": "Business Simulation and Analytics"
+  },
+  {
+    "code": "BUSI 2510U",
+    "name": "Communicating with Data"
+  },
+  {
+    "code": "BUSI 2550U",
+    "name": "Introduction to Project Management"
+  },
+  {
+    "code": "BUSI 2560U",
+    "name": "Buyer Beware: The Psychology of Buying and Selling"
+  },
+  {
+    "code": "BUSI 2570U",
+    "name": "Cybercrime"
+  },
+  {
+    "code": "BUSI 2603U",
+    "name": "Introduction to Operations Management"
+  },
+  {
+    "code": "BUSI 2620U",
+    "name": "Business Ethics"
+  },
+  {
+    "code": "BUSI 2700U",
+    "name": "Entrepreneurial Finance"
+  },
+  {
+    "code": "BUSI 2800U",
+    "name": "Fundamentals of Artificial Intelligence (AI) for Business"
+  },
+  {
+    "code": "BUSI 2900U",
+    "name": "Fundamentals of Cybersecurity for Business"
+  },
+  {
+    "code": "BUSI 3000U",
+    "name": "Business and Sustainability"
+  },
+  {
+    "code": "BUSI 3110U",
+    "name": "Introduction to Taxation"
+  },
+  {
+    "code": "BUSI 3120U",
+    "name": "Advanced Taxation"
+  },
+  {
+    "code": "BUSI 3130U",
+    "name": "Intermediate Financial Accounting II"
+  },
+  {
+    "code": "BUSI 3131U",
+    "name": "Intermediate Financial Accounting III"
+  },
+  {
+    "code": "BUSI 3142U",
+    "name": "Accounting Skills Workshop I"
+  },
+  {
+    "code": "BUSI 3150U",
+    "name": "Financial Statement Analysis"
+  },
+  {
+    "code": "BUSI 3170U",
+    "name": "Auditing Standards and Applications"
+  },
+  {
+    "code": "BUSI 3171U",
+    "name": "Advanced Auditing"
+  },
+  {
+    "code": "BUSI 3180U",
+    "name": "Intermediate Managerial Accounting"
+  },
+  {
+    "code": "BUSI 3200U",
+    "name": "Marketing Communications"
+  },
+  {
+    "code": "BUSI 3210U",
+    "name": "Consumer Behaviour"
+  },
+  {
+    "code": "BUSI 3230U",
+    "name": "Marketing Channels"
+  },
+  {
+    "code": "BUSI 3250U",
+    "name": "Service Marketing"
+  },
+  {
+    "code": "BUSI 3260U",
+    "name": "Marketing Research"
+  },
+  {
+    "code": "BUSI 3290U",
+    "name": "Marketing Management in Asia Pacific"
+  },
+  {
+    "code": "BUSI 3305U",
+    "name": "Recruitment and Selection"
+  },
+  {
+    "code": "BUSI 3312U",
+    "name": "Industrial and Labour Relations"
+  },
+  {
+    "code": "BUSI 3315U",
+    "name": "Negotiation Theory and Behaviour"
+  },
+  {
+    "code": "BUSI 3330U",
+    "name": "The Management of Change"
+  },
+  {
+    "code": "BUSI 3340U",
+    "name": "Human Resources Planning"
+  },
+  {
+    "code": "BUSI 3360U",
+    "name": "Occupational Health and Safety"
+  },
+  {
+    "code": "BUSI 3380U",
+    "name": "Compensation and Benefits"
+  },
+  {
+    "code": "BUSI 3390U",
+    "name": "Training and Development"
+  },
+  {
+    "code": "BUSI 3405U",
+    "name": "Equity Asset Analysis"
+  },
+  {
+    "code": "BUSI 3410U",
+    "name": "Financial Institutions"
+  },
+  {
+    "code": "BUSI 3420U",
+    "name": "Derivative Securities"
+  },
+  {
+    "code": "BUSI 3430U",
+    "name": "Personal Finance"
+  },
+  {
+    "code": "BUSI 3440U",
+    "name": "Financial Modelling"
+  },
+  {
+    "code": "BUSI 3460U",
+    "name": "Fixed Income Strategies"
+  },
+  {
+    "code": "BUSI 3470U",
+    "name": "Wealth Management Principles"
+  },
+  {
+    "code": "BUSI 3480U",
+    "name": "International Finance"
+  },
+  {
+    "code": "BUSI 3503U",
+    "name": "Digital Marketing"
+  },
+  {
+    "code": "BUSI 3504U",
+    "name": "Databases, Data Warehouses and Business Intelligence"
+  },
+  {
+    "code": "BUSI 3550U",
+    "name": "Systems Analysis and Design"
+  },
+  {
+    "code": "BUSI 3580U",
+    "name": "Network Systems"
+  },
+  {
+    "code": "BUSI 3590U",
+    "name": "Design Thinking"
+  },
+  {
+    "code": "BUSI 3601U",
+    "name": "Supply Chain Analytics"
+  },
+  {
+    "code": "BUSI 3630U",
+    "name": "Logistics in the Supply Chain"
+  },
+  {
+    "code": "BUSI 3650U",
+    "name": "Innovation Management"
+  },
+  {
+    "code": "BUSI 3670U",
+    "name": "Risk Management Frameworks and Processes"
+  },
+  {
+    "code": "BUSI 3700U",
+    "name": "Strategic Management for Professionals"
+  },
+  {
+    "code": "BUSI 3705U",
+    "name": "Legal Environment of Business"
+  },
+  {
+    "code": "BUSI 3710U",
+    "name": "Entrepreneurial Growth"
+  },
+  {
+    "code": "BUSI 3720U",
+    "name": "Family Business"
+  },
+  {
+    "code": "BUSI 3730U",
+    "name": "Creative Problem Solving, Entrepreneurship and Imagination"
+  },
+  {
+    "code": "BUSI 3750U",
+    "name": "Lean Start-up"
+  },
+  {
+    "code": "BUSI 3800U",
+    "name": "International Business"
+  },
+  {
+    "code": "BUSI 3810U",
+    "name": "International Management"
+  },
+  {
+    "code": "BUSI 3830U",
+    "name": "AI Beyond the Hype: Ethical, Legal, and Societal issues in Artificial Intelligence"
+  },
+  {
+    "code": "BUSI 3998U",
+    "name": "Energy Economics"
+  },
+  {
+    "code": "BUSI 3999U",
+    "name": "Environmental Economics"
+  },
+  {
+    "code": "BUSI 4040U",
+    "name": "Emerging Trends in Technology Management"
+  },
+  {
+    "code": "BUSI 4130U",
+    "name": "Advanced Financial Accounting"
+  },
+  {
+    "code": "BUSI 4142U",
+    "name": "Accounting Skills Workshop II"
+  },
+  {
+    "code": "BUSI 4180U",
+    "name": "Advanced Managerial Accounting"
+  },
+  {
+    "code": "BUSI 4190U",
+    "name": "Special Topics in Accounting"
+  },
+  {
+    "code": "BUSI 4210U",
+    "name": "High-Tech Marketing"
+  },
+  {
+    "code": "BUSI 4220U",
+    "name": "Marketing Strategy"
+  },
+  {
+    "code": "BUSI 4230U",
+    "name": "Marketing Analytics"
+  },
+  {
+    "code": "BUSI 4250U",
+    "name": "International Marketing"
+  },
+  {
+    "code": "BUSI 4280U",
+    "name": "Social Media Marketing"
+  },
+  {
+    "code": "BUSI 4290U",
+    "name": "Special Topics in Marketing"
+  },
+  {
+    "code": "BUSI 4299U",
+    "name": "Directed Independent Studies in Marketing"
+  },
+  {
+    "code": "BUSI 4340U",
+    "name": "Business of Gaming"
+  },
+  {
+    "code": "BUSI 4390U",
+    "name": "Special Topics in Organizational Behaviour and Human Resources Management"
+  },
+  {
+    "code": "BUSI 4399U",
+    "name": "Directed Independent Study in Organizational Behaviour and Human Resources Management"
+  },
+  {
+    "code": "BUSI 4405U",
+    "name": "Portfolio and Investment Strategies"
+  },
+  {
+    "code": "BUSI 4410U",
+    "name": "Advanced Corporate Finance Applications"
+  },
+  {
+    "code": "BUSI 4440U",
+    "name": "Financial Econometrics"
+  },
+  {
+    "code": "BUSI 4450U",
+    "name": "Business Applications of Blockchain and Cryptocurrencies"
+  },
+  {
+    "code": "BUSI 4455U",
+    "name": "Student Managed Investment Fund"
+  },
+  {
+    "code": "BUSI 4490U",
+    "name": "Special Topics in Finance"
+  },
+  {
+    "code": "BUSI 4504U",
+    "name": "Advanced Business Intelligence"
+  },
+  {
+    "code": "BUSI 4570U",
+    "name": "Strategic Information Technology Management"
+  },
+  {
+    "code": "BUSI 4590U",
+    "name": "Special Topics in Technology Management"
+  },
+  {
+    "code": "BUSI 4599U",
+    "name": "Directed Independent Studies in E-Business and E-Commerce"
+  },
+  {
+    "code": "BUSI 4650U",
+    "name": "Global Operations and Supply Chain Management"
+  },
+  {
+    "code": "BUSI 4701U",
+    "name": "Strategic Management"
+  },
+  {
+    "code": "BUSI 4710U",
+    "name": "Information Privacy Law and New Technologies"
+  },
+  {
+    "code": "BUSI 4800U",
+    "name": "Business Applications of Artificial Intelligence (AI)"
+  },
+  {
+    "code": "BUSI 4801U",
+    "name": "Special Topics in Artificial Intelligence (AI) for Business"
+  },
+  {
+    "code": "BUSI 4901U",
+    "name": "Special Topics in Cybersecurity for Business"
+  },
+  {
+    "code": "BUSI 4920U",
+    "name": "Cybersecurity Leadership"
+  },
+  {
+    "code": "CHEM 0900U",
+    "name": "Preparatory Chemistry for Engineers"
+  },
+  {
+    "code": "CHEM 1010U",
+    "name": "Chemistry I"
+  },
+  {
+    "code": "CHEM 1020U",
+    "name": "Chemistry II"
+  },
+  {
+    "code": "CHEM 1800U",
+    "name": "Chemistry for Engineers"
+  },
+  {
+    "code": "CHEM 2010U",
+    "name": "Structure and Bonding"
+  },
+  {
+    "code": "CHEM 2020U",
+    "name": "Introduction to Organic Chemistry"
+  },
+  {
+    "code": "CHEM 2030U",
+    "name": "Analytical Chemistry"
+  },
+  {
+    "code": "CHEM 2040U",
+    "name": "Thermodynamics and Kinetics"
+  },
+  {
+    "code": "CHEM 2120U",
+    "name": "Organic Chemistry"
+  },
+  {
+    "code": "CHEM 2130U",
+    "name": "Analytical Chemistry for Biosciences"
+  },
+  {
+    "code": "CHEM 2220U",
+    "name": "Molecular Structure Determination from Spectroscopic Data"
+  },
+  {
+    "code": "CHEM 3040U",
+    "name": "Fundamentals of Physical Chemistry"
+  },
+  {
+    "code": "CHEM 3050U",
+    "name": "Environmental Chemistry"
+  },
+  {
+    "code": "CHEM 3120U",
+    "name": "Advanced Organic Chemistry"
+  },
+  {
+    "code": "CHEM 3140U",
+    "name": "Physical Chemistry for Biosciences"
+  },
+  {
+    "code": "CHEM 3250U",
+    "name": "Introductory Medicinal Chemistry"
+  },
+  {
+    "code": "CHEM 3410U",
+    "name": "Chemistry Laboratory Techniques"
+  },
+  {
+    "code": "CHEM 3510U",
+    "name": "Inorganic Chemistry I: Transition Metals and Main Group Elements"
+  },
+  {
+    "code": "CHEM 3520U",
+    "name": "Inorganic Chemistry II: Organometallics"
+  },
+  {
+    "code": "CHEM 3530U",
+    "name": "Instrumental Analytical Chemistry I"
+  },
+  {
+    "code": "CHEM 3540U",
+    "name": "Instrumental Analytical Chemistry II"
+  },
+  {
+    "code": "CHEM 3830U",
+    "name": "Instrumental Analytical Chemistry"
+  },
+  {
+    "code": "CHEM 4040U",
+    "name": "Physical Chemistry: Surfaces and Colloids"
+  },
+  {
+    "code": "CHEM 4041U",
+    "name": "Advanced Topics in Chemistry I"
+  },
+  {
+    "code": "CHEM 4042U",
+    "name": "Advanced Topics in Chemistry II"
+  },
+  {
+    "code": "CHEM 4060U",
+    "name": "Quantum Chemistry and Spectroscopy"
+  },
+  {
+    "code": "CHEM 4110U",
+    "name": "Bio-Organic Chemistry and Chemical Biology"
+  },
+  {
+    "code": "CHEM 4120U",
+    "name": "Advanced Topics in Chemical Biology"
+  },
+  {
+    "code": "CHEM 4140U",
+    "name": "Surface and Colloidal Chemistry"
+  },
+  {
+    "code": "CHEM 4410U",
+    "name": "Chemistry Thesis Project I"
+  },
+  {
+    "code": "CHEM 4420U",
+    "name": "Chemistry Thesis Project II"
+  },
+  {
+    "code": "CHEM 4510U",
+    "name": "Pharmaceutical Discovery"
+  },
+  {
+    "code": "CHEM 4520U",
+    "name": "Advanced Topics in Pharmaceutical Chemistry"
+  },
+  {
+    "code": "CHEM 4610U",
+    "name": "Advances in Inorganic Chemistry"
+  },
+  {
+    "code": "COMM 1050U",
+    "name": "Technical Communications"
+  },
+  {
+    "code": "COMM 1100U",
+    "name": "Introduction to Communication and Digital Media Studies"
+  },
+  {
+    "code": "COMM 1320U",
+    "name": "Public Speaking and Multimedia Presentation for Web 3.0"
+  },
+  {
+    "code": "COMM 1420U",
+    "name": "Living Digitally: Social Media, Culture & Society"
+  },
+  {
+    "code": "COMM 2110U",
+    "name": "Communication and Digital Media Theory: Keyworks"
+  },
+  {
+    "code": "COMM 2210U",
+    "name": "Researching Communication and Digital Culture"
+  },
+  {
+    "code": "COMM 2220U",
+    "name": "The Media, Creativity and Culture in Canada"
+  },
+  {
+    "code": "COMM 2240U",
+    "name": "Television"
+  },
+  {
+    "code": "COMM 2270U",
+    "name": "Entertainment Goes Global: from Hollywood to the World"
+  },
+  {
+    "code": "COMM 2311U",
+    "name": "The Creative Industries: Ideas, Art, Tech, Money, Power"
+  },
+  {
+    "code": "COMM 2410U",
+    "name": "Social History of Communication and Media Technologies"
+  },
+  {
+    "code": "COMM 2411U",
+    "name": "Governing Communication and Digital Creativity: Policy for an era of Digital Disruption"
+  },
+  {
+    "code": "COMM 2530U",
+    "name": "Advertising as Social Communication"
+  },
+  {
+    "code": "COMM 2620U",
+    "name": "Professional Communication and AI"
+  },
+  {
+    "code": "COMM 3110U",
+    "name": "Communication Ethics: Making Media for the Social Good"
+  },
+  {
+    "code": "COMM 3250U",
+    "name": "Pop Culture and Entertainment"
+  },
+  {
+    "code": "COMM 3310U",
+    "name": "Communication for Social Change, Community and Development"
+  },
+  {
+    "code": "COMM 3350U",
+    "name": "Environmental Communication: Media and Tech for"
+  },
+  {
+    "code": "COMM 3410U",
+    "name": "Designing Hits: Storytelling in the Digital Age"
+  },
+  {
+    "code": "COMM 3510U",
+    "name": "Work in the Creative and Tech Industries"
+  },
+  {
+    "code": "COMM 3610U",
+    "name": "Strategic Communications for Influence: Rhetoric, Persuasion and Propaganda"
+  },
+  {
+    "code": "COMM 3710U",
+    "name": "Media, Identity and Intercultural Communication"
+  },
+  {
+    "code": "COMM 3720U",
+    "name": "Knowing Your Audience: Audience Studies for Media Professionals and Creators"
+  },
+  {
+    "code": "COMM 3740U",
+    "name": "Video Games, Media and Culture"
+  },
+  {
+    "code": "COMM 3751U",
+    "name": "Media, War and Conflict"
+  },
+  {
+    "code": "COMM 4120U",
+    "name": "AI, Ethics and Communication"
+  },
+  {
+    "code": "COMM 4130U",
+    "name": "Capstone Creator Project"
+  },
+  {
+    "code": "COMM 4140U",
+    "name": "Ways of Seeing: Immersive Communication and AI"
+  },
+  {
+    "code": "COMM 4210U",
+    "name": "Special Topics in Communication and Digital Media Studies"
+  },
+  {
+    "code": "COMM 4261U",
+    "name": "Online Creator-Entrepreneurs: YouTubers, Influencers, and Streamers"
+  },
+  {
+    "code": "COMM 4420U",
+    "name": "Political Communication, Digital Media and Democracy"
+  },
+  {
+    "code": "COMM 4510U",
+    "name": "Public Relations: Social Power, Social Media Platforms, and Social Responsibility"
+  },
+  {
+    "code": "COMM 4530U",
+    "name": "Media Activism and Protest Cultures"
+  },
+  {
+    "code": "COMM 4610U",
+    "name": "The Struggle is Real: Transformation for Communication, Conflict, and Peace"
+  },
+  {
+    "code": "COMM 4710U",
+    "name": "Global Media, the Internet and International Relations"
+  },
+  {
+    "code": "CRMN 1000U",
+    "name": "Introduction to Criminology and Justice"
+  },
+  {
+    "code": "CRMN 2010U",
+    "name": "Criminal Law"
+  },
+  {
+    "code": "CRMN 2021U",
+    "name": "Families and the Justice System"
+  },
+  {
+    "code": "CRMN 2030U",
+    "name": "Social Control"
+  },
+  {
+    "code": "CRMN 2040U",
+    "name": "Decolonizing Criminology"
+  },
+  {
+    "code": "CRMN 2050U",
+    "name": "Rights and Wrongs in the Justice System"
+  },
+  {
+    "code": "CRMN 2830U",
+    "name": "Theories of Justice"
+  },
+  {
+    "code": "CRMN 2831U",
+    "name": "Critical Race Theory"
+  },
+  {
+    "code": "CRMN 2840U",
+    "name": "Gender, Sex, and (In)Justice"
+  },
+  {
+    "code": "CRMN 2850U",
+    "name": "Classical Theories of Crime"
+  },
+  {
+    "code": "CRMN 3010U",
+    "name": "Social Justice/Criminal Justice"
+  },
+  {
+    "code": "CRMN 3023U",
+    "name": "Family Violence"
+  },
+  {
+    "code": "CRMN 3024U",
+    "name": "Criminal Gangs"
+  },
+  {
+    "code": "CRMN 3025U",
+    "name": "Victimology"
+  },
+  {
+    "code": "CRMN 3026U",
+    "name": "Organized Crime"
+  },
+  {
+    "code": "CRMN 3027U",
+    "name": "Delinquency, Deviance, and Youth Crime"
+  },
+  {
+    "code": "CRMN 3028U",
+    "name": "Women in the Criminal Justice System"
+  },
+  {
+    "code": "CRMN 3029U",
+    "name": "Crime and the Elderly"
+  },
+  {
+    "code": "CRMN 3035U",
+    "name": "Crime and Media"
+  },
+  {
+    "code": "CRMN 3038U",
+    "name": "Serial and Mass Homicide"
+  },
+  {
+    "code": "CRMN 3040U",
+    "name": "Restorative Justice"
+  },
+  {
+    "code": "CRMN 3045U",
+    "name": "Terrorism"
+  },
+  {
+    "code": "CRMN 3050U",
+    "name": "Police and Society"
+  },
+  {
+    "code": "CRMN 3056U",
+    "name": "Race-ing Justice"
+  },
+  {
+    "code": "CRMN 3060U",
+    "name": "Punishment and Society"
+  },
+  {
+    "code": "CRMN 3301U",
+    "name": "Green Criminology and Eco-Justice"
+  },
+  {
+    "code": "CRMN 3401U",
+    "name": "Indigenous Peoples and Justice"
+  },
+  {
+    "code": "CRMN 3850U",
+    "name": "Contemporary Theories of Crime"
+  },
+  {
+    "code": "CRMN 4000U",
+    "name": "Advanced Justice Studies"
+  },
+  {
+    "code": "CRMN 4001U",
+    "name": "Special Topics in Criminology and Justice"
+  },
+  {
+    "code": "CRMN 4020U",
+    "name": "Corporate Crime"
+  },
+  {
+    "code": "CRMN 4021U",
+    "name": "Cybercrime"
+  },
+  {
+    "code": "CRMN 4022U",
+    "name": "Hate Crime"
+  },
+  {
+    "code": "CRMN 4032U",
+    "name": "Mediation and Conflict Resolution"
+  },
+  {
+    "code": "CRMN 4037U",
+    "name": "Youth Justice Policy"
+  },
+  {
+    "code": "CRMN 4052U",
+    "name": "Policing Diverse Communities"
+  },
+  {
+    "code": "CRMN 4062U",
+    "name": "The Prison Experience"
+  },
+  {
+    "code": "CRMN 4065U",
+    "name": "Criminal Justice Ethics and Misconduct"
+  },
+  {
+    "code": "CRMN 4075U",
+    "name": "International Perspectives on Criminal Justice"
+  },
+  {
+    "code": "CRMN 4079U",
+    "name": "Alternative Sanctions"
+  },
+  {
+    "code": "CRMN 4085U",
+    "name": "Emerging Patterns of Policing"
+  },
+  {
+    "code": "CRMN 4099U",
+    "name": "Criminology and Justice Integrating Project"
+  },
+  {
+    "code": "CRMN 4100U",
+    "name": "Doing Criminology"
+  },
+  {
+    "code": "CSCI 1030U",
+    "name": "Introduction to Computer Science"
+  },
+  {
+    "code": "CSCI 1040U",
+    "name": "Introduction to Programming for Scientists"
+  },
+  {
+    "code": "CSCI 1050U",
+    "name": "Computer Architecture"
+  },
+  {
+    "code": "CSCI 1060U",
+    "name": "Programming Workshop I"
+  },
+  {
+    "code": "CSCI 1061U",
+    "name": "Programming Workshop II"
+  },
+  {
+    "code": "CSCI 1062U",
+    "name": "Accelerated Programming Workshop"
+  },
+  {
+    "code": "CSCI 1063U",
+    "name": "Computer Programming Project"
+  },
+  {
+    "code": "CSCI 2000U",
+    "name": "Scientific Data Analysis"
+  },
+  {
+    "code": "CSCI 2010U",
+    "name": "Data Structures"
+  },
+  {
+    "code": "CSCI 2020U",
+    "name": "Software Systems Development and Integration"
+  },
+  {
+    "code": "CSCI 2040U",
+    "name": "Software Design and Analysis"
+  },
+  {
+    "code": "CSCI 2072U",
+    "name": "Computational Science I"
+  },
+  {
+    "code": "CSCI 2110U",
+    "name": "Discrete Mathematics for Computer Scientists"
+  },
+  {
+    "code": "CSCI 2160U",
+    "name": "Digital Media"
+  },
+  {
+    "code": "CSCI 3000U",
+    "name": "Information Visualization"
+  },
+  {
+    "code": "CSCI 3010U",
+    "name": "Simulation and Modelling"
+  },
+  {
+    "code": "CSCI 3020U",
+    "name": "Operating Systems"
+  },
+  {
+    "code": "CSCI 3030U",
+    "name": "Database Systems and Concepts"
+  },
+  {
+    "code": "CSCI 3052U",
+    "name": "Machine Learning I"
+  },
+  {
+    "code": "CSCI 3055U",
+    "name": "Programming Languages"
+  },
+  {
+    "code": "CSCI 3060U",
+    "name": "Software Quality Assurance"
+  },
+  {
+    "code": "CSCI 3070U",
+    "name": "Analysis and Design of Algorithms"
+  },
+  {
+    "code": "CSCI 3090U",
+    "name": "Computer Graphics and Visualization"
+  },
+  {
+    "code": "CSCI 3101U",
+    "name": "Mobile Devices"
+  },
+  {
+    "code": "CSCI 3150U",
+    "name": "Computer Networks"
+  },
+  {
+    "code": "CSCI 3230U",
+    "name": "Web Application Development"
+  },
+  {
+    "code": "CSCI 3240U",
+    "name": "Computer Vision I"
+  },
+  {
+    "code": "CSCI 3310U",
+    "name": "Systems Programming"
+  },
+  {
+    "code": "CSCI 3540U",
+    "name": "Software Security"
+  },
+  {
+    "code": "CSCI 3620U",
+    "name": "Human-Computer Interaction"
+  },
+  {
+    "code": "CSCI 4020U",
+    "name": "Compilers"
+  },
+  {
+    "code": "CSCI 4030U",
+    "name": "Big Data Analytics"
+  },
+  {
+    "code": "CSCI 4040U",
+    "name": "Ethics, Law and the Social Impacts of Computing"
+  },
+  {
+    "code": "CSCI 4052U",
+    "name": "Machine Learning II"
+  },
+  {
+    "code": "CSCI 4055U",
+    "name": "Natural Language Processing"
+  },
+  {
+    "code": "CSCI 4060U",
+    "name": "Massively Parallel Programming"
+  },
+  {
+    "code": "CSCI 4080U",
+    "name": "Design for Educational Applications"
+  },
+  {
+    "code": "CSCI 4101U",
+    "name": "Advanced Mobile Devices"
+  },
+  {
+    "code": "CSCI 4110U",
+    "name": "Advanced Computer Graphics"
+  },
+  {
+    "code": "CSCI 4140U",
+    "name": "Quantum Computing Software and Applications"
+  },
+  {
+    "code": "CSCI 4150U",
+    "name": "Data Mining"
+  },
+  {
+    "code": "CSCI 4160U",
+    "name": "Game Development"
+  },
+  {
+    "code": "CSCI 4220U",
+    "name": "Computer Vision II"
+  },
+  {
+    "code": "CSCI 4230U",
+    "name": "Advanced Web Development"
+  },
+  {
+    "code": "CSCI 4410U",
+    "name": "Computer Science Thesis Project I"
+  },
+  {
+    "code": "CSCI 4420U",
+    "name": "Computer Science Thesis Project II"
+  },
+  {
+    "code": "CSCI 4430U",
+    "name": "Directed Studies in Computer Science"
+  },
+  {
+    "code": "CSCI 4440U",
+    "name": "Topics in Computer Science I"
+  },
+  {
+    "code": "CSCI 4450U",
+    "name": "Advanced Topics in Data Science"
+  },
+  {
+    "code": "CSCI 4460U",
+    "name": "Topics in Computer Science II"
+  },
+  {
+    "code": "CSCI 4470U",
+    "name": "Advanced Topics in Interactive Computing"
+  },
+  {
+    "code": "CSCI 4480U",
+    "name": "Advanced Topics in Artificial Intelligence"
+  },
+  {
+    "code": "CSCI 4490U",
+    "name": "Advanced Topics in Software Development"
+  },
+  {
+    "code": "CSCI 4610U",
+    "name": "Artificial Intelligence"
+  },
+  {
+    "code": "CURS 4100U",
+    "name": "Curriculum Studies I: I/S Biology"
+  },
+  {
+    "code": "CURS 4101U",
+    "name": "Curriculum Studies II: I/S Biology"
+  },
+  {
+    "code": "CURS 4110U",
+    "name": "Curriculum Studies I: I/S English"
+  },
+  {
+    "code": "CURS 4111U",
+    "name": "Curriculum Studies II: I/S English"
+  },
+  {
+    "code": "CURS 4140U",
+    "name": "Curriculum Studies I: I/S Mathematics"
+  },
+  {
+    "code": "CURS 4141U",
+    "name": "Curriculum Studies II: I/S Mathematics"
+  },
+  {
+    "code": "CURS 4180U",
+    "name": "Curriculum Studies I: I/S General Science"
+  },
+  {
+    "code": "CURS 4181U",
+    "name": "Curriculum Studies II: I/S General Science"
+  },
+  {
+    "code": "CURS 4301U",
+    "name": "Curriculum Studies I: I/S Chemistry/Physics"
+  },
+  {
+    "code": "CURS 4302U",
+    "name": "Curriculum Studies II: I/S Chemistry/Physics"
+  },
+  {
+    "code": "CURS 4501U",
+    "name": "Curriculum Studies I: I/S History"
+  },
+  {
+    "code": "CURS 4502U",
+    "name": "Curriculum Studies II: I/S History"
+  },
+  {
+    "code": "CURS 4503U",
+    "name": "Curriculum Studies I: I/S Health and Physical Education"
+  },
+  {
+    "code": "CURS 4504U",
+    "name": "Curriculum Studies II: I/S Health and Physical Education"
+  },
+  {
+    "code": "ECON 2010U",
+    "name": "Microeconomics"
+  },
+  {
+    "code": "ECON 2020U",
+    "name": "Macroeconomics"
+  },
+  {
+    "code": "EDST 1000U",
+    "name": "Foundations of Learning"
+  },
+  {
+    "code": "EDST 1010U",
+    "name": "Teaching, Learning and Educational Contexts"
+  },
+  {
+    "code": "EDST 1020U",
+    "name": "Academic Success Strategies for Educational Studies"
+  },
+  {
+    "code": "EDST 1100U",
+    "name": "Problem and Inquiry Based Learning"
+  },
+  {
+    "code": "EDST 1130U",
+    "name": "Writing and Information Literacy in the Digital Age"
+  },
+  {
+    "code": "EDST 1230U",
+    "name": "Design Thinking and Visual Design for Educational Contexts"
+  },
+  {
+    "code": "EDST 2110U",
+    "name": "Assessment and Evaluation"
+  },
+  {
+    "code": "EDST 2120U",
+    "name": "Culture and Digital Technologies"
+  },
+  {
+    "code": "EDST 2140U",
+    "name": "Creating Digital Tools"
+  },
+  {
+    "code": "EDST 2150U",
+    "name": "Teaching to Facilitate Learning"
+  },
+  {
+    "code": "EDST 2160U",
+    "name": "Online Learning"
+  },
+  {
+    "code": "EDST 2170U",
+    "name": "Designing Inclusive Learning Environments"
+  },
+  {
+    "code": "EDST 2180U",
+    "name": "AI in Education"
+  },
+  {
+    "code": "EDST 2200U",
+    "name": "Literature and Pedagogy: Exploring Human Experience"
+  },
+  {
+    "code": "EDST 2250U",
+    "name": "(Re)Thinking Canadian History for Educational Contexts"
+  },
+  {
+    "code": "EDST 2310C",
+    "name": "Foundations for Success in Co-op"
+  },
+  {
+    "code": "EDST 2410U",
+    "name": "Foundations of Adult Learning"
+  },
+  {
+    "code": "EDST 2420U",
+    "name": "Workplace Learning"
+  },
+  {
+    "code": "EDST 2500U",
+    "name": "Foundations of Equity, Diversity and Inclusion in Education"
+  },
+  {
+    "code": "EDST 2700U",
+    "name": "Foundations of Special Education"
+  },
+  {
+    "code": "EDST 2800U",
+    "name": "Mental Health and Education"
+  },
+  {
+    "code": "EDST 3000U",
+    "name": "Instructional Design"
+  },
+  {
+    "code": "EDST 3050U",
+    "name": "Foundations of Teaching English"
+  },
+  {
+    "code": "EDST 3110U",
+    "name": "Critical Digital Literacies"
+  },
+  {
+    "code": "EDST 3140U",
+    "name": "Digital Communication Technologies"
+  },
+  {
+    "code": "EDST 3160U",
+    "name": "Developing Literacy"
+  },
+  {
+    "code": "EDST 3170U",
+    "name": "Developing Numeracy"
+  },
+  {
+    "code": "EDST 3200U",
+    "name": "Youth Literature in Educational Contexts"
+  },
+  {
+    "code": "EDST 3250U",
+    "name": "Pedagogical Approaches to Canadian History through Literature"
+  },
+  {
+    "code": "EDST 3310W",
+    "name": "EDST Co-op Work Term I"
+  },
+  {
+    "code": "EDST 3440U",
+    "name": "Managing and Developing eLearning Projects"
+  },
+  {
+    "code": "EDST 3460U",
+    "name": "Working with Clients and Partners"
+  },
+  {
+    "code": "EDST 3500U",
+    "name": "Unlearning and The Inclusive Curriculum"
+  },
+  {
+    "code": "EDST 3520U",
+    "name": "The Power of Art: Advancing Equity through the Creative Process"
+  },
+  {
+    "code": "EDST 3610U",
+    "name": "Child Development and Health"
+  },
+  {
+    "code": "EDST 3700U",
+    "name": "Models of Inclusion"
+  },
+  {
+    "code": "EDST 3710U",
+    "name": "Understanding the Diversity of Educational Needs"
+  },
+  {
+    "code": "EDST 3820U",
+    "name": "Psycho-Education Assessments"
+  },
+  {
+    "code": "EDST 3830U",
+    "name": "Introduction to Guidance Counselling"
+  },
+  {
+    "code": "EDST 3999U",
+    "name": "Special Topics in Educational Studies"
+  },
+  {
+    "code": "EDST 4000U",
+    "name": "Inquiry and Professional Practice"
+  },
+  {
+    "code": "EDST 4120U",
+    "name": "Games and Simulations for Learning"
+  },
+  {
+    "code": "EDST 4130U",
+    "name": "Pop Culture and Education"
+  },
+  {
+    "code": "EDST 4150U",
+    "name": "Holistic Learning in Early Childhood Education"
+  },
+  {
+    "code": "EDST 4190U",
+    "name": "Developing your Educational Technology Portfolio"
+  },
+  {
+    "code": "EDST 4300U",
+    "name": "Engaged Educator Project I"
+  },
+  {
+    "code": "EDST 4301U",
+    "name": "Engaged Educator Project II"
+  },
+  {
+    "code": "EDST 4310W",
+    "name": "EDST Co-op Work Term II"
+  },
+  {
+    "code": "EDST 4320W",
+    "name": "EDST Co-op Work Term III"
+  },
+  {
+    "code": "EDST 4330W",
+    "name": "EDST Co-op Work Term IV"
+  },
+  {
+    "code": "EDST 4340W",
+    "name": "EDST Co-op Work Term V"
+  },
+  {
+    "code": "EDST 4470U",
+    "name": "Trends and Issues in Educational Technology"
+  },
+  {
+    "code": "EDST 4500U",
+    "name": "Enabling Learning through Technology"
+  },
+  {
+    "code": "EDST 4530U",
+    "name": "Social Justice Issues in Education"
+  },
+  {
+    "code": "EDST 4540U",
+    "name": "Learning in Community"
+  },
+  {
+    "code": "EDST 4560U",
+    "name": "Supporting Multilanguage Learners in Elementary Schools"
+  },
+  {
+    "code": "EDST 4610U",
+    "name": "Coding and Maker Pedagogies for Young Children"
+  },
+  {
+    "code": "EDST 4620U",
+    "name": "Ecology of Learning: Play, Nature, and Community in"
+  },
+  {
+    "code": "EDST 4670U",
+    "name": "Developing Space and Spatial Reasoning"
+  },
+  {
+    "code": "EDST 4700U",
+    "name": "Technology and Assistive Tools for Special Education"
+  },
+  {
+    "code": "EDST 4800U",
+    "name": "Exploring Diverse Educational Environments"
+  },
+  {
+    "code": "EDST 4900U",
+    "name": "Research Literacy for Education"
+  },
+  {
+    "code": "EDST 4901U",
+    "name": "Research Project"
+  },
+  {
+    "code": "EDST 4980U",
+    "name": "Work Integrated Learning I"
+  },
+  {
+    "code": "EDST 4981U",
+    "name": "Work Integrated Learning II"
+  },
+  {
+    "code": "EDST 4999U",
+    "name": "Directed Studies in Educational Studies"
+  },
+  {
+    "code": "EDUC 1300U",
+    "name": "Foundations I: Planning and Preparation"
+  },
+  {
+    "code": "EDUC 1301U",
+    "name": "Learning and Development"
+  },
+  {
+    "code": "EDUC 1302U",
+    "name": "P/J Digital Literacies I (Language Arts and Digital Technology)"
+  },
+  {
+    "code": "EDUC 1305U",
+    "name": "Foundations II: Curriculum Theory and Practice"
+  },
+  {
+    "code": "EDUC 1306U",
+    "name": "P/J Digital Literacies/Social Studies II (Language Arts and Social Studies)"
+  },
+  {
+    "code": "EDUC 1308U",
+    "name": "P/J Mathematical Thinking and Doing"
+  },
+  {
+    "code": "EDUC 1309U",
+    "name": "I/S Digital Literacies and Information and Communication Technology"
+  },
+  {
+    "code": "EDUC 1310U",
+    "name": "I/S Mathematical Thinking and Doing"
+  },
+  {
+    "code": "EDUC 1311U",
+    "name": "I/S Coding and Communication"
+  },
+  {
+    "code": "EDUC 1314U",
+    "name": "P/J Health & Physical Education"
+  },
+  {
+    "code": "EDUC 1315U",
+    "name": "The Arts Primary/Junior"
+  },
+  {
+    "code": "EDUC 1330U",
+    "name": "P/J Mathematics Methods I"
+  },
+  {
+    "code": "EDUC 1340U",
+    "name": "P/J Mathematics Methods II"
+  },
+  {
+    "code": "EDUC 1370U",
+    "name": "P/J Science & Technology Methods I"
+  },
+  {
+    "code": "EDUC 1380U",
+    "name": "P/J Science & Technology Methods II"
+  },
+  {
+    "code": "EDUC 2400U",
+    "name": "Equity and Diversity"
+  },
+  {
+    "code": "EDUC 2401U",
+    "name": "Learning in Digital Contexts"
+  },
+  {
+    "code": "EDUC 2402U",
+    "name": "Teaching for Inclusion: Special Needs and Individualized"
+  },
+  {
+    "code": "EDUC 2403U",
+    "name": "Independent Inquiry"
+  },
+  {
+    "code": "EDUC 2404U",
+    "name": "Education Law, Policy and Ethics"
+  },
+  {
+    "code": "EDUC 2405U",
+    "name": "Foundations III: Long Range Planning and Assessment"
+  },
+  {
+    "code": "EDUC 2406U",
+    "name": "Reflective Practice/Action Research"
+  },
+  {
+    "code": "EDUC 2407U",
+    "name": "Mental Health Issues in Schools"
+  },
+  {
+    "code": "EDUC 2408U",
+    "name": "P/J Coding and Communication"
+  },
+  {
+    "code": "EDUC 3200U",
+    "name": "Introduction to Indigenous Pedagogy"
+  },
+  {
+    "code": "EDUC 3201U",
+    "name": "Environmental Education"
+  },
+  {
+    "code": "EDUC 3206U",
+    "name": "Teaching the Catholic Religion in Schools"
+  },
+  {
+    "code": "EDUC 3207U",
+    "name": "Teacher as Coach"
+  },
+  {
+    "code": "EDUC 3208U",
+    "name": "Teaching Kindergarten"
+  },
+  {
+    "code": "EDUC 3209U",
+    "name": "Outdoor Education"
+  },
+  {
+    "code": "EDUC 3216U",
+    "name": "Teaching English Language Learners"
+  },
+  {
+    "code": "EDUC 3217U",
+    "name": "Indigenous Knowledge, Environmental and Sustainability"
+  },
+  {
+    "code": "EDUC 3299U",
+    "name": "Special Topics in Education"
+  },
+  {
+    "code": "ELEE 2110U",
+    "name": "Discrete Mathematics for Engineers"
+  },
+  {
+    "code": "ELEE 2200U",
+    "name": "Electrical Engineering Fundamentals"
+  },
+  {
+    "code": "ELEE 2210U",
+    "name": "Circuit Analysis"
+  },
+  {
+    "code": "ELEE 2250U",
+    "name": "Introductory Electronics"
+  },
+  {
+    "code": "ELEE 2450U",
+    "name": "Digital Systems"
+  },
+  {
+    "code": "ELEE 2520U",
+    "name": "Fundamentals of Electromagnetics"
+  },
+  {
+    "code": "ELEE 2530U",
+    "name": "Electrical Engineering Mathematics: Essentials and Applications"
+  },
+  {
+    "code": "ELEE 2790U",
+    "name": "Electric Circuits"
+  },
+  {
+    "code": "ELEE 3070U",
+    "name": "Probability and Random Signals"
+  },
+  {
+    "code": "ELEE 3100U",
+    "name": "Introduction to Control Systems"
+  },
+  {
+    "code": "ELEE 3110U",
+    "name": "Signals and Systems"
+  },
+  {
+    "code": "ELEE 3130U",
+    "name": "Communication Systems"
+  },
+  {
+    "code": "ELEE 3180U",
+    "name": "Design Principles and Project Management in Electrical"
+  },
+  {
+    "code": "ELEE 3230U",
+    "name": "Electronic Circuit Design"
+  },
+  {
+    "code": "ELEE 3240U",
+    "name": "Applications for Electromagnetics"
+  },
+  {
+    "code": "ELEE 3250U",
+    "name": "Electric Machines"
+  },
+  {
+    "code": "ELEE 3260U",
+    "name": "Power Systems"
+  },
+  {
+    "code": "ELEE 3450U",
+    "name": "Microprocessors and Computer Architecture"
+  },
+  {
+    "code": "ELEE 4115U",
+    "name": "Fundamentals of Smart Grid"
+  },
+  {
+    "code": "ELEE 4120U",
+    "name": "Introduction to Power Electronics"
+  },
+  {
+    "code": "ELEE 4125U",
+    "name": "Smart Grid Networking and Security"
+  },
+  {
+    "code": "ELEE 4130U",
+    "name": "Digital Communications"
+  },
+  {
+    "code": "ELEE 4140U",
+    "name": "Power System Protection Relaying"
+  },
+  {
+    "code": "ELEE 4150U",
+    "name": "Advanced Control Systems"
+  },
+  {
+    "code": "ELEE 4180U",
+    "name": "Special Topics in Electrical Engineering"
+  },
+  {
+    "code": "ELEE 4420U",
+    "name": "Digital Signal Processing"
+  },
+  {
+    "code": "ELEE 4500U",
+    "name": "Wireless Communications"
+  },
+  {
+    "code": "ELEE 4750U",
+    "name": "Microwave and RF Circuits"
+  },
+  {
+    "code": "ENEE 2160U",
+    "name": "Energy and Environmental Impacts"
+  },
+  {
+    "code": "ENEE 2210U",
+    "name": "Introduction to Alternative Fuels"
+  },
+  {
+    "code": "ENEE 3030U",
+    "name": "Computer-Aided Design"
+  },
+  {
+    "code": "ENEE 3265U",
+    "name": "Hydrogen and Fuel Cells"
+  },
+  {
+    "code": "ENEE 4161U",
+    "name": "Solar Energy"
+  },
+  {
+    "code": "ENEE 4163U",
+    "name": "Wind and Hydro Energy"
+  },
+  {
+    "code": "ENEE 4260U",
+    "name": "Integrated Energy Systems"
+  },
+  {
+    "code": "ENEE 4460U",
+    "name": "Sustainable Community Energy Systems"
+  },
+  {
+    "code": "ENGR 1000C",
+    "name": "Professional Competencies for Engineers"
+  },
+  {
+    "code": "ENGR 1015U",
+    "name": "Introduction to Engineering"
+  },
+  {
+    "code": "ENGR 1025U",
+    "name": "Engineering Design"
+  },
+  {
+    "code": "ENGR 1050U",
+    "name": "Engineering Communications and Technology Impacts"
+  },
+  {
+    "code": "ENGR 1200U",
+    "name": "Introduction to Programming for Engineers"
+  },
+  {
+    "code": "ENGR 2000W",
+    "name": "Engineering Co-op Work Term I"
+  },
+  {
+    "code": "ENGR 2100U",
+    "name": "Computational Engineering Applications"
+  },
+  {
+    "code": "ENGR 3000W",
+    "name": "Engineering Co-op Work Term II"
+  },
+  {
+    "code": "ENGR 3011U",
+    "name": "Introduction to Railway Systems"
+  },
+  {
+    "code": "ENGR 3150U",
+    "name": "Artificial Intelligence and Machine Learning"
+  },
+  {
+    "code": "ENGR 3160U",
+    "name": "Engineering Operations and Project Management"
+  },
+  {
+    "code": "ENGR 3215U",
+    "name": "Engineering Project Management"
+  },
+  {
+    "code": "ENGR 3360U",
+    "name": "Engineering Economics"
+  },
+  {
+    "code": "ENGR 3730U",
+    "name": "Solar Energy Technologies"
+  },
+  {
+    "code": "ENGR 3840U",
+    "name": "Fuel Cell Design"
+  },
+  {
+    "code": "ENGR 4000W",
+    "name": "Engineering Co-op Work Term III"
+  },
+  {
+    "code": "ENGR 4001W",
+    "name": "Engineering Co-op Work Term IV"
+  },
+  {
+    "code": "ENGR 4002W",
+    "name": "Engineering Co-op Work Term V"
+  },
+  {
+    "code": "ENGR 4022U",
+    "name": "Railway Safety and Signalling"
+  },
+  {
+    "code": "ENGR 4033U",
+    "name": "Railway Rolling Stock"
+  },
+  {
+    "code": "ENGR 4044U",
+    "name": "Railway Systems Operation and Maintenance"
+  },
+  {
+    "code": "ENGR 4111U",
+    "name": "Capstone Systems Design I"
+  },
+  {
+    "code": "ENGR 4170U",
+    "name": "Deep Learning"
+  },
+  {
+    "code": "ENGR 4222U",
+    "name": "Capstone Systems Design II"
+  },
+  {
+    "code": "ENGR 4270U",
+    "name": "Machine Learning Applications"
+  },
+  {
+    "code": "ENGR 4470U",
+    "name": "Hydrogen Power Systems"
+  },
+  {
+    "code": "ENGR 4530U",
+    "name": "Hydroelectric Power Systems"
+  },
+  {
+    "code": "ENGR 4570U",
+    "name": "Indigenous Design and Technology"
+  },
+  {
+    "code": "ENGR 4760U",
+    "name": "Ethics, Law and Professionalism for Engineers"
+  },
+  {
+    "code": "ENGR 4940U",
+    "name": "Capstone Systems Design for Electrical, Computer and Software Engineering I"
+  },
+  {
+    "code": "ENGR 4941U",
+    "name": "Capstone Systems Design for Electrical, Computer and Software Engineering II"
+  },
+  {
+    "code": "ENGR 4950U",
+    "name": "Capstone Systems Design for Mechanical, Automotive, Mechatronics and Manufacturing Engineering I"
+  },
+  {
+    "code": "ENGR 4951U",
+    "name": "Capstone Systems Design for Mechanical, Automotive, Mechatronics and Manufacturing Engineering II"
+  },
+  {
+    "code": "ENGR 4960U",
+    "name": "Capstone Systems Design for Energy Engineering I"
+  },
+  {
+    "code": "ENGR 4961U",
+    "name": "Capstone Systems Design for Energy Engineering II"
+  },
+  {
+    "code": "ENGR 4970U",
+    "name": "Capstone System Design for Industrial Engineering I"
+  },
+  {
+    "code": "ENGR 4971U",
+    "name": "Capstone System Design for Industrial Engineering II"
+  },
+  {
+    "code": "ENSY 0101U",
+    "name": "Calculus and Algebra for Energy Systems"
+  },
+  {
+    "code": "ENSY 0102U",
+    "name": "Applied Heat Transfer"
+  },
+  {
+    "code": "ENSY 0103U",
+    "name": "Materials for Energy Systems"
+  },
+  {
+    "code": "ENSY 1000U",
+    "name": "Introduction to Energy Systems"
+  },
+  {
+    "code": "ENSY 1110U",
+    "name": "Chemical Fundamentals"
+  },
+  {
+    "code": "ENSY 2210U",
+    "name": "Principles of Electrical Systems"
+  },
+  {
+    "code": "ENSY 2220U",
+    "name": "Fluid Mechanics for Energy Systems"
+  },
+  {
+    "code": "ENSY 2330U",
+    "name": "Mechanical Equipment and Systems"
+  },
+  {
+    "code": "ENSY 2410U",
+    "name": "Low Carbon Technologies"
+  },
+  {
+    "code": "ENSY 3600U",
+    "name": "Sustainable Energy Thesis I"
+  },
+  {
+    "code": "ENSY 3730U",
+    "name": "Solar Energy Technologies"
+  },
+  {
+    "code": "ENSY 3830U",
+    "name": "Wind Energy Systems"
+  },
+  {
+    "code": "ENSY 3840U",
+    "name": "Fuel Cell and Hydrogen Systems"
+  },
+  {
+    "code": "ENSY 4300U",
+    "name": "Environmental Protection Systems"
+  },
+  {
+    "code": "ENSY 4400U",
+    "name": "Electric Power Systems"
+  },
+  {
+    "code": "ENSY 4500U",
+    "name": "Geo-Engineered Systems"
+  },
+  {
+    "code": "ENSY 4530U",
+    "name": "Hydroelectric Power Systems"
+  },
+  {
+    "code": "ENSY 4600U",
+    "name": "Sustainable Energy Thesis II"
+  },
+  {
+    "code": "ENSY 4610U",
+    "name": "Community and Urban Design"
+  },
+  {
+    "code": "ENSY 4620U",
+    "name": "Smart Grids"
+  },
+  {
+    "code": "ENSY 4700U",
+    "name": "Energy Policy, Standards and Safety"
+  },
+  {
+    "code": "ENSY 4800U",
+    "name": "Energy Systems Analysis"
+  },
+  {
+    "code": "ENVS 1000U",
+    "name": "Environmental Science"
+  },
+  {
+    "code": "ENVS 2010U",
+    "name": "Introductory Environment Science"
+  },
+  {
+    "code": "ENVS 3110U",
+    "name": "Economics and Politics of the Environment"
+  },
+  {
+    "code": "ENVS 4010U",
+    "name": "Geographic Information Systems (GIS) & Spatial Analysis"
+  },
+  {
+    "code": "ESNS 1200U",
+    "name": "Engineering Graphics and Design"
+  },
+  {
+    "code": "ESNS 2140U",
+    "name": "Problem Solving, Modelling and Simulation"
+  },
+  {
+    "code": "ESNS 2200U",
+    "name": "Technical System Visualization"
+  },
+  {
+    "code": "ESNS 3200U",
+    "name": "Technical Graphics and Design"
+  },
+  {
+    "code": "ESNS 3380U",
+    "name": "Strength of Materials"
+  },
+  {
+    "code": "ESNS 3385U",
+    "name": "Strength of Materials for Energy Systems"
+  },
+  {
+    "code": "ESNS 3740U",
+    "name": "Scientific Instrumentation"
+  },
+  {
+    "code": "ESNS 3750U",
+    "name": "Integrated Engineering Laboratory"
+  },
+  {
+    "code": "ESNS 4660U",
+    "name": "Risk Analysis Methods"
+  },
+  {
+    "code": "FPSY 3039U",
+    "name": "Children, Psychology and the Law"
+  },
+  {
+    "code": "FPSY 3055U",
+    "name": "Treatment in Forensic Settings"
+  },
+  {
+    "code": "FPSY 3110U",
+    "name": "Directed Laboratory Research in Forensic Psychology"
+  },
+  {
+    "code": "FPSY 3210U",
+    "name": "Forensic Psychology"
+  },
+  {
+    "code": "FPSY 3310U",
+    "name": "Confessions and Interrogations"
+  },
+  {
+    "code": "FPSY 3320U",
+    "name": "Eyewitness Psychology"
+  },
+  {
+    "code": "FPSY 3400U",
+    "name": "Investigative Psychology"
+  },
+  {
+    "code": "FPSY 3900U",
+    "name": "Special Topics in Forensic Psychology I"
+  },
+  {
+    "code": "FPSY 4050U",
+    "name": "Forensic Assessment"
+  },
+  {
+    "code": "FPSY 4060U",
+    "name": "Wrongful Conviction"
+  },
+  {
+    "code": "FPSY 4070U",
+    "name": "Sexual Offenders"
+  },
+  {
+    "code": "FPSY 4080U",
+    "name": "Psychopathic Behaviour"
+  },
+  {
+    "code": "FPSY 4110U",
+    "name": "Honours Thesis in Forensic Psychology I"
+  },
+  {
+    "code": "FPSY 4120U",
+    "name": "Honours Thesis in Forensic Psychology II"
+  },
+  {
+    "code": "FPSY 4820U",
+    "name": "Selected Topics in Antisociality"
+  },
+  {
+    "code": "FPSY 4900U",
+    "name": "Special Topics in Forensic Psychology II"
+  },
+  {
+    "code": "FSCI 1010U",
+    "name": "Introductory Forensic Science"
+  },
+  {
+    "code": "FSCI 2010U",
+    "name": "Crime Scene Science"
+  },
+  {
+    "code": "FSCI 2020U",
+    "name": "Essentials of Crime Scene Science"
+  },
+  {
+    "code": "FSCI 3010U",
+    "name": "Criminalistics I"
+  },
+  {
+    "code": "FSCI 3030U",
+    "name": "Criminalistics II"
+  },
+  {
+    "code": "FSCI 3040U",
+    "name": "Forensic Chemistry"
+  },
+  {
+    "code": "FSCI 3050U",
+    "name": "Assassinations, International Crimes and Disasters"
+  },
+  {
+    "code": "FSCI 3110U",
+    "name": "Population Genetics"
+  },
+  {
+    "code": "FSCI 3120U",
+    "name": "Forensic Biology"
+  },
+  {
+    "code": "FSCI 4020U",
+    "name": "Interdisciplinary Topics in Forensic Science"
+  },
+  {
+    "code": "FSCI 4030U",
+    "name": "Forensic Drug Chemistry and Toxicology"
+  },
+  {
+    "code": "FSCI 4040U",
+    "name": "Fire Investigation"
+  },
+  {
+    "code": "FSCI 4050U",
+    "name": "Law for Forensic Scientists"
+  },
+  {
+    "code": "FSCI 4090U",
+    "name": "Applied Forensic Entomology"
+  },
+  {
+    "code": "FSCI 4120U",
+    "name": "Advanced Forensic Biology"
+  },
+  {
+    "code": "FSCI 4410U",
+    "name": "Forensic Science Thesis Project I"
+  },
+  {
+    "code": "FSCI 4420U",
+    "name": "Forensic Science Thesis Project II"
+  },
+  {
+    "code": "FSCI 4430U",
+    "name": "Directed Studies in Forensic Science"
+  },
+  {
+    "code": "FSCI 4460U",
+    "name": "Mock Crime Scene Practicum"
+  },
+  {
+    "code": "HLSC 0880U",
+    "name": "Science Bridge"
+  },
+  {
+    "code": "HLSC 1050U",
+    "name": "Professional Communication for Nurses"
+  },
+  {
+    "code": "HLSC 1200U",
+    "name": "Human Anatomy & Physiology I"
+  },
+  {
+    "code": "HLSC 1201U",
+    "name": "Human Anatomy & Physiology II"
+  },
+  {
+    "code": "HLSC 1701U",
+    "name": "Information Literacy and Written Communication for the Health Sciences"
+  },
+  {
+    "code": "HLSC 1810U",
+    "name": "Health Promotion and Healthy Active Living"
+  },
+  {
+    "code": "HLSC 1811U",
+    "name": "Social Determinants of Health"
+  },
+  {
+    "code": "HLSC 2030U",
+    "name": "Interpersonal and Interprofessional Communication"
+  },
+  {
+    "code": "HLSC 2110U",
+    "name": "Foundations in Clinical Biochemistry"
+  },
+  {
+    "code": "HLSC 2130U",
+    "name": "Public Health Microbiology"
+  },
+  {
+    "code": "HLSC 2201U",
+    "name": "Introduction to Health Information Management"
+  },
+  {
+    "code": "HLSC 2202U",
+    "name": "Comprehensive Anatomy and Physiology"
+  },
+  {
+    "code": "HLSC 2460U",
+    "name": "Pathophysiology I"
+  },
+  {
+    "code": "HLSC 2461U",
+    "name": "Pathophysiology II"
+  },
+  {
+    "code": "HLSC 2462U",
+    "name": "Altered Physiology: Mechanisms of Disease I"
+  },
+  {
+    "code": "HLSC 2463U",
+    "name": "Altered Physiology: Mechanisms of Disease II"
+  },
+  {
+    "code": "HLSC 2465U",
+    "name": "Anatomy and Physiology III: Cells and Tissues"
+  },
+  {
+    "code": "HLSC 2601U",
+    "name": "Introduction to Health Services Management"
+  },
+  {
+    "code": "HLSC 2700U",
+    "name": "Mathematical Reasoning in Health Sciences"
+  },
+  {
+    "code": "HLSC 2802U",
+    "name": "Introduction to the Canadian Healthcare System"
+  },
+  {
+    "code": "HLSC 2805U",
+    "name": "Financial Management: Canadian Healthcare Sector"
+  },
+  {
+    "code": "HLSC 2810U",
+    "name": "Child and Adolescent Health"
+  },
+  {
+    "code": "HLSC 2820U",
+    "name": "Nutrition for Nursing Practice"
+  },
+  {
+    "code": "HLSC 2825U",
+    "name": "Nutrition and Health"
+  },
+  {
+    "code": "HLSC 3000U",
+    "name": "Disability, Rehabilitation and Society"
+  },
+  {
+    "code": "HLSC 3203U",
+    "name": "Health Data Analytics in Canadian Health Care"
+  },
+  {
+    "code": "HLSC 3230U",
+    "name": "Organizational Behaviour in Health Care"
+  },
+  {
+    "code": "HLSC 3421U",
+    "name": "Gender, Sex and Women’s Health"
+  },
+  {
+    "code": "HLSC 3460U",
+    "name": "Integrated Case Studies in Health Sciences"
+  },
+  {
+    "code": "HLSC 3463U",
+    "name": "Human Genetics in Society"
+  },
+  {
+    "code": "HLSC 3464U",
+    "name": "Altered Physiology III: Cancer Biology"
+  },
+  {
+    "code": "HLSC 3473U",
+    "name": "Prevention and Rehabilitation of Complex Chronic Conditions"
+  },
+  {
+    "code": "HLSC 3501U",
+    "name": "Health Law"
+  },
+  {
+    "code": "HLSC 3601U",
+    "name": "Interprofessional Health Care Teams"
+  },
+  {
+    "code": "HLSC 3630U",
+    "name": "Health Finance"
+  },
+  {
+    "code": "HLSC 3631U",
+    "name": "Health Policy and Process"
+  },
+  {
+    "code": "HLSC 3632U",
+    "name": "Health Economics"
+  },
+  {
+    "code": "HLSC 3710U",
+    "name": "Ethics"
+  },
+  {
+    "code": "HLSC 3712U",
+    "name": "Professional Ethics in Nursing"
+  },
+  {
+    "code": "HLSC 3800U",
+    "name": "Introduction to Statistics for Health Sciences"
+  },
+  {
+    "code": "HLSC 3805U",
+    "name": "Introduction to Epidemiology"
+  },
+  {
+    "code": "HLSC 3820U",
+    "name": "Public Health I"
+  },
+  {
+    "code": "HLSC 3821U",
+    "name": "Public Health II"
+  },
+  {
+    "code": "HLSC 3823U",
+    "name": "Health and Indigenous People in Canada"
+  },
+  {
+    "code": "HLSC 3824U",
+    "name": "Plagues, Pandemics, and People"
+  },
+  {
+    "code": "HLSC 3910U",
+    "name": "Research Methods for Public Health and Health Care Professionals"
+  },
+  {
+    "code": "HLSC 4310U",
+    "name": "Altered Physiology IV: Pharmacological Interactions"
+  },
+  {
+    "code": "HLSC 4406U",
+    "name": "Professionalism for Kinesiology and Health Care Workers"
+  },
+  {
+    "code": "HLSC 4620U",
+    "name": "Quality and Performance Management in Health Care"
+  },
+  {
+    "code": "HLSC 4621U",
+    "name": "Program Planning, Implementation and Evaluation in Public Health"
+  },
+  {
+    "code": "HLSC 4670U",
+    "name": "Studies in Work Disability Prevention"
+  },
+  {
+    "code": "HLSC 4672U",
+    "name": "Making A Work Disability Diagnosis"
+  },
+  {
+    "code": "HLSC 4674U",
+    "name": "Coordinating Return to Work"
+  },
+  {
+    "code": "HLSC 4676U",
+    "name": "Occupational Ergonomics and Work Disability"
+  },
+  {
+    "code": "HLSC 4700U",
+    "name": "Intermediate Statistics for Health Sciences"
+  },
+  {
+    "code": "HLSC 4803U",
+    "name": "Global Health"
+  },
+  {
+    "code": "HLSC 4804U",
+    "name": "Global Dimensions of Communicable Diseases"
+  },
+  {
+    "code": "HLSC 4805U",
+    "name": "Non-communicable Diseases: Current Issues and Emerging Trends"
+  },
+  {
+    "code": "HLSC 4807U",
+    "name": "Perspectives in Aging"
+  },
+  {
+    "code": "HLSC 4808U",
+    "name": "Exploring Mental Health and Developmental Disabilities"
+  },
+  {
+    "code": "HLSC 4809U",
+    "name": "Environmental and Occupational Health"
+  },
+  {
+    "code": "HLSC 4812U",
+    "name": "Addictions and Public Health"
+  },
+  {
+    "code": "HLSC 4820U",
+    "name": "Interdisciplinary Collaboration"
+  },
+  {
+    "code": "HLSC 4822U",
+    "name": "Social Marketing for Public Health"
+  },
+  {
+    "code": "HLSC 4823U",
+    "name": "Small Business Practice and Entrepreneurship for Health Professionals"
+  },
+  {
+    "code": "HLSC 4824U",
+    "name": "Physical Activity and Public Health"
+  },
+  {
+    "code": "HLSC 4850U",
+    "name": "Current Issues in Health Care"
+  },
+  {
+    "code": "HLSC 4851U",
+    "name": "Critical Perspectives on Health, Illness, and Healthcare"
+  },
+  {
+    "code": "HLSC 4855U",
+    "name": "Human Resources Management in Healthcare"
+  },
+  {
+    "code": "HLSC 4990U",
+    "name": "Practicum Placement"
+  },
+  {
+    "code": "HLSC 4991U",
+    "name": "Case Study Analysis and Application"
+  },
+  {
+    "code": "HLSC 4993U",
+    "name": "Bachelor of Health Administration Seminar Series"
+  },
+  {
+    "code": "HLSC 4996U",
+    "name": "Research Applications I"
+  },
+  {
+    "code": "HLSC 4997U",
+    "name": "Research Applications II"
+  },
+  {
+    "code": "HLSC 4998U",
+    "name": "Research Practicum I"
+  },
+  {
+    "code": "HLSC 4999U",
+    "name": "Research Practicum II"
+  },
+  {
+    "code": "IMCS 3010U",
+    "name": "Integrated Application Project I"
+  },
+  {
+    "code": "IMCS 3020U",
+    "name": "Integrated Application Project II"
+  },
+  {
+    "code": "IMCS 4410U",
+    "name": "Integrated Mathematics and Computer Science Thesis Project I"
+  },
+  {
+    "code": "IMCS 4420U",
+    "name": "Integrated Mathematics and Computer Science Thesis Project II"
+  },
+  {
+    "code": "INDG 1000U",
+    "name": "Introduction to Indigenous Studies: Colonial History and its Impacts on Indigenous Peoples"
+  },
+  {
+    "code": "INDG 2010U",
+    "name": "The Indian Residential School System"
+  },
+  {
+    "code": "INDG 2100U",
+    "name": "Endaayaang - Storying Home in Michi Saagiig Territory"
+  },
+  {
+    "code": "INDG 2200U",
+    "name": "Indigenous Digital and Visual Media"
+  },
+  {
+    "code": "INDG 2500U",
+    "name": "Two-Eyed Seeing in the Natural Sciences"
+  },
+  {
+    "code": "INDG 3100U",
+    "name": "First Nations History in Michi Saagiig and Haudenosaunee Territories in Southern Ontario"
+  },
+  {
+    "code": "INDG 3200U",
+    "name": "Contemporary Indigenous Literature"
+  },
+  {
+    "code": "INDG 3310U",
+    "name": "Indigenous Peoples, Sustainability and Development: A Global Perspective"
+  },
+  {
+    "code": "INDG 4000U",
+    "name": "Understanding Reconciliation and Decolonization"
+  },
+  {
+    "code": "INDG 4100U",
+    "name": "(Re)Membering Reciprocal Relations"
+  },
+  {
+    "code": "INDG 4300U",
+    "name": "Special Topics in Indigenous Studies"
+  },
+  {
+    "code": "INDG 4310U",
+    "name": "The Politics of Indigenous Rights"
+  },
+  {
+    "code": "INDG 4570U",
+    "name": "Indigenous Design and Technology"
+  },
+  {
+    "code": "INFR 1010U",
+    "name": "Discrete Mathematics"
+  },
+  {
+    "code": "INFR 1016U",
+    "name": "Introductory Calculus"
+  },
+  {
+    "code": "INFR 1020U",
+    "name": "Essential Mathematics for Games I"
+  },
+  {
+    "code": "INFR 1030U",
+    "name": "Essential Mathematics for Games II"
+  },
+  {
+    "code": "INFR 1100U",
+    "name": "Programming for Games I"
+  },
+  {
+    "code": "INFR 1101U",
+    "name": "Introduction to Programming for IT"
+  },
+  {
+    "code": "INFR 1110U",
+    "name": "Programming for Games II"
+  },
+  {
+    "code": "INFR 1300U",
+    "name": "Introduction to Narrative Design"
+  },
+  {
+    "code": "INFR 1315U",
+    "name": "Visual Narrative Foundations"
+  },
+  {
+    "code": "INFR 1325U",
+    "name": "Introduction to 2D Animation for Games"
+  },
+  {
+    "code": "INFR 1330U",
+    "name": "Basic Introduction to Game Design"
+  },
+  {
+    "code": "INFR 1335U",
+    "name": "Digital Game Design"
+  },
+  {
+    "code": "INFR 1350U",
+    "name": "Introduction to Computer Graphics"
+  },
+  {
+    "code": "INFR 1395U",
+    "name": "Game Development Workshop I"
+  },
+  {
+    "code": "INFR 1396U",
+    "name": "Game Development Workshop II"
+  },
+  {
+    "code": "INFR 1400U",
+    "name": "Statistics and Probability for IT"
+  },
+  {
+    "code": "INFR 1411U",
+    "name": "Introduction to Networking I"
+  },
+  {
+    "code": "INFR 1421U",
+    "name": "Introduction to Networking II"
+  },
+  {
+    "code": "INFR 1550U",
+    "name": "Law and Ethics of IT"
+  },
+  {
+    "code": "INFR 2020U",
+    "name": "Essential Math for Games III"
+  },
+  {
+    "code": "INFR 2100U",
+    "name": "Programming in C/C++"
+  },
+  {
+    "code": "INFR 2141U",
+    "name": "Object Oriented Programming for IT"
+  },
+  {
+    "code": "INFR 2310U",
+    "name": "Animation and A.I. for Games"
+  },
+  {
+    "code": "INFR 2330U",
+    "name": "Intermediate Game Design"
+  },
+  {
+    "code": "INFR 2345U",
+    "name": "Modelling and Animation Systems I"
+  },
+  {
+    "code": "INFR 2350U",
+    "name": "Intermediate Computer Graphics"
+  },
+  {
+    "code": "INFR 2370U",
+    "name": "Game Sound"
+  },
+  {
+    "code": "INFR 2395U",
+    "name": "Game Development Workshop III"
+  },
+  {
+    "code": "INFR 2396U",
+    "name": "Game Development Workshop IV"
+  },
+  {
+    "code": "INFR 2411U",
+    "name": "Advanced Networking I"
+  },
+  {
+    "code": "INFR 2421U",
+    "name": "Advanced Networking II"
+  },
+  {
+    "code": "INFR 2431U",
+    "name": "Advanced Networking III"
+  },
+  {
+    "code": "INFR 2600U",
+    "name": "Introduction to Computer Security"
+  },
+  {
+    "code": "INFR 2670U",
+    "name": "Introduction to Cloud Services"
+  },
+  {
+    "code": "INFR 2810U",
+    "name": "Computer Architecture"
+  },
+  {
+    "code": "INFR 2820U",
+    "name": "Algorithms and Data Structures"
+  },
+  {
+    "code": "INFR 2830U",
+    "name": "Operating Systems"
+  },
+  {
+    "code": "INFR 3110U",
+    "name": "Game Engine Design and Implementation"
+  },
+  {
+    "code": "INFR 3120U",
+    "name": "Web and Script Programming"
+  },
+  {
+    "code": "INFR 3200U",
+    "name": "Introduction to DevOps and Infrastructure Automation"
+  },
+  {
+    "code": "INFR 3250U",
+    "name": "User Experience Research"
+  },
+  {
+    "code": "INFR 3315U",
+    "name": "Cinematic Systems Design"
+  },
+  {
+    "code": "INFR 3322U",
+    "name": "Character Design"
+  },
+  {
+    "code": "INFR 3325U",
+    "name": "Digital Painting and Composition for Games"
+  },
+  {
+    "code": "INFR 3332U",
+    "name": "Advanced Narrative Design"
+  },
+  {
+    "code": "INFR 3335U",
+    "name": "Social and Multiplayer Game Design"
+  },
+  {
+    "code": "INFR 3342U",
+    "name": "Figure Studies"
+  },
+  {
+    "code": "INFR 3345U",
+    "name": "Modelling and Animation Systems II"
+  },
+  {
+    "code": "INFR 3350U",
+    "name": "Games User Research"
+  },
+  {
+    "code": "INFR 3355U",
+    "name": "Portable Game Development"
+  },
+  {
+    "code": "INFR 3365U",
+    "name": "Designing Tabletop Games"
+  },
+  {
+    "code": "INFR 3370U",
+    "name": "Designing Games for Social and Emotional Impact"
+  },
+  {
+    "code": "INFR 3375U",
+    "name": "Retro Game Design and Development"
+  },
+  {
+    "code": "INFR 3380U",
+    "name": "Industrial Design for Game Hardware Development"
+  },
+  {
+    "code": "INFR 3385U",
+    "name": "Hard Surface and Environment Modeling"
+  },
+  {
+    "code": "INFR 3390U",
+    "name": "Intermediate Rigging"
+  },
+  {
+    "code": "INFR 3395U",
+    "name": "Game Development Workshop V"
+  },
+  {
+    "code": "INFR 3396U",
+    "name": "Game Development Workshop VI"
+  },
+  {
+    "code": "INFR 3500U",
+    "name": "Introduction to Live Streaming"
+  },
+  {
+    "code": "INFR 3600U",
+    "name": "Cryptography and Network Security"
+  },
+  {
+    "code": "INFR 3610U",
+    "name": "Operating System Security"
+  },
+  {
+    "code": "INFR 3700U",
+    "name": "Machine Learning"
+  },
+  {
+    "code": "INFR 3720U",
+    "name": "Basics of Digital Transmission"
+  },
+  {
+    "code": "INFR 3810U",
+    "name": "Database Systems"
+  },
+  {
+    "code": "INFR 3830U",
+    "name": "Game Networking Essentials"
+  },
+  {
+    "code": "INFR 3850U",
+    "name": "System and Network Administration"
+  },
+  {
+    "code": "INFR 4120U",
+    "name": "Serious Gaming and Virtual Simulation"
+  },
+  {
+    "code": "INFR 4320U",
+    "name": "Artificial Intelligence for Gaming"
+  },
+  {
+    "code": "INFR 4336U",
+    "name": "Visual Programming for Game Development"
+  },
+  {
+    "code": "INFR 4338U",
+    "name": "Asset Pipelines and Procedural Workflows"
+  },
+  {
+    "code": "INFR 4345U",
+    "name": "Game Analytics"
+  },
+  {
+    "code": "INFR 4350U",
+    "name": "Human-Computer Interaction for Games"
+  },
+  {
+    "code": "INFR 4351U",
+    "name": "Human-Computer Interaction and User Evaluation"
+  },
+  {
+    "code": "INFR 4355U",
+    "name": "Empirical Evaluation of Interactive Systems"
+  },
+  {
+    "code": "INFR 4365U",
+    "name": "Themed Entertainment Design"
+  },
+  {
+    "code": "INFR 4370U",
+    "name": "Advanced Game Sound"
+  },
+  {
+    "code": "INFR 4380U",
+    "name": "Trends in Game Development"
+  },
+  {
+    "code": "INFR 4391U",
+    "name": "Special Topics in Game Development and Entrepreneurship"
+  },
+  {
+    "code": "INFR 4395U",
+    "name": "Game Development Workshop VII"
+  },
+  {
+    "code": "INFR 4396U",
+    "name": "Game Development Workshop VIII"
+  },
+  {
+    "code": "INFR 4440U",
+    "name": "Advanced Sculpting"
+  },
+  {
+    "code": "INFR 4445U",
+    "name": "Advanced Rigging"
+  },
+  {
+    "code": "INFR 4450U",
+    "name": "Advanced Computer Graphics for Games"
+  },
+  {
+    "code": "INFR 4460U",
+    "name": "Emerging Technologies"
+  },
+  {
+    "code": "INFR 4470U",
+    "name": "Games Accessibility"
+  },
+  {
+    "code": "INFR 4560U",
+    "name": "Law and Ethics in Game Development"
+  },
+  {
+    "code": "INFR 4590U",
+    "name": "Directed Independent Studies in Information Technology"
+  },
+  {
+    "code": "INFR 4599U",
+    "name": "Special Topics in Information Technology"
+  },
+  {
+    "code": "INFR 4601U",
+    "name": "Software-Defined and Programmable Networks"
+  },
+  {
+    "code": "INFR 4611U",
+    "name": "Trust Systems"
+  },
+  {
+    "code": "INFR 4641U",
+    "name": "Advanced Network Security"
+  },
+  {
+    "code": "INFR 4661U",
+    "name": "Introduction to Penetration Testing"
+  },
+  {
+    "code": "INFR 4662U",
+    "name": "Web Penetration Testing"
+  },
+  {
+    "code": "INFR 4680U",
+    "name": "IT Security Policies and Procedures"
+  },
+  {
+    "code": "INFR 4690U",
+    "name": "IT Forensics"
+  },
+  {
+    "code": "INFR 4710U",
+    "name": "Social, Information, and Technology Networks"
+  },
+  {
+    "code": "INFR 4900U",
+    "name": "Introduction to Blockchain Technologies"
+  },
+  {
+    "code": "INSE 2110U",
+    "name": "Health, Safety and Sustainability for Engineers"
+  },
+  {
+    "code": "INSE 2210U",
+    "name": "Operations Research I (Deterministic)"
+  },
+  {
+    "code": "INSE 3110U",
+    "name": "Operations Research II (Stochastic)"
+  },
+  {
+    "code": "INSE 3115U",
+    "name": "Workplace and Facilities Design"
+  },
+  {
+    "code": "INSE 3140U",
+    "name": "Lean Production Systems Engineering"
+  },
+  {
+    "code": "INSE 3142U",
+    "name": "Industrial Internet of Things"
+  },
+  {
+    "code": "INSE 3245U",
+    "name": "Industrial Data Analytics"
+  },
+  {
+    "code": "INSE 4170U",
+    "name": "Human‐System Integration (Human Machine Interface)"
+  },
+  {
+    "code": "INSE 4248U",
+    "name": "Industrial Cyber‐Physical Systems"
+  },
+  {
+    "code": "KINE 1000U",
+    "name": "Foundations in Kinesiology"
+  },
+  {
+    "code": "KINE 1010U",
+    "name": "Human Anatomy & Physiology I"
+  },
+  {
+    "code": "KINE 1020U",
+    "name": "Information Literacy & Written Communications"
+  },
+  {
+    "code": "KINE 1030U",
+    "name": "Quantitative Reasoning"
+  },
+  {
+    "code": "KINE 1100U",
+    "name": "Human Anatomy & Physiology II"
+  },
+  {
+    "code": "KINE 1120U",
+    "name": "Human Growth and Motor Development"
+  },
+  {
+    "code": "KINE 1130U",
+    "name": "Sociocultural Perspectives"
+  },
+  {
+    "code": "KINE 1140U",
+    "name": "Exercise Biochemistry"
+  },
+  {
+    "code": "KINE 2000U",
+    "name": "Anatomy of Human Movement"
+  },
+  {
+    "code": "KINE 2002U",
+    "name": "Fitness and Health Promotion Bridge"
+  },
+  {
+    "code": "KINE 2010U",
+    "name": "Health and Indigenous People in Canada"
+  },
+  {
+    "code": "KINE 2030U",
+    "name": "Psychology of Sport and Exercise"
+  },
+  {
+    "code": "KINE 2040U",
+    "name": "Biomechanics"
+  },
+  {
+    "code": "KINE 2050U",
+    "name": "Introduction to Movement Neuroscience"
+  },
+  {
+    "code": "KINE 2100U",
+    "name": "Introduction to Injury Management"
+  },
+  {
+    "code": "KINE 2110U",
+    "name": "Motor Control and Learning"
+  },
+  {
+    "code": "KINE 2120U",
+    "name": "Ethical Behaviour"
+  },
+  {
+    "code": "KINE 2130U",
+    "name": "Exercise Physiology"
+  },
+  {
+    "code": "KINE 2140U",
+    "name": "Research Methods"
+  },
+  {
+    "code": "KINE 3000U",
+    "name": "Fitness Assessment and Exercise Prescription"
+  },
+  {
+    "code": "KINE 3010U",
+    "name": "Introduction to Statistics for Kinesiology"
+  },
+  {
+    "code": "KINE 3100U",
+    "name": "Nutrition and Health"
+  },
+  {
+    "code": "KINE 3200U",
+    "name": "Integrated Topics in Active Aging"
+  },
+  {
+    "code": "KINE 3300U",
+    "name": "Coaching Principles and Practice"
+  },
+  {
+    "code": "KINE 3476U",
+    "name": "Advanced Sport Injury Management"
+  },
+  {
+    "code": "KINE 3482U",
+    "name": "Physical Activity and Indigenous Peoples in Canada"
+  },
+  {
+    "code": "KINE 4100U",
+    "name": "Kinesiology Capstone"
+  },
+  {
+    "code": "KINE 4150U",
+    "name": "Foundational Skills and Techniques for Massage Therapy"
+  },
+  {
+    "code": "KINE 4401U",
+    "name": "Motor Behaviour and Developmental Disabilities"
+  },
+  {
+    "code": "KINE 4404U",
+    "name": "Injury Prevention for Sport and Physical Activity"
+  },
+  {
+    "code": "KINE 4405U",
+    "name": "Policy Development for Sport and Physical Activity"
+  },
+  {
+    "code": "KINE 4406U",
+    "name": "Professionalism for Kinesiology and Health Care Workers"
+  },
+  {
+    "code": "KINE 4410U",
+    "name": "Practical Skills for Kinesiology Professionals"
+  },
+  {
+    "code": "KINE 4412U",
+    "name": "Exercise Rehabilitation: Cardiac, Respiratory, and Metabolic Conditions"
+  },
+  {
+    "code": "KINE 4413U",
+    "name": "Exercise Rehabilitation: Integrated Musculoskeletal Case Studies"
+  },
+  {
+    "code": "KINE 4414U",
+    "name": "Advanced Topics in Neuromuscular Physiology and Pathophysiology"
+  },
+  {
+    "code": "KINE 4460U",
+    "name": "Selected Topics in Physical Activity and Health"
+  },
+  {
+    "code": "KINE 4461U",
+    "name": "Applied Topics in Sport and Exercise Psychology"
+  },
+  {
+    "code": "KINE 4473U",
+    "name": "Practical Human Anatomy I: Back and Lower Limbs"
+  },
+  {
+    "code": "KINE 4474U",
+    "name": "Practical Human Anatomy II: Head, Neck and Upper Limbs"
+  },
+  {
+    "code": "KINE 4475U",
+    "name": "Occupational Ergonomics"
+  },
+  {
+    "code": "KINE 4476U",
+    "name": "Clinical Biomechanics"
+  },
+  {
+    "code": "KINE 4477U",
+    "name": "Applied Techniques in Neuromechanics"
+  },
+  {
+    "code": "KINE 4478U",
+    "name": "Advanced Ergonomics and Human Factors"
+  },
+  {
+    "code": "KINE 4482U",
+    "name": "Advanced Exercise Assessment and Prescription"
+  },
+  {
+    "code": "KINE 4490U",
+    "name": "Kinesiology Internship I"
+  },
+  {
+    "code": "KINE 4491U",
+    "name": "Kinternship II"
+  },
+  {
+    "code": "KINE 4492U",
+    "name": "Athletic Therapy Internship I"
+  },
+  {
+    "code": "KINE 4493U",
+    "name": "Athletic Therapy Internship II"
+  },
+  {
+    "code": "KINE 4494U",
+    "name": "Extended Athletic Therapy Internship I"
+  },
+  {
+    "code": "KINE 4495U",
+    "name": "Extended Athletic Therapy Internship II"
+  },
+  {
+    "code": "KINE 4670U",
+    "name": "Studies in Work Disability Prevention"
+  },
+  {
+    "code": "KINE 4672U",
+    "name": "Making a Work Disability Diagnosis"
+  },
+  {
+    "code": "KINE 4823U",
+    "name": "Small Business and Entrepreneurship for Health Professionals"
+  },
+  {
+    "code": "KINE 4940U",
+    "name": "Special Topics in Kinesiology"
+  },
+  {
+    "code": "KINE 4998U",
+    "name": "Research Practicum I"
+  },
+  {
+    "code": "KINE 4999U",
+    "name": "Research Practicum II"
+  },
+  {
+    "code": "LEAP 1001U",
+    "name": "Learner Engagement for Academic Purposes"
+  },
+  {
+    "code": "LGLS 1000U",
+    "name": "Foundations of Legal Studies"
+  },
+  {
+    "code": "LGLS 2011U",
+    "name": "Immigration and Refugee Law"
+  },
+  {
+    "code": "LGLS 2100U",
+    "name": "Public Law"
+  },
+  {
+    "code": "LGLS 2110U",
+    "name": "Private Law"
+  },
+  {
+    "code": "LGLS 2120U",
+    "name": "International Law"
+  },
+  {
+    "code": "LGLS 2200U",
+    "name": "Legal Theory"
+  },
+  {
+    "code": "LGLS 2420U",
+    "name": "Canadian Human Rights Law"
+  },
+  {
+    "code": "LGLS 2500U",
+    "name": "Information and Privacy Law"
+  },
+  {
+    "code": "LGLS 2940U",
+    "name": "Legal Research Methods"
+  },
+  {
+    "code": "LGLS 3053U",
+    "name": "Prosecution and Sentencing"
+  },
+  {
+    "code": "LGLS 3100U",
+    "name": "Administrative Law"
+  },
+  {
+    "code": "LGLS 3130U",
+    "name": "Family Law"
+  },
+  {
+    "code": "LGLS 3200U",
+    "name": "Sociology of Law"
+  },
+  {
+    "code": "LGLS 3220U",
+    "name": "Philosophy of Law"
+  },
+  {
+    "code": "LGLS 3230U",
+    "name": "Law and Globalization"
+  },
+  {
+    "code": "LGLS 3240U",
+    "name": "Cultural Studies of Law"
+  },
+  {
+    "code": "LGLS 3300U",
+    "name": "Disability and the Law"
+  },
+  {
+    "code": "LGLS 3310U",
+    "name": "Indigenous Peoples, Law and the State in Canada"
+  },
+  {
+    "code": "LGLS 3320U",
+    "name": "Race, Ethnicity and the Law"
+  },
+  {
+    "code": "LGLS 3330U",
+    "name": "Gender, Sexuality and the Law"
+  },
+  {
+    "code": "LGLS 3410U",
+    "name": "Labour and Employment Law"
+  },
+  {
+    "code": "LGLS 3430U",
+    "name": "International Human Rights"
+  },
+  {
+    "code": "LGLS 3510U",
+    "name": "Censorship and Freedom of Expression"
+  },
+  {
+    "code": "LGLS 3520U",
+    "name": "Law and Technology"
+  },
+  {
+    "code": "LGLS 3530U",
+    "name": "Intellectual Property"
+  },
+  {
+    "code": "LGLS 3600U",
+    "name": "Family Mediation"
+  },
+  {
+    "code": "LGLS 3610U",
+    "name": "Employment and Mediation"
+  },
+  {
+    "code": "LGLS 3620U",
+    "name": "Human Rights Mediation"
+  },
+  {
+    "code": "LGLS 3700U",
+    "name": "Law and Power"
+  },
+  {
+    "code": "LGLS 3800U",
+    "name": "Issues in Health Law and Biomedical Ethics"
+  },
+  {
+    "code": "LGLS 4000U",
+    "name": "Advanced Topics in Legal Studies"
+  },
+  {
+    "code": "LGLS 4010U",
+    "name": "Communication Law and Policy"
+  },
+  {
+    "code": "LGLS 4020U",
+    "name": "Topics in Comparative Law"
+  },
+  {
+    "code": "LGLS 4030U",
+    "name": "Law and the Body"
+  },
+  {
+    "code": "LGLS 4040U",
+    "name": "Law and the Environment"
+  },
+  {
+    "code": "LGLS 4050U",
+    "name": "Impartiality, Neutrality and Objectivity"
+  },
+  {
+    "code": "LGLS 4060U",
+    "name": "Security and the Nation-State"
+  },
+  {
+    "code": "LGLS 4070U",
+    "name": "Public Governance through Law"
+  },
+  {
+    "code": "LGLS 4099U",
+    "name": "Legal Studies Integrating Project"
+  },
+  {
+    "code": "LGLS 4200U",
+    "name": "Law and Social Change"
+  },
+  {
+    "code": "LGLS 4800U",
+    "name": "Independent Study"
+  },
+  {
+    "code": "MANE 2220U",
+    "name": "Structure and Properties of Materials"
+  },
+  {
+    "code": "MANE 3120U",
+    "name": "Thermo-mechanical Processing of Materials"
+  },
+  {
+    "code": "MANE 3190U",
+    "name": "Manufacturing and Production Processes"
+  },
+  {
+    "code": "MANE 3300U",
+    "name": "Integrated Manufacturing Systems"
+  },
+  {
+    "code": "MANE 3460U",
+    "name": "Industrial Ergonomics"
+  },
+  {
+    "code": "MANE 4000U",
+    "name": "Special Topics in Manufacturing Engineering"
+  },
+  {
+    "code": "MANE 4015U",
+    "name": "Reliability and Maintenance"
+  },
+  {
+    "code": "MANE 4045U",
+    "name": "Quality Control"
+  },
+  {
+    "code": "MANE 4110U",
+    "name": "Design for Manufacturing"
+  },
+  {
+    "code": "MANE 4160U",
+    "name": "Artificial Intelligence in Engineering"
+  },
+  {
+    "code": "MANE 4190U",
+    "name": "Principles of Material Removal Processes"
+  },
+  {
+    "code": "MANE 4380U",
+    "name": "Life Cycle Engineering"
+  },
+  {
+    "code": "MANE 4390U",
+    "name": "Modelling Manufacturing Systems"
+  },
+  {
+    "code": "MANE 4600U",
+    "name": "Additive Manufacturing"
+  },
+  {
+    "code": "MANE 4700U",
+    "name": "Introduction to Tribology: Friction, Wear and Lubrication"
+  },
+  {
+    "code": "MATH 0900U",
+    "name": "Preparatory Math for Engineers"
+  },
+  {
+    "code": "MATH 1000U",
+    "name": "Introductory Calculus"
+  },
+  {
+    "code": "MATH 1010U",
+    "name": "Calculus I"
+  },
+  {
+    "code": "MATH 1015U",
+    "name": "Mathematics for Bioscience"
+  },
+  {
+    "code": "MATH 1020U",
+    "name": "Calculus II"
+  },
+  {
+    "code": "MATH 1850U",
+    "name": "Linear Algebra for Engineers"
+  },
+  {
+    "code": "MATH 1880U",
+    "name": "Mathematical Modelling for Health Science"
+  },
+  {
+    "code": "MATH 2015U",
+    "name": "Calculus III"
+  },
+  {
+    "code": "MATH 2050U",
+    "name": "Linear Algebra"
+  },
+  {
+    "code": "MATH 2055U",
+    "name": "Advanced Linear Algebra and Applications"
+  },
+  {
+    "code": "MATH 2060U",
+    "name": "Differential Equations"
+  },
+  {
+    "code": "MATH 2070U",
+    "name": "Numerical Methods"
+  },
+  {
+    "code": "MATH 2072U",
+    "name": "Computational Science I"
+  },
+  {
+    "code": "MATH 2080U",
+    "name": "Discrete Mathematics"
+  },
+  {
+    "code": "MATH 2810U",
+    "name": "Advanced Engineering Mathematics"
+  },
+  {
+    "code": "MATH 2860U",
+    "name": "Differential Equations for Engineers"
+  },
+  {
+    "code": "MATH 3010U",
+    "name": "Modern Applications in Mathematics"
+  },
+  {
+    "code": "MATH 3020U",
+    "name": "Real Analysis"
+  },
+  {
+    "code": "MATH 3030U",
+    "name": "Introduction to Probability Theory"
+  },
+  {
+    "code": "MATH 3035U",
+    "name": "Mathematics of Machine Learning"
+  },
+  {
+    "code": "MATH 3040U",
+    "name": "Optimization"
+  },
+  {
+    "code": "MATH 3050U",
+    "name": "Mathematical Modelling"
+  },
+  {
+    "code": "MATH 3060U",
+    "name": "Complex Analysis"
+  },
+  {
+    "code": "MATH 3070U",
+    "name": "Algebraic Structures"
+  },
+  {
+    "code": "MATH 3080U",
+    "name": "Applied Partial Differential Equations"
+  },
+  {
+    "code": "MATH 3090U",
+    "name": "Network Science and Applications"
+  },
+  {
+    "code": "MATH 4010U",
+    "name": "Dynamical Systems and Chaos"
+  },
+  {
+    "code": "MATH 4020U",
+    "name": "Computational Science II"
+  },
+  {
+    "code": "MATH 4041U",
+    "name": "Topics in Applied Mathematics I"
+  },
+  {
+    "code": "MATH 4042U",
+    "name": "Topics in Applied Mathematics II"
+  },
+  {
+    "code": "MATH 4050U",
+    "name": "Partial Differential Equations"
+  },
+  {
+    "code": "MATH 4060U",
+    "name": "Industrial Mathematics"
+  },
+  {
+    "code": "MATH 4070U",
+    "name": "Projects in Applied Mathematics"
+  },
+  {
+    "code": "MATH 4080U",
+    "name": "Advanced Projects in Applied Mathematics"
+  },
+  {
+    "code": "MATH 4410U",
+    "name": "Mathematics Thesis Project I"
+  },
+  {
+    "code": "MATH 4420U",
+    "name": "Mathematics Thesis Project II"
+  },
+  {
+    "code": "MATH 4430U",
+    "name": "Directed Studies in Mathematics"
+  },
+  {
+    "code": "MECE 2230U",
+    "name": "Statics"
+  },
+  {
+    "code": "MECE 2310U",
+    "name": "Concurrent Engineering and Design"
+  },
+  {
+    "code": "MECE 2320U",
+    "name": "Thermodynamics"
+  },
+  {
+    "code": "MECE 2420U",
+    "name": "Solid Mechanics I"
+  },
+  {
+    "code": "MECE 2430U",
+    "name": "Dynamics"
+  },
+  {
+    "code": "MECE 2640U",
+    "name": "Thermodynamic and Heat Transfer"
+  },
+  {
+    "code": "MECE 2860U",
+    "name": "Fluid Mechanics"
+  },
+  {
+    "code": "MECE 3030U",
+    "name": "Computer-Aided Design"
+  },
+  {
+    "code": "MECE 3210U",
+    "name": "Mechanical Vibrations"
+  },
+  {
+    "code": "MECE 3220U",
+    "name": "Machine Design"
+  },
+  {
+    "code": "MECE 3230U",
+    "name": "Thermodynamic Applications"
+  },
+  {
+    "code": "MECE 3260U",
+    "name": "Introduction to Energy Systems"
+  },
+  {
+    "code": "MECE 3270U",
+    "name": "Kinematics and Dynamics of Machines"
+  },
+  {
+    "code": "MECE 3350U",
+    "name": "Control Systems"
+  },
+  {
+    "code": "MECE 3390U",
+    "name": "Mechatronics"
+  },
+  {
+    "code": "MECE 3410U",
+    "name": "Electro-Mechanical Energy Conversion"
+  },
+  {
+    "code": "MECE 3420U",
+    "name": "Solid Mechanics II"
+  },
+  {
+    "code": "MECE 3811U",
+    "name": "Aerodynamics and Flight Mechanics"
+  },
+  {
+    "code": "MECE 3822U",
+    "name": "Aircraft Structures and Design"
+  },
+  {
+    "code": "MECE 3930U",
+    "name": "Heat Transfer"
+  },
+  {
+    "code": "MECE 4000U",
+    "name": "Special Topics in Mechanical Engineering"
+  },
+  {
+    "code": "MECE 4151U",
+    "name": "Solar Energy"
+  },
+  {
+    "code": "MECE 4153U",
+    "name": "Wind and Hydro Energy"
+  },
+  {
+    "code": "MECE 4210U",
+    "name": "Advanced Solid Mechanics and Stress Analysis"
+  },
+  {
+    "code": "MECE 4250U",
+    "name": "Advanced Materials Engineering"
+  },
+  {
+    "code": "MECE 4290U",
+    "name": "Finite Element Methods"
+  },
+  {
+    "code": "MECE 4450U",
+    "name": "Thermal Environmental Engineering"
+  },
+  {
+    "code": "MECE 4823U",
+    "name": "Aerospace Propulsion Systems"
+  },
+  {
+    "code": "MECE 4824U",
+    "name": "Flight Dynamics and Control"
+  },
+  {
+    "code": "METE 2010U",
+    "name": "Circuits and Electronics"
+  },
+  {
+    "code": "METE 2020U",
+    "name": "Circuit Design for Mechatronics"
+  },
+  {
+    "code": "METE 2030U",
+    "name": "Electronics Applications in Mechatronics"
+  },
+  {
+    "code": "METE 3100U",
+    "name": "Actuators and Power Electronics"
+  },
+  {
+    "code": "METE 3200U",
+    "name": "Sensors and Instrumentation"
+  },
+  {
+    "code": "METE 3300U",
+    "name": "Systems Modelling"
+  },
+  {
+    "code": "METE 3350U",
+    "name": "Microprocessors and Digital Systems"
+  },
+  {
+    "code": "METE 3400U",
+    "name": "Automatic Control Systems"
+  },
+  {
+    "code": "METE 4000U",
+    "name": "Special Topics in Mechatronics Engineering"
+  },
+  {
+    "code": "METE 4100U",
+    "name": "Mechatronics Design"
+  },
+  {
+    "code": "METE 4200U",
+    "name": "Industrial Automation"
+  },
+  {
+    "code": "METE 4280U",
+    "name": "Robotics and Automation"
+  },
+  {
+    "code": "METE 4300U",
+    "name": "Introduction to Mobile Robotics"
+  },
+  {
+    "code": "METE 4350U",
+    "name": "Linear State‐Space Control Systems"
+  },
+  {
+    "code": "METE 4400U",
+    "name": "Introduction to Real-Time Embedded Systems"
+  },
+  {
+    "code": "METE 4500U",
+    "name": "Machine Vision for Robotic Systems"
+  },
+  {
+    "code": "MLSC 1010U",
+    "name": "Introduction to Medical Laboratory Practice"
+  },
+  {
+    "code": "MLSC 1110U",
+    "name": "Foundations in Clinical Biochemistry"
+  },
+  {
+    "code": "MLSC 2111U",
+    "name": "Clinical Biochemistry I"
+  },
+  {
+    "code": "MLSC 2121U",
+    "name": "Clinical Hematology I"
+  },
+  {
+    "code": "MLSC 2130U",
+    "name": "Foundations in Clinical Microbiology and Immunology"
+  },
+  {
+    "code": "MLSC 2131U",
+    "name": "Clinical Microbiology I"
+  },
+  {
+    "code": "MLSC 2140U",
+    "name": "Medical Laboratory Science (MLS) Bridge Course – Biotechnology to MLS"
+  },
+  {
+    "code": "MLSC 3111U",
+    "name": "Clinical Biochemistry II"
+  },
+  {
+    "code": "MLSC 3121U",
+    "name": "Clinical Hematology II"
+  },
+  {
+    "code": "MLSC 3131U",
+    "name": "Clinical Microbiology II"
+  },
+  {
+    "code": "MLSC 3141U",
+    "name": "Molecular Techniques and Complementary Technologies"
+  },
+  {
+    "code": "MLSC 3200U",
+    "name": "Transfusion Science I"
+  },
+  {
+    "code": "MLSC 3210U",
+    "name": "Effective Leadership and Quality Management in the Clinical Laboratory"
+  },
+  {
+    "code": "MLSC 3220U",
+    "name": "Transfusion Science II"
+  },
+  {
+    "code": "MLSC 3230U",
+    "name": "Microanatomy and Histotechnology"
+  },
+  {
+    "code": "MLSC 3231U",
+    "name": "Advanced Histotechnology"
+  },
+  {
+    "code": "MLSC 3300U",
+    "name": "Simulated Clinical Practicum"
+  },
+  {
+    "code": "MLSC 3501U",
+    "name": "Simulated Clinical Practicum (Pathology)"
+  },
+  {
+    "code": "MLSC 3502U",
+    "name": "Simulated Clinical Practicum (Molecular and Microbiology)"
+  },
+  {
+    "code": "MLSC 4111U",
+    "name": "Clinical Biochemistry III"
+  },
+  {
+    "code": "MLSC 4112U",
+    "name": "Clinical Biochemistry IV"
+  },
+  {
+    "code": "MLSC 4121U",
+    "name": "Clinical Hematology III"
+  },
+  {
+    "code": "MLSC 4122U",
+    "name": "Clinical Hematology IV"
+  },
+  {
+    "code": "MLSC 4131U",
+    "name": "Clinical Microbiology III"
+  },
+  {
+    "code": "MLSC 4132U",
+    "name": "Clinical Microbiology IV"
+  },
+  {
+    "code": "MLSC 4201U",
+    "name": "Professional Practice in the Pathology Laboratory"
+  },
+  {
+    "code": "MLSC 4202U",
+    "name": "Professional Practice in the Microbiology Laboratory"
+  },
+  {
+    "code": "MLSC 4203U",
+    "name": "Professional Practice in the Core Laboratory"
+  },
+  {
+    "code": "MLSC 4210U",
+    "name": "Professional Practice in the Clinical Laboratory I"
+  },
+  {
+    "code": "MLSC 4211U",
+    "name": "Professional Practice in the Clinical Laboratory II"
+  },
+  {
+    "code": "MLSC 4220U",
+    "name": "Transfusion Science III"
+  },
+  {
+    "code": "MLSC 4221U",
+    "name": "Transfusion Science IV"
+  },
+  {
+    "code": "MLSC 4231U",
+    "name": "Histopathology I"
+  },
+  {
+    "code": "MLSC 4232U",
+    "name": "Histopathology II"
+  },
+  {
+    "code": "MLSC 4400U",
+    "name": "Clinical Project I"
+  },
+  {
+    "code": "MLSC 4401U",
+    "name": "Clinical Project II"
+  },
+  {
+    "code": "MLSC 4405U",
+    "name": "Case Studies in Medical Laboratory Science"
+  },
+  {
+    "code": "NSCI 2400U",
+    "name": "Introduction to Movement Neuroscience"
+  },
+  {
+    "code": "NSCI 3410U",
+    "name": "Motor Control and Learning"
+  },
+  {
+    "code": "NSCI 3470U",
+    "name": "Anatomy of Human Movement"
+  },
+  {
+    "code": "NSCI 4410U",
+    "name": "Neuroscience Thesis Project I"
+  },
+  {
+    "code": "NSCI 4414U",
+    "name": "Advanced Topics in Neuromuscular Physiology and Pathophysiology"
+  },
+  {
+    "code": "NSCI 4420U",
+    "name": "Neuroscience Thesis Project II"
+  },
+  {
+    "code": "NSCI 4808U",
+    "name": "Exploring Mental Health and Developmental Disabilities"
+  },
+  {
+    "code": "NSCI 4999U",
+    "name": "Advanced Topics in Integrative Neuroscience"
+  },
+  {
+    "code": "NUCL 1530U",
+    "name": "Radiation and Nuclear Technologies"
+  },
+  {
+    "code": "NUCL 2010U",
+    "name": "Thermodynamic Cycles"
+  },
+  {
+    "code": "NUCL 2240U",
+    "name": "Nuclear Engineering Fundamentals"
+  },
+  {
+    "code": "NUCL 2500U",
+    "name": "Interaction of Radiation with Matter"
+  },
+  {
+    "code": "NUCL 2860U",
+    "name": "Fluid Mechanics"
+  },
+  {
+    "code": "NUCL 2950U",
+    "name": "Radiation Protection"
+  },
+  {
+    "code": "NUCL 3820U",
+    "name": "Nuclear Reactor Physics"
+  },
+  {
+    "code": "NUCL 3860U",
+    "name": "Introduction to Nuclear Reactor Technology"
+  },
+  {
+    "code": "NUCL 3930U",
+    "name": "Heat Transfer"
+  },
+  {
+    "code": "NUCL 4000U",
+    "name": "Special Topics in Nuclear Engineering"
+  },
+  {
+    "code": "NUCL 4120U",
+    "name": "Instrumentation in Nuclear Power Generation"
+  },
+  {
+    "code": "NUCL 4360U",
+    "name": "Nuclear Plant Electric and Auxiliary Systems"
+  },
+  {
+    "code": "NUCL 4460U",
+    "name": "Nuclear Power Systems"
+  },
+  {
+    "code": "NUCL 4500U",
+    "name": "BWR Design and Construction"
+  },
+  {
+    "code": "NUCL 4510U",
+    "name": "Nuclear Plant Chemistry"
+  },
+  {
+    "code": "NUCL 4520U",
+    "name": "Nuclear Plant Safety"
+  },
+  {
+    "code": "NUCL 4525U",
+    "name": "Nuclear Plant Safety Design"
+  },
+  {
+    "code": "NUCL 4545U",
+    "name": "Nuclear Plant Steam Utilization Systems"
+  },
+  {
+    "code": "NUCL 4550U",
+    "name": "Thesis Project I"
+  },
+  {
+    "code": "NUCL 4560U",
+    "name": "Thesis Project II"
+  },
+  {
+    "code": "NUCL 4610U",
+    "name": "Corrosion for Engineers"
+  },
+  {
+    "code": "NUCL 4625U",
+    "name": "Radioactive Waste Management Design"
+  },
+  {
+    "code": "NUCL 4640U",
+    "name": "Nuclear Plant Operation"
+  },
+  {
+    "code": "NUCL 4670U",
+    "name": "Shielding Design"
+  },
+  {
+    "code": "NUCL 4680U",
+    "name": "Nuclear Materials"
+  },
+  {
+    "code": "NUCL 4700U",
+    "name": "Nuclear Power Plant Systems Design"
+  },
+  {
+    "code": "NUCL 4730U",
+    "name": "Reactor Control"
+  },
+  {
+    "code": "NUCL 4780U",
+    "name": "Nuclear Reactor Design"
+  },
+  {
+    "code": "NUCL 4810U",
+    "name": "Nuclear Fuel Cycles"
+  },
+  {
+    "code": "NUCL 4880U",
+    "name": "Principles of Fusion Energy"
+  },
+  {
+    "code": "NUCL 4994U",
+    "name": "Capstone Design I"
+  },
+  {
+    "code": "NUCL 4998U",
+    "name": "Capstone Design II"
+  },
+  {
+    "code": "NURS 0420U",
+    "name": "Professional Nursing - Bridging"
+  },
+  {
+    "code": "NURS 1003U",
+    "name": "Foundations for Nursing Practicum I"
+  },
+  {
+    "code": "NURS 1100U",
+    "name": "Introduction to Health and Healing"
+  },
+  {
+    "code": "NURS 1420U",
+    "name": "Development of Self as a Nurse I"
+  },
+  {
+    "code": "NURS 1503U",
+    "name": "Foundations for Nursing Practicum II"
+  },
+  {
+    "code": "NURS 1700U",
+    "name": "Health and Healing: Older Adult Nursing Theory and Practicum"
+  },
+  {
+    "code": "NURS 2320U",
+    "name": "Health Assessment"
+  },
+  {
+    "code": "NURS 2420U",
+    "name": "Knowing Through Inquiry"
+  },
+  {
+    "code": "NURS 2421U",
+    "name": "Complementary and Alternative Healing Modalities for"
+  },
+  {
+    "code": "NURS 2500U",
+    "name": "Child and Family Health Nursing"
+  },
+  {
+    "code": "NURS 2600U",
+    "name": "Child and Family Health Nursing"
+  },
+  {
+    "code": "NURS 2605U",
+    "name": "Advancing Clinical Judgement: Caring for Adults with Complex Health Challenges"
+  },
+  {
+    "code": "NURS 2700U",
+    "name": "Health and Healing: Child and Family Nursing Theory and Practicum"
+  },
+  {
+    "code": "NURS 2701U",
+    "name": "Health and Healing: Adult Health Challenges Nursing Theory and Practicum"
+  },
+  {
+    "code": "NURS 2703U",
+    "name": "Health and Healing: Mental Health Nursing Theory and Practicum"
+  },
+  {
+    "code": "NURS 2810U",
+    "name": "Pharmacology for Nurses"
+  },
+  {
+    "code": "NURS 2820U",
+    "name": "Integrated Health Assessment and Pharmacology"
+  },
+  {
+    "code": "NURS 2821U",
+    "name": "Clinical Judgment in the Context of Nursing Pharmacology"
+  },
+  {
+    "code": "NURS 2822U",
+    "name": "Clinical Judgment in the Context of Health Assessment"
+  },
+  {
+    "code": "NURS 3401U",
+    "name": "Advanced Pediatric Nursing"
+  },
+  {
+    "code": "NURS 3403U",
+    "name": "High Acuity Nursing"
+  },
+  {
+    "code": "NURS 3700U",
+    "name": "Health and Healing: Healthy Communities Nursing Theory and Practicum"
+  },
+  {
+    "code": "NURS 3701U",
+    "name": "Health and Healing: Mental Health Nursing Theory and Practicum"
+  },
+  {
+    "code": "NURS 3702U",
+    "name": "Health and Healing: Adult Health Challenges II Theory and Practicum"
+  },
+  {
+    "code": "NURS 3703U",
+    "name": "Clinical Judgment in the Context of Mental Health Nursing"
+  },
+  {
+    "code": "NURS 4100U",
+    "name": "Nursing Leadership and Innovation"
+  },
+  {
+    "code": "NURS 4600U",
+    "name": "Health and Healing: Advancing Clinical Judgment Theory and Simulation"
+  },
+  {
+    "code": "NURS 4700U",
+    "name": "Health and Healing: Synthesis Professional Practice"
+  },
+  {
+    "code": "NURS 4701U",
+    "name": "Professional Nursing Integrated Practicum"
+  },
+  {
+    "code": "PHY 0900U",
+    "name": "Preparatory Physics for Engineers"
+  },
+  {
+    "code": "PHY 1010U",
+    "name": "Physics I"
+  },
+  {
+    "code": "PHY 1020U",
+    "name": "Physics II"
+  },
+  {
+    "code": "PHY 1030U",
+    "name": "Introductory Physics"
+  },
+  {
+    "code": "PHY 1040U",
+    "name": "Physics for Biosciences"
+  },
+  {
+    "code": "PHY 2010U",
+    "name": "Electricity and Magnetism I"
+  },
+  {
+    "code": "PHY 2030U",
+    "name": "Mechanics I"
+  },
+  {
+    "code": "PHY 2040U",
+    "name": "Mechanics II"
+  },
+  {
+    "code": "PHY 2050U",
+    "name": "Thermodynamics and Heat Transfer"
+  },
+  {
+    "code": "PHY 2060U",
+    "name": "Modern Physics"
+  },
+  {
+    "code": "PHY 2900U",
+    "name": "Astronomy I"
+  },
+  {
+    "code": "PHY 3010U",
+    "name": "Statistical Mechanics"
+  },
+  {
+    "code": "PHY 3020U",
+    "name": "Quantum Mechanics I"
+  },
+  {
+    "code": "PHY 3030U",
+    "name": "Experimental Methods in Physics I"
+  },
+  {
+    "code": "PHY 3040U",
+    "name": "Applied Partial Differential Equations"
+  },
+  {
+    "code": "PHY 3050U",
+    "name": "Experimental Methods in Physics II"
+  },
+  {
+    "code": "PHY 3060U",
+    "name": "Fluid Dynamics"
+  },
+  {
+    "code": "PHY 3080U",
+    "name": "Electricity and Magnetism II"
+  },
+  {
+    "code": "PHY 3510U",
+    "name": "Biophysics"
+  },
+  {
+    "code": "PHY 3900U",
+    "name": "Astronomy II"
+  },
+  {
+    "code": "PHY 4010U",
+    "name": "Condensed Matter"
+  },
+  {
+    "code": "PHY 4020U",
+    "name": "Quantum Mechanics II"
+  },
+  {
+    "code": "PHY 4030U",
+    "name": "Topics in Contemporary Physics I"
+  },
+  {
+    "code": "PHY 4040U",
+    "name": "Solar Energy and Photovoltaics"
+  },
+  {
+    "code": "PHY 4060U",
+    "name": "Topics in Contemporary Physics II"
+  },
+  {
+    "code": "PHY 4110U",
+    "name": "Computational Physics"
+  },
+  {
+    "code": "PHY 4120U",
+    "name": "Forensic Physics Applications"
+  },
+  {
+    "code": "PHY 4130U",
+    "name": "Particle Physics"
+  },
+  {
+    "code": "PHY 4410U",
+    "name": "Physics Thesis Project I"
+  },
+  {
+    "code": "PHY 4420U",
+    "name": "Physics Thesis Project II"
+  },
+  {
+    "code": "PHY 4510U",
+    "name": "Physics of Nanotechnology"
+  },
+  {
+    "code": "PHY 4910U",
+    "name": "Techniques of Modern Astrophysics"
+  },
+  {
+    "code": "PHY 4920U",
+    "name": "Cosmology"
+  },
+  {
+    "code": "POSC 1000U",
+    "name": "Introduction to Political Science"
+  },
+  {
+    "code": "POSC 1200U",
+    "name": "Introduction to Democracy in Theory & Practice"
+  },
+  {
+    "code": "POSC 2000U",
+    "name": "Introduction to Canadian Politics"
+  },
+  {
+    "code": "POSC 2100U",
+    "name": "Introduction to Global Politics"
+  },
+  {
+    "code": "POSC 2200U",
+    "name": "Introduction to Participation and Representation"
+  },
+  {
+    "code": "POSC 2300U",
+    "name": "Mobilizing for Change"
+  },
+  {
+    "code": "POSC 2502U",
+    "name": "Community Development and Social Change"
+  },
+  {
+    "code": "POSC 2800U",
+    "name": "Introduction to Business, Economy and Society"
+  },
+  {
+    "code": "POSC 3000U",
+    "name": "Introduction to Political Economy"
+  },
+  {
+    "code": "POSC 3100U",
+    "name": "Political Economy of Global Development"
+  },
+  {
+    "code": "POSC 3101U",
+    "name": "Inequality, Environment and Development"
+  },
+  {
+    "code": "POSC 3102U",
+    "name": "Race and Racism in Political Culture"
+  },
+  {
+    "code": "POSC 3200U",
+    "name": "Rural-Urban Fringe"
+  },
+  {
+    "code": "POSC 3201U",
+    "name": "Rural Communities"
+  },
+  {
+    "code": "POSC 3203U",
+    "name": "Urban Development"
+  },
+  {
+    "code": "POSC 3300U",
+    "name": "Building Sustainable Communities"
+  },
+  {
+    "code": "POSC 3301U",
+    "name": "Eco-Justice"
+  },
+  {
+    "code": "POSC 3302U",
+    "name": "Environment and Globalization"
+  },
+  {
+    "code": "POSC 3303U",
+    "name": "Policies for Sustainability"
+  },
+  {
+    "code": "POSC 3304U",
+    "name": "Planetary Health and Global Environmental Justice"
+  },
+  {
+    "code": "POSC 3305U",
+    "name": "Energy Policy: Canada in a Transitioning World"
+  },
+  {
+    "code": "POSC 3310U",
+    "name": "Indigenous Peoples, Sustainability and Development: A Global Perspective"
+  },
+  {
+    "code": "POSC 3500U",
+    "name": "Equity Policy"
+  },
+  {
+    "code": "POSC 3501U",
+    "name": "Politics and Poverty"
+  },
+  {
+    "code": "POSC 3602U",
+    "name": "Labour in the Global Economy"
+  },
+  {
+    "code": "POSC 3603U",
+    "name": "The Politics of Housing"
+  },
+  {
+    "code": "POSC 3700U",
+    "name": "Technology, Politics and Social Theory"
+  },
+  {
+    "code": "POSC 3750U",
+    "name": "Introduction to American Politics"
+  },
+  {
+    "code": "POSC 3800U",
+    "name": "Special Topics in Business, Economy and Society"
+  },
+  {
+    "code": "POSC 4000U",
+    "name": "Special Topics in Political Economy"
+  },
+  {
+    "code": "POSC 4005U",
+    "name": "Independent Study"
+  },
+  {
+    "code": "POSC 4010U",
+    "name": "Policy Development"
+  },
+  {
+    "code": "POSC 4020U",
+    "name": "Federalism in Canadian Politics"
+  },
+  {
+    "code": "POSC 4104U",
+    "name": "Directed Research"
+  },
+  {
+    "code": "POSC 4300U",
+    "name": "Special Topics in Political Science"
+  },
+  {
+    "code": "POSC 4310U",
+    "name": "The Politics of Indigenous Rights"
+  },
+  {
+    "code": "POSC 4800U",
+    "name": "Advanced Topics in Business, Economy and Society"
+  },
+  {
+    "code": "PSYC 1000U",
+    "name": "Introductory Psychology"
+  },
+  {
+    "code": "PSYC 2010U",
+    "name": "Developmental Psychology"
+  },
+  {
+    "code": "PSYC 2020U",
+    "name": "Social Psychology"
+  },
+  {
+    "code": "PSYC 2030U",
+    "name": "Psychopathology"
+  },
+  {
+    "code": "PSYC 2050U",
+    "name": "Brain and Behaviour"
+  },
+  {
+    "code": "PSYC 2060U",
+    "name": "Cognitive Psychology"
+  },
+  {
+    "code": "PSYC 2900U",
+    "name": "Research Methods in Psychology"
+  },
+  {
+    "code": "PSYC 2910U",
+    "name": "Data Analysis in Psychology"
+  },
+  {
+    "code": "PSYC 3035U",
+    "name": "Adolescence"
+  },
+  {
+    "code": "PSYC 3045U",
+    "name": "Child Maltreatment"
+  },
+  {
+    "code": "PSYC 3060U",
+    "name": "Personality Psychology"
+  },
+  {
+    "code": "PSYC 3065U",
+    "name": "Emotion"
+  },
+  {
+    "code": "PSYC 3070U",
+    "name": "Stress and Coping"
+  },
+  {
+    "code": "PSYC 3075U",
+    "name": "Biopsychology of Sex"
+  },
+  {
+    "code": "PSYC 3090U",
+    "name": "Social Affective Neuroscience"
+  },
+  {
+    "code": "PSYC 3110U",
+    "name": "Directed Laboratory Research in Psychology"
+  },
+  {
+    "code": "PSYC 3150U",
+    "name": "Psychology of Aging"
+  },
+  {
+    "code": "PSYC 3330U",
+    "name": "Developmental Psychopathology"
+  },
+  {
+    "code": "PSYC 3500U",
+    "name": "Stereotypes and Prejudice"
+  },
+  {
+    "code": "PSYC 3510U",
+    "name": "Research Methods in Neuroscience"
+  },
+  {
+    "code": "PSYC 3520U",
+    "name": "Introduction to Cognitive Neuroscience"
+  },
+  {
+    "code": "PSYC 3530U",
+    "name": "Developmental Neuroscience"
+  },
+  {
+    "code": "PSYC 3550U",
+    "name": "Psychology of Gender"
+  },
+  {
+    "code": "PSYC 3610U",
+    "name": "Thinking and Decision Making"
+  },
+  {
+    "code": "PSYC 3620U",
+    "name": "Motivation and Emotion"
+  },
+  {
+    "code": "PSYC 3630U",
+    "name": "Sleep and Consciousness"
+  },
+  {
+    "code": "PSYC 3700U",
+    "name": "Aging and Mental Health"
+  },
+  {
+    "code": "PSYC 3710U",
+    "name": "Positive Psychology"
+  },
+  {
+    "code": "PSYC 3900U",
+    "name": "Special Topics in Psychology I"
+  },
+  {
+    "code": "PSYC 3910U",
+    "name": "Advanced Data Analysis in Psychology"
+  },
+  {
+    "code": "PSYC 4110U",
+    "name": "Honours Thesis in Psychology I"
+  },
+  {
+    "code": "PSYC 4120U",
+    "name": "Honours Thesis in Psychology II"
+  },
+  {
+    "code": "PSYC 4210U",
+    "name": "Social Cognition"
+  },
+  {
+    "code": "PSYC 4900U",
+    "name": "Special Topics in Psychology II"
+  },
+  {
+    "code": "RADI 2200U",
+    "name": "Reactors and Radiation Machines"
+  },
+  {
+    "code": "RADI 3200U",
+    "name": "Medical Imaging"
+  },
+  {
+    "code": "RADI 3570U",
+    "name": "Environmental Effects of Radiation"
+  },
+  {
+    "code": "RADI 4220U",
+    "name": "Radiation Biophysics and Dosimetry"
+  },
+  {
+    "code": "RADI 4320U",
+    "name": "Therapeutic Applications of Radiation Techniques"
+  },
+  {
+    "code": "RADI 4430U",
+    "name": "Industrial Applications of Radiation Techniques"
+  },
+  {
+    "code": "RADI 4440U",
+    "name": "Radioisotopes and Radiation Machines"
+  },
+  {
+    "code": "RADI 4550U",
+    "name": "Radiation Detection and Measurement"
+  },
+  {
+    "code": "RADI 4995U",
+    "name": "Thesis Project I"
+  },
+  {
+    "code": "RADI 4999U",
+    "name": "Thesis Project II"
+  },
+  {
+    "code": "SCCO 0999C",
+    "name": "Science Co-op Success Program"
+  },
+  {
+    "code": "SCCO 1000W",
+    "name": "Science Co-op Work Term I"
+  },
+  {
+    "code": "SCCO 2000W",
+    "name": "Science Co-op Work Term II"
+  },
+  {
+    "code": "SCCO 3000W",
+    "name": "Science Co-op Work Term III"
+  },
+  {
+    "code": "SCCO 4000W",
+    "name": "Science Co-op Work Term IV"
+  },
+  {
+    "code": "SCCO 5000W",
+    "name": "Science Co-op Work Term V"
+  },
+  {
+    "code": "SCIE 1920U",
+    "name": "Introduction to Astronomy"
+  },
+  {
+    "code": "SCIE 2010U",
+    "name": "The Science of Pop Culture: Superheroes, Spaceships, and Dystopian Worlds"
+  },
+  {
+    "code": "SCIE 2500U",
+    "name": "Two-Eyed Seeing in the Natural Sciences"
+  },
+  {
+    "code": "SIMU 1000U",
+    "name": "Foundations of Healthcare Simulation"
+  },
+  {
+    "code": "SIMU 2000U",
+    "name": "Immersion in Critical Care and Perioperative Environments"
+  },
+  {
+    "code": "SIMU 3000U",
+    "name": "Applied Theory and Technology in Simulation Operations"
+  },
+  {
+    "code": "SIMU 3050U",
+    "name": "Simulation Design and Applied Methodology"
+  },
+  {
+    "code": "SOCI 1000U",
+    "name": "Introductory Sociology"
+  },
+  {
+    "code": "SOCI 1470U",
+    "name": "Impact of Science and Technology on Society"
+  },
+  {
+    "code": "SOCI 2000U",
+    "name": "Classical Sociological Theory"
+  },
+  {
+    "code": "SOCI 2010U",
+    "name": "Deviance and Social Control"
+  },
+  {
+    "code": "SOCI 2020U",
+    "name": "Issues in Diversity"
+  },
+  {
+    "code": "SOCI 2025U",
+    "name": "Youth Cultures"
+  },
+  {
+    "code": "SOCI 2030U",
+    "name": "Technology and Society"
+  },
+  {
+    "code": "SOCI 2300U",
+    "name": "Social Problems"
+  },
+  {
+    "code": "SOCI 2700U",
+    "name": "Human Sexuality"
+  },
+  {
+    "code": "SOCI 2720U",
+    "name": "Sports and Society"
+  },
+  {
+    "code": "SOCI 3000U",
+    "name": "Contemporary Sociological Theory"
+  },
+  {
+    "code": "SOCI 3001U",
+    "name": "Economy and Society"
+  },
+  {
+    "code": "SOCI 3100U",
+    "name": "Applied Sociology"
+  },
+  {
+    "code": "SOCI 3110U",
+    "name": "Community-Based Participatory Action Research"
+  },
+  {
+    "code": "SOCI 3120U",
+    "name": "Evaluation Research"
+  },
+  {
+    "code": "SOCI 3130U",
+    "name": "Advanced Studies in Social Inequality"
+  },
+  {
+    "code": "SOCI 3200U",
+    "name": "Ethics in the Modern World: Challenges and Perspectives"
+  },
+  {
+    "code": "SOCI 3210U",
+    "name": "Social Life and Moral Order: Exploring Norms, Values, and Social Change"
+  },
+  {
+    "code": "SOCI 3220U",
+    "name": "Emerging Technologies and Society"
+  },
+  {
+    "code": "SOCI 3230U",
+    "name": "Families in Contemporary Society"
+  },
+  {
+    "code": "SOCI 4020U",
+    "name": "Social Movements"
+  },
+  {
+    "code": "SOCI 4030U",
+    "name": "Doing Sociology"
+  },
+  {
+    "code": "SOCI 4100U",
+    "name": "Social Innovation and Change"
+  },
+  {
+    "code": "SOCI 4110U",
+    "name": "Sociology of Organizations"
+  },
+  {
+    "code": "SOCI 4200U",
+    "name": "Health, Aging and Society"
+  },
+  {
+    "code": "SOCI 4210U",
+    "name": "Privacy, Data and Surveillance"
+  },
+  {
+    "code": "SOCI 4220U",
+    "name": "Technology and Environmental Sustainability"
+  },
+  {
+    "code": "SOCI 4999U",
+    "name": "Special Topics in Sociology"
+  },
+  {
+    "code": "SOFE 2250U",
+    "name": "Digital Systems and Computer Architecture"
+  },
+  {
+    "code": "SOFE 2710U",
+    "name": "Object Oriented Programming and Design"
+  },
+  {
+    "code": "SOFE 2715U",
+    "name": "Data Structures"
+  },
+  {
+    "code": "SOFE 2720U",
+    "name": "Principles of Software and Requirements Engineering"
+  },
+  {
+    "code": "SOFE 2800U",
+    "name": "Web Programming"
+  },
+  {
+    "code": "SOFE 2850U",
+    "name": "Natural Foundations for Information Technology"
+  },
+  {
+    "code": "SOFE 3200U",
+    "name": "Systems Programming"
+  },
+  {
+    "code": "SOFE 3290U",
+    "name": "Software Quality and Project Management"
+  },
+  {
+    "code": "SOFE 3490U",
+    "name": "Software Project Management"
+  },
+  {
+    "code": "SOFE 3620U",
+    "name": "Machine Learning and Data Mining"
+  },
+  {
+    "code": "SOFE 3650U",
+    "name": "Software Design and Architectures"
+  },
+  {
+    "code": "SOFE 3700U",
+    "name": "Data Management Systems"
+  },
+  {
+    "code": "SOFE 3720U",
+    "name": "Introduction to Artificial Intelligence"
+  },
+  {
+    "code": "SOFE 3770U",
+    "name": "Design and Analysis of Algorithms"
+  },
+  {
+    "code": "SOFE 3850U",
+    "name": "Computer Networks"
+  },
+  {
+    "code": "SOFE 3950U",
+    "name": "Operating Systems"
+  },
+  {
+    "code": "SOFE 3980U",
+    "name": "Software Quality"
+  },
+  {
+    "code": "SOFE 4590U",
+    "name": "Embedded Systems"
+  },
+  {
+    "code": "SOFE 4610U",
+    "name": "Design and Analysis of IoT Software Systems"
+  },
+  {
+    "code": "SOFE 4630U",
+    "name": "Cloud Computing"
+  },
+  {
+    "code": "SOFE 4640U",
+    "name": "Mobile Application Development"
+  },
+  {
+    "code": "SOFE 4790U",
+    "name": "Distributed Systems"
+  },
+  {
+    "code": "SOFE 4820U",
+    "name": "Modelling and Simulation"
+  },
+  {
+    "code": "SOFE 4840U",
+    "name": "Software and Computer Security"
+  },
+  {
+    "code": "SOFE 4850U",
+    "name": "User Interface and Experience Design"
+  },
+  {
+    "code": "SOFE 4870U",
+    "name": "Special Topics in Software Engineering"
+  },
+  {
+    "code": "SOFE 4890U",
+    "name": "Advanced Computer Networks"
+  },
+  {
+    "code": "SSCI 1050U",
+    "name": "Engineering Communications and Technology Impacts"
+  },
+  {
+    "code": "SSCI 1210U",
+    "name": "History of Science and Technology"
+  },
+  {
+    "code": "SSCI 1700U",
+    "name": "Reading Our World"
+  },
+  {
+    "code": "SSCI 1910U",
+    "name": "Writing for the Social Sciences"
+  },
+  {
+    "code": "SSCI 2000U",
+    "name": "Introduction to Social Science, Humanities and Arts"
+  },
+  {
+    "code": "SSCI 2101U",
+    "name": "Making a Difference: An Introduction to Social Entrepreneurship"
+  },
+  {
+    "code": "SSCI 2200C",
+    "name": "Professional Skills"
+  },
+  {
+    "code": "SSCI 2201W",
+    "name": "FSSH Co-op Work Term I"
+  },
+  {
+    "code": "SSCI 2413U",
+    "name": "Science Communication: Media for creative, fun, and effective STEM communication"
+  },
+  {
+    "code": "SSCI 2414U",
+    "name": "Science Fiction and Society"
+  },
+  {
+    "code": "SSCI 2900U",
+    "name": "Research Methods"
+  },
+  {
+    "code": "SSCI 2910U",
+    "name": "Data Analysis"
+  },
+  {
+    "code": "SSCI 2920U",
+    "name": "Qualitative Research Methods"
+  },
+  {
+    "code": "SSCI 3000U",
+    "name": "Disability, Rehabilitation and Society"
+  },
+  {
+    "code": "SSCI 3201W",
+    "name": "FSSH Co-op Work Term II"
+  },
+  {
+    "code": "SSCI 3300U",
+    "name": "Community Connections"
+  },
+  {
+    "code": "SSCI 3400U",
+    "name": "Modern Espionage"
+  },
+  {
+    "code": "SSCI 3500U",
+    "name": "Canada at War"
+  },
+  {
+    "code": "SSCI 3910U",
+    "name": "Advanced Data Analysis"
+  },
+  {
+    "code": "SSCI 3920U",
+    "name": "Advanced Qualitative Methods"
+  },
+  {
+    "code": "SSCI 3999U",
+    "name": "Special Topics in Social Science, Humanities and Arts"
+  },
+  {
+    "code": "SSCI 4001U",
+    "name": "Social Science, Humanities and Arts Capstone"
+  },
+  {
+    "code": "SSCI 4005U",
+    "name": "Independent Study"
+  },
+  {
+    "code": "SSCI 4010U",
+    "name": "Policy Development"
+  },
+  {
+    "code": "SSCI 4020U",
+    "name": "Leadership and Administration"
+  },
+  {
+    "code": "SSCI 4098U",
+    "name": "Practicum"
+  },
+  {
+    "code": "SSCI 4101U",
+    "name": "Honours Thesis I"
+  },
+  {
+    "code": "SSCI 4102U",
+    "name": "Honours Thesis II"
+  },
+  {
+    "code": "SSCI 4103W",
+    "name": "Internship"
+  },
+  {
+    "code": "SSCI 4104W",
+    "name": "Internship II"
+  },
+  {
+    "code": "SSCI 4201W",
+    "name": "FSSH Co-op Work Term III"
+  },
+  {
+    "code": "SSCI 4202W",
+    "name": "FSSH Co-op Work Term IV"
+  },
+  {
+    "code": "SSCI 4203W",
+    "name": "FSSH Co-op Work Term V"
+  },
+  {
+    "code": "STAT 2010U",
+    "name": "Statistics and Probability for Physical Science"
+  },
+  {
+    "code": "STAT 2020U",
+    "name": "Statistics and Probability for Biological Science"
+  },
+  {
+    "code": "STAT 2800U",
+    "name": "Statistics and Probability for Engineers"
+  },
+  {
+    "code": "STAT 3010U",
+    "name": "Biostatistics"
+  },
+  {
+    "code": "STAT 3020U",
+    "name": "Applied Statistical Methods for Data Science"
+  },
+  {
+    "code": "SUST 1001U",
+    "name": "Fundamentals of Sustainability I: Science & Technology"
+  },
+  {
+    "code": "SUST 1002U",
+    "name": "Fundamentals of Sustainability II: Health & Social Sciences"
+  },
+  {
+    "code": "SUST 4001U",
+    "name": "Sustainability Group Capstone I"
+  },
+  {
+    "code": "SUST 4002U",
+    "name": "Sustainability Group Capstone II"
+  },
+  {
+    "code": "XBIT 1000C",
+    "name": "Foundations for Success in Co-op"
+  },
+  {
+    "code": "XBIT 1500U",
+    "name": "FBIT Student Success Workshop"
+  },
+  {
+    "code": "XBIT 2000W",
+    "name": "FBIT Co-op Work Term I"
+  },
+  {
+    "code": "XBIT 2500U",
+    "name": "FBIT Experience Workshop"
+  },
+  {
+    "code": "XBIT 3000W",
+    "name": "FBIT Co-op Work Term II"
+  },
+  {
+    "code": "XBIT 3500U",
+    "name": "FBIT Career Readiness Workshop"
+  },
+  {
+    "code": "XBIT 4000W",
+    "name": "FBIT Co-op Work Term III"
+  },
+  {
+    "code": "XBIT 4100W",
+    "name": "FBIT Co-op Work Term IV"
+  },
+  {
+    "code": "XBIT 4200W",
+    "name": "FBIT Co-op Work Term V"
+  },
+  {
+    "code": "XBIT 4500U",
+    "name": "Capstone Study Project"
+  },
+  {
+    "code": "XBIT 4600W",
+    "name": "Internship"
+  },
+  {
+    "code": "XBIT 4700U",
+    "name": "Venture Creation"
+  }
+]

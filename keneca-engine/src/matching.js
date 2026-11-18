@@ -37,15 +37,35 @@ async function findUsersForPostWithDistance(startingCell, current_Ring, post){
     const user_List = await getCandidatesData(userIds);
 
 
-    // 4. Calculate each candidate's physical distance from the post
     const usersWithDistance = addDistanceToUsers(
-        user_List,
-        post
+    user_List,
+    post
+);
+
+// Strict maximum matching distance: 3 kilometres.
+const MAX_MATCH_DISTANCE = 3000;
+
+const eligibleUsers = usersWithDistance.filter((user) => {
+    const distance = Number(user.distance);
+
+    return (
+        Number.isFinite(distance) &&
+        distance >= 0 &&
+        distance <= MAX_MATCH_DISTANCE
     );
+});
+
+console.log(
+    `[Matching] ${eligibleUsers.length}/${usersWithDistance.length} ` +
+    `helpers within ${MAX_MATCH_DISTANCE}m`
+);
+
+// Return only helpers within the allowed distance.
+return eligibleUsers;
 
 
-    // 5. Return the final list of users with their distance information
-    return usersWithDistance;
+
+
 
 }
 

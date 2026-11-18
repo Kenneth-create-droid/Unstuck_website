@@ -4,6 +4,10 @@ import {
   getDispatchJob
 } from "./redis/dispatchState.js";
 
+import { logHelperEvent } from "../../backend/helperEventLogger.js";
+
+import { randomUUID } from "node:crypto";
+
 // Import dispatch history function
 import {
   addUserToDispatchHistory
@@ -18,7 +22,8 @@ import {
 
 async function sendRequest(user, post) {
   const sentAt = Date.now();
-  const expiresAt = sentAt + 20 * 1000;
+const expiresAt = sentAt + 20 * 1000;
+const offerId = randomUUID();
 
   // Confirm the helper is still available.
   const helperStatus = await getUserStatus(user.id);
@@ -35,20 +40,40 @@ async function sendRequest(user, post) {
 
   // Store the pending offer in the dispatch job.
   await updateDispatchJob(post.id, {
-    status: "PENDING_CANDIDATE",
-    currentCandidateId: String(user.id),
-    sentAt: String(sentAt),
-    expiresAt: String(expiresAt)
+  status: "PENDING_CANDIDATE",
+  currentCandidateId: String(user.id),
+  offerId,
+  sentAt: String(sentAt),
+  expiresAt: String(expiresAt)
+});
+
+// Permanently record the offer in PostgreSQL.
+try {
+  await logHelperEvent({
+    helperId: user.id,
+    postId: post.id,
+    offerId,
+    eventType: "OFFER_SENT"
   });
+
+  console.log(
+    `[Event Logger] OFFER_SENT recorded for helper ${user.id}`
+  );
+} catch (error) {
+  console.error(
+    "[Event Logger] Failed to record OFFER_SENT:",
+    error
+  );
+}
 
   // Prevent repeatedly offering the same request.
   await addUserToDispatchHistory(post.id, user.id);
 
   // Wait for acceptance, rejection, or timeout.
-  return await handleTimeOut(post, user);
+ return await handleTimeOut(post, user, offerId);
 }
 
-async function handleTimeOut(post, user) {
+async function handleTimeOut(post, user, offerId) {
   const postState = await getDispatchJob(post.id);
   if (!postState || !postState.expiresAt) return "CANCELLED";
 
@@ -84,7 +109,7 @@ async function handleTimeOut(post, user) {
 
       // If user toggled off location or passed, currentCandidateId will no longer match
       if (
-        latestState.status === "SEARCHING" || 
+        latestState.status === "SEARCHING" ||
         latestState.currentCandidateId !== user.id.toString()
       ) {
         finished = true;
@@ -104,22 +129,48 @@ async function handleTimeOut(post, user) {
 
       const latestState = await getDispatchJob(post.id);
 
-      if (latestState && latestState.currentCandidateId === user.id.toString()) {
-        await updateDispatchJob(post.id, {
-          status: "SEARCHING",
-          currentCandidateId: "",
-          sentAt: "",
-          expiresAt: ""
-        });
+     // Confirm this exact offer is still pending before timing it out.
+if (
+  latestState &&
+  latestState.status === "PENDING_CANDIDATE" &&
+  String(latestState.currentCandidateId) === String(user.id) &&
+  String(latestState.offerId) === String(offerId)
+) {
+  // Record the timeout before clearing the offer.
+  try {
+    await logHelperEvent({
+      helperId: user.id,
+      postId: post.id,
+      offerId,
+      eventType: "TIMED_OUT"
+    });
 
-        // Reset the helper's status back to AVAILABLE so dispatcher doesn't skip them later
-        await updateUserStatus(user.id, {
-          status: "AVAILABLE",
-          postID: ""
-        });
-      }
+    console.log(
+      `[Event Logger] TIMED_OUT recorded for helper ${user.id}`
+    );
+  } catch (error) {
+    console.error(
+      "[Event Logger] Failed to record TIMED_OUT:",
+      error
+    );
+  }
 
-      resolve("TIMEOUT");
+  // Reset dispatch state.
+  await updateDispatchJob(post.id, {
+    status: "SEARCHING",
+    currentCandidateId: "",
+    offerId: "",
+    sentAt: "",
+    expiresAt: ""
+  });
+
+  // Release the helper.
+  await updateUserStatus(user.id, {
+    status: "AVAILABLE",
+    postID: ""
+  });
+}
+resolve("TIMEOUT");
     }, timeRemaining);
   });
 }

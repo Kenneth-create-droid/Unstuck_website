@@ -5,6 +5,7 @@ import {
   Check,
   LoaderCircle,
   MessageCircle,
+    ChevronRight,
   Paperclip,
   Send
 } from "lucide-react";
@@ -29,7 +30,45 @@ export default function ChatPage() {
   const postId = params.get("postId");
   const { user } = useAuth();
   const userId = user?.id ? String(user.id) : "";
+
+  const loadMatchedProfile = async () => {
+  if (!postId || !userId) return;
+
+  try {
+    const token = localStorage.getItem("unstuck_token");
+
+    if (!token) return;
+
+    const query = new URLSearchParams({
+      postId,
+      userId,
+      includeProfile: "true"
+    });
+
+    const response = await fetch(
+      `${API_BASE_URL}/api/chat/session?${query}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Unable to load matched student profile.");
+    }
+
+    const data = await response.json();
+
+    setMatchedProfile(data.session?.otherUser || null);
+  } catch (error) {
+    console.error("[Chat] Matched profile failed:", error);
+  }
+};
   const [session, setSession] = useState(null);
+  const [matchedProfile, setMatchedProfile] = useState(null);
+
+  const [showMatchedProfile, setShowMatchedProfile] = useState(false);
   const [messages, setMessages] = useState([]);
   const [messageText, setMessageText] = useState("");
   const [loading, setLoading] = useState(true);
@@ -79,14 +118,25 @@ const closeHelperChat = useCallback(() => {
       setLoading(false);
       return () => { active = false; };
     }
-    getChatSession(postId, userId)
-      .then((data) => { if (active) setSession(data.session); })
+   getChatSession(postId, userId)
+  .then((data) => {
+    if (active) {
+      setSession(data.session);
+    }
+  })
       .catch((err) => { if (active) setError(err.message || "Unable to open chat."); })
       .finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
   }, [postId, userId]);
 
-  
+  useEffect(() => {
+  if (!session || !postId || !userId) return;
+
+  setMatchedProfile(null);
+  loadMatchedProfile();
+}, [session?.postId, postId, userId]);
+
+
 const loadMessages = useCallback(async () => {
   if (
     !postId ||
@@ -282,7 +332,7 @@ const loadMessages = useCallback(async () => {
     if (!text || !postId || !userId || sending || closedRef.current) return;
     setSending(true);
     try {
-     
+
 const data = await sendChatMessage(postId, userId, text);
 
 setMessageText("");
@@ -342,7 +392,7 @@ useEffect(() => {
 
     const inactiveFor = Date.now() - lastActivityRef.current;
 
-   
+
 if (inactiveFor >= INACTIVITY_LIMIT) {
   closedRef.current = true;
 
@@ -365,10 +415,22 @@ if (inactiveFor >= INACTIVITY_LIMIT) {
       <section className="unstuck-chat-panel" aria-label="Help request chat">
         <header className="unstuck-chat-header">
           <div className="unstuck-chat-header-spacer" />
-          <div className="unstuck-chat-contact">
-            <strong>{session.otherUser?.firstname || "Student"}</strong>
-            <span><span className="unstuck-chat-online" /> Connected</span>
-          </div>
+          <button
+  type="button"
+  className="unstuck-chat-contact unstuck-chat-profile-trigger"
+  onClick={() => setShowMatchedProfile(true)}
+  aria-label="View matched student's profile"
+>
+  <strong>
+  {session.otherUser?.firstname || "Student"}
+</strong>
+
+<span className="unstuck-chat-profile-link">
+  View Profile
+  <ChevronRight size={14} />
+</span>
+</button>
+
           <div className="unstuck-chat-header-actions">
             {isRequester && <button className="unstuck-chat-done" disabled={completing} onClick={() => setShowDone(true)}>Done <Check size={15} /></button>}
           </div>
@@ -403,7 +465,7 @@ if (inactiveFor >= INACTIVITY_LIMIT) {
                     </button>
                 </div>
 )}
-          
+
           {messages.map((item) => {
             const mine = String(item.senderId) === userId;
             return <div className={`unstuck-chat-message-row ${mine ? "mine" : "theirs"}`} key={item.id}>
@@ -471,7 +533,7 @@ if (inactiveFor >= INACTIVITY_LIMIT) {
         </form>
       </section>
 
-          
+
 {showThankYou && (
   <div className="unstuck-thankyou-overlay">
     <div
@@ -484,7 +546,7 @@ if (inactiveFor >= INACTIVITY_LIMIT) {
         <Check size={30} />
       </div>
 
-      
+
 {thankYouType === "timeout" ? (
   <>
     <h2>Chat Timed Out</h2>
@@ -522,6 +584,71 @@ if (inactiveFor >= INACTIVITY_LIMIT) {
         Return Home
       </button>
     </div>
+  </div>
+)}
+
+{showMatchedProfile && (
+  <div
+    className="unstuck-chat-modal-backdrop"
+    onClick={() => setShowMatchedProfile(false)}
+  >
+    <section
+      className="unstuck-matched-profile-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="matched-profile-title"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        type="button"
+        className="unstuck-matched-profile-close"
+        onClick={() => setShowMatchedProfile(false)}
+        aria-label="Close profile"
+      >
+        ×
+      </button>
+
+      <h2 id="matched-profile-title">
+        {[
+          session.otherUser?.firstname,
+          session.otherUser?.lastname
+        ].filter(Boolean).join(" ") || "Student Profile"}
+      </h2>
+
+      {!matchedProfile ? (
+        <p>Profile information is unavailable.</p>
+      ) : (
+        <>
+          <div className="unstuck-matched-profile-stat">
+            <span>People Helped</span>
+            <strong>{matchedProfile.peopleHelped ?? 0}</strong>
+          </div>
+
+          <div className="unstuck-matched-profile-stat">
+            <span>Reliability Score</span>
+            <strong>
+              {matchedProfile.reliabilityEstablished
+                ? `${matchedProfile.reliabilityScore}/100`
+                : "Not yet established"}
+            </strong>
+          </div>
+
+          {matchedProfile.reliabilityEstablished && (
+            <>
+              <div className="unstuck-matched-profile-stat">
+                <span>Response Score</span>
+                <strong>{matchedProfile.responseScore}/100</strong>
+              </div>
+
+              <div className="unstuck-matched-profile-stat">
+                <span>Completion Score</span>
+                <strong>{matchedProfile.completionScore}/100</strong>
+              </div>
+            </>
+          )}
+        </>
+      )}
+    </section>
   </div>
 )}
 

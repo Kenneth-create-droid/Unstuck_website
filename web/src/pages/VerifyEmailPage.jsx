@@ -50,9 +50,15 @@ export default function VerifyEmailPage() {
     return;
   }
 
-  // The backend must establish a valid authenticated session.
-  // A user object alone is not proof of authentication.
-  login(data.user);
+ if (!data.token) {
+  setError(
+    "Account verified successfully. Please sign in to continue."
+  );
+  navigate("/login", { replace: true });
+  return;
+}
+
+login(data.user, data.token);
 
   setSuccessMsg(
     "Account verified! Let's personalize your Unstuck experience."

@@ -70,7 +70,7 @@ async function prioritizeCourseCandidates(candidates, courseCode) {
 }
 async function propagateRing(post) {
   const postStatus = await getDispatchJob(post.id);
-  
+
   // Exit immediately if job was cancelled or deleted from a prior run
   if (!postStatus || postStatus.status === "CANCELLED" || postStatus.status === "FAILED") {
     console.log(`[Dispatcher] Aborting propagation for post ${post.id} (Status: ${postStatus?.status || "DELETED"})`);
@@ -80,20 +80,64 @@ async function propagateRing(post) {
   let postStatus_Value = Number(postStatus.currentRing || 0);
 
   if (postStatus_Value >= 7) {
-    console.log(`[Dispatcher] Max ring depth reached for post ${post.id}. Dispatch failed.`);
+  console.log(
+    `[Dispatcher] Max ring depth reached for post ${post.id}. Dispatch failed.`
+  );
 
-    await updateDispatchJob(post.id, {
-      status: "FAILED",
-      currentRing: "7"
-    });
+  await updateDispatchJob(post.id, {
+    status: "FAILED",
+    currentRing: "7"
+  });
 
-    setTimeout(async () => {
-      await deleteDispatchJob(post.id);
-      await removeUserFromDispatchHistory(post.id);
-    }, 2000);
+  // Restore the requester when matching fails.
+  const requesterId = postStatus.userId;
 
-    return { success: false, reason: "NO_HELPERS_FOUND" };
+  if (requesterId) {
+    try {
+      const requesterStatus = await getUserStatus(requesterId);
+
+      if (
+        requesterStatus?.status === "SEARCHING" &&
+        String(requesterStatus.postID) === String(post.id)
+      ) {
+        await updateUserStatus(requesterId, {
+          status: "OFFLINE",
+          postID: ""
+        });
+
+        console.log(
+          `[Dispatcher] Requester ${requesterId} reset to OFFLINE after failed matching.`
+        );
+      }
+    } catch (error) {
+      console.error(
+        `[Dispatcher] Failed to reset requester ${requesterId}:`,
+        error
+      );
+    }
   }
+
+  setTimeout(async () => {
+    try {
+      const latestJob = await getDispatchJob(post.id);
+
+      if (latestJob?.status === "FAILED") {
+        await deleteDispatchJob(post.id);
+        await removeUserFromDispatchHistory(post.id);
+      }
+    } catch (error) {
+      console.error(
+        `[Dispatcher] Failed to clean up post ${post.id}:`,
+        error
+      );
+    }
+  }, 2000);
+
+  return {
+    success: false,
+    reason: "NO_HELPERS_FOUND"
+  };
+}
 
   postStatus_Value++;
   console.log(`[Dispatcher] Propagating post ${post.id} to Ring: ${postStatus_Value}`);
@@ -116,6 +160,12 @@ async function dispatchPost(post) {
   if (!postStatus || postStatus.status === "CANCELLED") return null;
 
   const courseCode = postStatus.courseCode || null;
+
+  // Retrieve the requested skill from the Redis job
+const requestedSkill = postStatus.requestedSkill || "";
+
+// Make the skill available to the scoring engine
+post.requestedSkill = requestedSkill;
   // Sync state to Redis only if it's not already updated
   if (postStatus.currentRing !== currentRingStr || postStatus.status !== "SEARCHING") {
     await updateDispatchJob(post.id, {
@@ -165,7 +215,7 @@ async function dispatchPost(post) {
 
   return null;
 });
-  
+
  const resolvedUsers = await Promise.all(userCheckPromises);
 const validCandidates = resolvedUsers.filter(Boolean);
 
@@ -258,7 +308,7 @@ if (
       result === "TIMEOUT" ||
       result === "REJECTED" ||
       result === "CANCELLED" ||
-      result === "DEACTIVATED" || 
+      result === "DEACTIVATED" ||
       result === "PASS"
     ) {
       continue;

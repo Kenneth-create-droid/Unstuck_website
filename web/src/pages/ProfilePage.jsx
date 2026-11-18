@@ -10,6 +10,7 @@ import {
   LogOut,
   Pencil,
   Check,
+    ShieldCheck,
   X,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
@@ -18,16 +19,14 @@ import {
   deactivateLocation,
   getMyCourses,
 } from "../api";
+import COURSES from "../data/courses.json";
+import AVAILABLE_SKILLS from "../data/skills";
 import "./ProfilePage.css";
 
-const COURSE_NAMES = {
-  "ENGR 4111U": "Capstone Systems Design I",
-  "SOFE 4790U": "Distributed Systems",
-  "SOFE 4590U": "Embedded Systems",
-  "SOFE 4640U": "Mobile Application Development",
-  "SOFE 4850U": "User Experience Design",
-  "ARTE 4110U": "Deep Learning Architecture and Algorithms",
-};
+const COURSE_NAMES = Object.fromEntries(
+  COURSES.map((course) => [course.code, course.name])
+);
+
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -44,8 +43,19 @@ export default function ProfilePage() {
   // Course editing
   const [editingCourses, setEditingCourses] = useState(false);
   const [selectedCourses, setSelectedCourses] = useState([]);
+  const [courseSearch, setCourseSearch] = useState("");
   const [savingCourses, setSavingCourses] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
+
+  // Skill selection
+const [mySkills, setMySkills] = useState([]);
+const [selectedSkills, setSelectedSkills] = useState([]);
+const [skillsLoading, setSkillsLoading] = useState(true);
+const [editingSkills, setEditingSkills] = useState(false);
+const [savingSkills, setSavingSkills] = useState(false);
+const [skillsError, setSkillsError] = useState("");
+const [skillsMessage, setSkillsMessage] = useState("");
+const [skillSearch, setSkillSearch] = useState("");
 
   useEffect(() => {
     let active = true;
@@ -114,6 +124,41 @@ export default function ProfilePage() {
     };
   }, [user?.id]);
 
+  useEffect(() => {
+  let active = true;
+
+  async function loadMySkills() {
+    if (!user?.id) {
+      setSkillsLoading(false);
+      return;
+    }
+
+    try {
+      const data = await apiRequest(
+        `/api/users/${encodeURIComponent(user.id)}/skills`
+      );
+
+      if (active) {
+        setMySkills(data.skills || []);
+      }
+    } catch (error) {
+      console.error("Failed to load skills:", error);
+
+      if (active) {
+        setSkillsError("Unable to load your skills.");
+      }
+    } finally {
+      if (active) setSkillsLoading(false);
+    }
+  }
+
+  loadMySkills();
+
+  return () => {
+    active = false;
+  };
+}, [user?.id]);
+
   const handleBack = () => {
     if (window.history.state?.idx > 0) {
       navigate(-1);
@@ -123,11 +168,12 @@ export default function ProfilePage() {
   };
 
   const handleEditCourses = () => {
-    setSelectedCourses([...myCourses]);
-    setCoursesError("");
-    setSaveMessage("");
-    setEditingCourses(true);
-  };
+  setSelectedCourses([...myCourses]);
+  setCourseSearch("");
+  setCoursesError("");
+  setSaveMessage("");
+  setEditingCourses(true);
+};
 
   const handleToggleCourse = (code) => {
     setSelectedCourses((previous) =>
@@ -177,6 +223,53 @@ export default function ProfilePage() {
     }
   };
 
+  const handleEditSkills = () => {
+  setSelectedSkills([...mySkills]);
+  setSkillSearch("");
+  setSkillsError("");
+  setSkillsMessage("");
+  setEditingSkills(true);
+};
+
+const handleToggleSkill = (skill) => {
+  const normalized = skill.toLowerCase();
+
+  setSelectedSkills((previous) => {
+    if (previous.includes(normalized)) {
+      return previous.filter((item) => item !== normalized);
+    }
+
+    if (previous.length >= 20) {
+      return previous;
+    }
+
+    return [...previous, normalized];
+  });
+};
+
+const handleSaveSkills = async () => {
+  if (!user?.id || savingSkills) return;
+
+  setSavingSkills(true);
+  setSkillsError("");
+
+  try {
+    const result = await apiRequest(
+      `/api/users/${encodeURIComponent(user.id)}/skills`,
+      "PUT",
+      { skills: selectedSkills }
+    );
+
+    setMySkills(result.skills || []);
+    setEditingSkills(false);
+    setSkillsMessage("Your skills have been updated successfully.");
+  } catch (error) {
+    setSkillsError(error.message || "Unable to save skills.");
+  } finally {
+    setSavingSkills(false);
+  }
+};
+
   const handleLogout = async () => {
     if (loggingOut) return;
 
@@ -210,6 +303,15 @@ export default function ProfilePage() {
           <ArrowLeft size={22} />
           Back
         </button>
+        <button
+            type="button"
+            className="unstuck-profile-logout"
+            onClick={handleLogout}
+            disabled={loggingOut}
+          >
+            <LogOut size={20} />
+            {loggingOut ? "Logging out..." : "Log Out"}
+          </button>
       </nav>
 
       <div className="unstuck-profile-center">
@@ -247,6 +349,51 @@ export default function ProfilePage() {
                   <span>People Helped</span>
                 </div>
               </div>
+
+              <div className="unstuck-profile-reliability">
+  <div className="unstuck-profile-reliability-heading">
+    <ShieldCheck size={24} />
+    <h2>My Reliability</h2>
+  </div>
+
+  {profile?.reliabilityEstablished ? (
+    <>
+      <div className="unstuck-profile-reliability-score">
+        <strong>{profile.reliabilityScore}</strong>
+        <span>/100</span>
+      </div>
+
+      <div className="unstuck-profile-reliability-track">
+        <div
+          className="unstuck-profile-reliability-fill"
+          style={{
+            width: `${Math.max(0, Math.min(100, profile.reliabilityScore))}%`,
+          }}
+        />
+      </div>
+
+      <div className="unstuck-profile-reliability-details">
+        <div>
+          <span>Response Score</span>
+          <strong>{profile.responseScore}/100</strong>
+        </div>
+
+        <div>
+          <span>Completion Score</span>
+          <strong>{profile.completionScore}/100</strong>
+        </div>
+      </div>
+    </>
+  ) : (
+    <div className="unstuck-profile-reliability-new">
+      <strong>Not yet established</strong>
+      <p>
+        Your reliability score will appear after you have
+        responded to at least 10 help offers.
+      </p>
+    </div>
+  )}
+</div>
             </div>
           )}
 
@@ -276,26 +423,53 @@ export default function ProfilePage() {
                   Select the courses you're currently taking.
                 </p>
 
-                <div className="unstuck-profile-course-list">
-                  {Object.entries(COURSE_NAMES).map(([code, name]) => (
-                    <label
-                      key={code}
-                      className="unstuck-profile-course-item unstuck-profile-course-option"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedCourses.includes(code)}
-                        onChange={() => handleToggleCourse(code)}
-                        disabled={savingCourses}
-                      />
 
-                      <div className="unstuck-profile-course-details">
-                        <strong>{code}</strong>
-                        <span>{name}</span>
-                      </div>
-                    </label>
-                  ))}
-                </div>
+
+               <div className="unstuck-profile-skill-picker">
+  <input
+    type="search"
+    className="form-input-box"
+    placeholder="Search courses by code or name..."
+    value={courseSearch}
+    onChange={(e) => setCourseSearch(e.target.value)}
+    disabled={savingCourses}
+  />
+
+  <p className="unstuck-profile-course-hint">
+    {selectedCourses.length} courses selected
+  </p>
+
+  <div className="unstuck-profile-skill-options">
+    {COURSES.filter((course) => {
+      const query = courseSearch.trim().toLowerCase();
+
+      return (
+        !query ||
+        course.code.toLowerCase().includes(query) ||
+        course.name.toLowerCase().includes(query)
+      );
+    })
+      .slice(0, 60)
+      .map(({ code, name }) => (
+        <label
+          key={code}
+          className="unstuck-profile-course-item unstuck-profile-course-option"
+        >
+          <input
+            type="checkbox"
+            checked={selectedCourses.includes(code)}
+            onChange={() => handleToggleCourse(code)}
+            disabled={savingCourses}
+          />
+
+          <div className="unstuck-profile-course-details">
+            <strong>{code}</strong>
+            <span>{name}</span>
+          </div>
+        </label>
+      ))}
+  </div>
+</div>
 
                 <div className="unstuck-profile-course-actions">
                   <button
@@ -350,15 +524,136 @@ export default function ProfilePage() {
             )}
           </div>
 
-          <button
-            type="button"
-            className="unstuck-profile-logout"
-            onClick={handleLogout}
-            disabled={loggingOut}
-          >
-            <LogOut size={20} />
-            {loggingOut ? "Logging out..." : "Log Out"}
-          </button>
+
+
+{/* MY SKILLS */}
+<div className="unstuck-profile-courses">
+  <div className="unstuck-profile-courses-heading">
+    <h2>My Skills</h2>
+
+    {!editingSkills && !skillsLoading && (
+      <button
+        type="button"
+        className="unstuck-profile-edit-courses"
+        onClick={handleEditSkills}
+      >
+        <Pencil size={15} />
+        Edit
+      </button>
+    )}
+  </div>
+
+  {skillsLoading ? (
+    <p>Loading skills...</p>
+  ) : editingSkills ? (
+    <>
+      <p className="unstuck-profile-course-hint">
+        Select the skills you can use to help other students.
+        You can select up to 20.
+      </p>
+
+      <div className="unstuck-profile-skill-picker">
+  <input
+    type="search"
+    className="form-input-box"
+    placeholder="Search skills..."
+    value={skillSearch}
+    onChange={(e) => setSkillSearch(e.target.value)}
+    disabled={savingSkills}
+  />
+
+  <p className="unstuck-profile-course-hint">
+    {selectedSkills.length} of 20 skills selected
+  </p>
+
+  <div className="unstuck-profile-skill-options">
+    {AVAILABLE_SKILLS.filter((skill) =>
+      skill.toLowerCase().includes(skillSearch.trim().toLowerCase())
+    ).map((skill) => {
+      const normalized = skill.toLowerCase();
+
+      return (
+        <label
+          key={skill}
+          className="unstuck-profile-course-item unstuck-profile-course-option"
+        >
+          <input
+            type="checkbox"
+            checked={selectedSkills.includes(normalized)}
+            onChange={() => handleToggleSkill(skill)}
+            disabled={
+              savingSkills ||
+              (selectedSkills.length >= 20 &&
+                !selectedSkills.includes(normalized))
+            }
+          />
+
+          <span>{skill}</span>
+        </label>
+      );
+    })}
+  </div>
+</div>
+
+      <div className="unstuck-profile-course-actions">
+        <button
+          type="button"
+          className="unstuck-profile-course-cancel"
+          onClick={() => {
+            setEditingSkills(false);
+            setSkillsError("");
+          }}
+          disabled={savingSkills}
+        >
+          <X size={16} />
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          className="unstuck-profile-course-save"
+          onClick={handleSaveSkills}
+          disabled={savingSkills}
+        >
+          <Check size={16} />
+          {savingSkills ? "Saving..." : "Save Skills"}
+        </button>
+      </div>
+    </>
+  ) : mySkills.length === 0 ? (
+    <p>No skills selected yet. Use Edit to add your skills.</p>
+  ) : (
+    <div className="unstuck-profile-course-list">
+      {mySkills.map((skill) => (
+        <div
+          key={skill}
+          className="unstuck-profile-course-item"
+        >
+          <strong>
+            {AVAILABLE_SKILLS.find(
+              (item) => item.toLowerCase() === skill
+            ) || skill}
+          </strong>
+        </div>
+      ))}
+    </div>
+  )}
+
+  {skillsError && (
+    <p role="alert" className="unstuck-profile-course-error">
+      {skillsError}
+    </p>
+  )}
+
+  {skillsMessage && !editingSkills && (
+    <p role="status" className="unstuck-profile-course-success">
+      {skillsMessage}
+    </p>
+  )}
+</div>
+
+
+
         </section>
       </div>
     </main>

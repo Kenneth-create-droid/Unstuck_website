@@ -58,7 +58,14 @@ export default function SignupPage() {
       }
 
       if (data.success && data.user?.id) {
-  login(data.user);
+  if (!data.token) {
+    setError(
+      "Account created, but authentication could not be established. Please sign in to continue."
+    );
+    return;
+  }
+
+  login(data.user, data.token);
 
   navigate("/select-courses", {
     replace: true

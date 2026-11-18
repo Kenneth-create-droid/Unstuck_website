@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  LogOut, 
-  MapPin, 
-  User, 
-  Send, 
-  Radio, 
-  CheckCircle2, 
-  XCircle, 
-  Clock, 
-  Sparkles, 
+import {
+  LogOut,
+  MapPin,
+  User,
+  Send,
+  Radio,
+  CheckCircle2,
+  XCircle,
+  Clock,
+  Sparkles,
   HelpCircle,
   MessageSquare,
   AlertTriangle,
@@ -21,22 +21,23 @@ import {
   BookOpen
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
-import { 
-  activateLocation, 
-  deactivateLocation, 
-  getUserStatus, 
-  submitHelpRequest, 
-  getRequestStatus, 
-  acceptOffer, 
-  passOffer, 
+import {
+  activateLocation,
+  deactivateLocation,
+  getUserStatus,
+  submitHelpRequest,
+  getRequestStatus,
+  acceptOffer,
+  passOffer,
   cancelHelpRequest,
   getChatSession,
   sendChatMessage,
   completeMatch,
-  DEFAULT_CAMPUS_LOCATION 
+  DEFAULT_CAMPUS_LOCATION
 } from "../api";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import COURSES from "../data/courses.json";
 import "./HomePageSimple.css";
 
 // Match the Expo app's 30-second GPS refresh interval.
@@ -45,12 +46,30 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:2000
 
 const REQUEST_COURSES = [
   { code: "", name: "General Campus Help (No Course)" },
-  { code: "ENGR 4111U", name: "Capstone Systems Design I" },
-  { code: "SOFE 4790U", name: "Distributed Systems" },
-  { code: "SOFE 4590U", name: "Embedded Systems" },
-  { code: "SOFE 4640U", name: "Mobile Application Development" },
-  { code: "SOFE 4850U", name: "User Experience Design" },
-  { code: "ARTE 4110U", name: "Deep Learning Architecture and Algorithms" }
+  ...COURSES
+];
+
+const REQUEST_SKILLS = [
+  "Python",
+  "Java",
+  "JavaScript",
+  "React",
+  "Node.js",
+  "SQL",
+  "C++",
+  "Kotlin",
+  "Android Development",
+  "Web Development",
+  "Debugging",
+  "Data Structures",
+  "Algorithms",
+  "Mathematics",
+  "Calculus",
+  "Physics",
+  "Statistics",
+  "Academic Writing",
+  "Presentation Skills",
+  "Git and GitHub"
 ];
 
 export default function HomePage() {
@@ -70,7 +89,7 @@ export default function HomePage() {
   const availabilityRef = useRef(false);
   const locationBusyRef = useRef(false);
   const availabilityGenerationRef = useRef(0);
-  
+
 
   // Incoming Help Offer State (Candidate mode)
   const [incomingOffer, setIncomingOffer] = useState(null);
@@ -79,7 +98,11 @@ export default function HomePage() {
   const enteringChatRef = useRef(false);
   const mountedRef = useRef(true);
   const [selectedCourse, setSelectedCourse] = useState("");
- 
+
+  const [requestedSkill, setRequestedSkill] = useState("");
+  const [courseSearch, setCourseSearch] = useState("");
+  const [courseDropdownOpen, setCourseDropdownOpen] = useState(false);
+
 
   // Help Request Modal State (Requester mode)
   const [showRequestModal, setShowRequestModal] = useState(false);
@@ -340,7 +363,8 @@ export default function HomePage() {
           ? REQUEST_COURSES.find(c => c.code === selectedCourse)?.name
           : "General Campus Help",
         courseCode: selectedCourse || null,
-        description,
+          requestedSkill: requestedSkill || null,
+          description,
         lat: position.coords.latitude,
         lng: position.coords.longitude
       });
@@ -350,6 +374,8 @@ export default function HomePage() {
         navigate(`/search?postId=${encodeURIComponent(res.postId)}`);
        setSubject("");
         setSelectedCourse("");
+        setRequestedSkill("");
+        setCourseSearch("");
         setDescription("");
       }
     } catch (err) {
@@ -389,7 +415,7 @@ export default function HomePage() {
           });
         }
 
-          
+
          else if (job.status === "FAILED") {
           showNotice("Search Ended", "No available helpers were found in nearby cells. Please try again later.");
           setActivePostId(null);
@@ -590,26 +616,126 @@ export default function HomePage() {
       Course (Optional)
     </label>
 
-    <select
-      id="request-course"
-      className="form-input-box"
-      value={selectedCourse}
-      onChange={(e) => setSelectedCourse(e.target.value)}
-      disabled={submittingReq}
-      style={{
-        width: "100%",
-        marginBottom: "0.25rem"
-      }}
-    >
-      {REQUEST_COURSES.map((course) => (
-        <option key={course.code || "general"} value={course.code}>
-          {course.code
-            ? `${course.code} — ${course.name}`
-            : course.name}
-        </option>
-      ))}
-    </select>
+    <div style={{ position: "relative" }}>
+      <input
+        id="request-course"
+        type="text"
+        className="form-input-box"
+        placeholder="Search and select a course..."
+        value={
+          courseDropdownOpen
+            ? courseSearch
+            : selectedCourse
+              ? `${selectedCourse} — ${
+                  COURSES.find(c => c.code === selectedCourse)?.name || ""
+                }`
+              : "General Campus Help (No Course)"
+        }
+        onFocus={() => {
+          setCourseDropdownOpen(true);
+          setCourseSearch("");
+        }}
+        onChange={(e) => {
+          setCourseSearch(e.target.value);
+          setSelectedCourse("");
+          setCourseDropdownOpen(true);
+        }}
+        onBlur={() => {
+          setTimeout(() => setCourseDropdownOpen(false), 150);
+        }}
+        disabled={submittingReq}
+        autoComplete="off"
+        style={{ width: "100%" }}
+      />
+
+      {courseDropdownOpen && (
+        <div
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            right: 0,
+            zIndex: 20,
+            maxHeight: "240px",
+            overflowY: "auto",
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            background: "#fff",
+            marginTop: "4px",
+            boxShadow: "0 8px 20px rgba(0,0,0,0.1)"
+          }}
+        >
+          <div
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => {
+              setSelectedCourse("");
+              setCourseSearch("");
+              setCourseDropdownOpen(false);
+            }}
+            style={{
+              padding: "12px",
+              cursor: "pointer",
+              borderBottom: "1px solid #eee"
+            }}
+          >
+            General Campus Help (No Course)
+          </div>
+
+          {COURSES.filter(course => {
+            const query = courseSearch.trim().toLowerCase();
+            return !query ||
+              `${course.code} ${course.name}`
+                .toLowerCase()
+                .includes(query);
+          })
+            .slice(0, 40)
+            .map(course => (
+              <div
+                key={course.code}
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => {
+                  setSelectedCourse(course.code);
+                  setCourseSearch("");
+                  setCourseDropdownOpen(false);
+                }}
+                style={{
+                  padding: "12px",
+                  cursor: "pointer",
+                  borderBottom: "1px solid #eee"
+                }}
+              >
+                {course.code} — {course.name}
+              </div>
+            ))}
+        </div>
+      )}
+    </div>
   </div>
+
+
+<div className="form-field" style={{ marginBottom: "16px" }}>
+  <label className="form-label" htmlFor="main-request-skill">
+    Skill Needed (Optional)
+  </label>
+
+  <select
+    id="main-request-skill"
+    className="form-input-box"
+    value={requestedSkill}
+    onChange={(e) => setRequestedSkill(e.target.value)}
+    disabled={submittingReq}
+    style={{ width: "100%" }}
+  >
+    <option value="">No specific skill required</option>
+
+    {REQUEST_SKILLS.map((skill) => (
+      <option key={skill} value={skill.toLowerCase()}>
+        {skill}
+      </option>
+    ))}
+  </select>
+</div>
+
 
   <textarea
     className="unstuck-help-textarea"
@@ -718,6 +844,29 @@ export default function HomePage() {
                   onChange={(e) => setSubject(e.target.value)}
                 />
               </div>
+
+              <div className="form-field">
+  <label className="form-label" htmlFor="modal-request-skill">
+    Skill Needed (Optional)
+  </label>
+
+  <select
+    id="modal-request-skill"
+    className="form-input-box"
+    value={requestedSkill}
+    onChange={(e) => setRequestedSkill(e.target.value)}
+    disabled={submittingReq}
+    style={{ width: "100%" }}
+  >
+    <option value="">No specific skill required</option>
+
+    {REQUEST_SKILLS.map((skill) => (
+      <option key={skill} value={skill.toLowerCase()}>
+        {skill}
+      </option>
+    ))}
+  </select>
+</div>
 
               <div className="form-field">
                 <label className="form-label">What concept do you need help with?</label>

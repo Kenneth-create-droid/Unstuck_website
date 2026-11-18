@@ -144,3 +144,90 @@
 .unstuck-chat-attachment small {
   opacity: 0.7;
 }
+
+.unstuck-chat-profile-trigger {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: center;
+}
+
+.unstuck-chat-profile-trigger:hover strong {
+  text-decoration: underline;
+}
+
+.unstuck-matched-profile-modal {
+  position: relative;
+  background: #ffffff;
+  width: min(90%, 420px);
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+}
+
+.unstuck-matched-profile-modal h2 {
+  margin: 0 30px 24px 0;
+  color: #182a58;
+}
+
+.unstuck-matched-profile-close {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.unstuck-matched-profile-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.unstuck-matched-profile-stat span {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.unstuck-matched-profile-stat strong {
+  color: #182a58;
+  font-size: 15px;
+  text-align: right;
+}
+
+.unstuck-chat-profile-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #315bc5;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.unstuck-chat-profile-trigger {
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 8px 16px;
+}
+
+.unstuck-chat-profile-trigger:hover {
+  background: #f0f4ff;
+}
+
+.unstuck-chat-profile-trigger:hover .unstuck-chat-profile-link {
+  text-decoration: underline;
+}
+
+.unstuck-chat-profile-trigger:focus-visible {
+  outline: 2px solid #315bc5;
+  outline-offset: 3px;
+}

@@ -153,6 +153,7 @@ export async function submitHelpRequest({
   userId,
   subject,
   courseCode,
+  requestedSkill,
   description,
   lat,
   lng
@@ -161,12 +162,12 @@ export async function submitHelpRequest({
     userId,
     subject: subject || "General Campus Help",
     courseCode: courseCode || null,
+    requestedSkill: requestedSkill || null,
     description: description.trim(),
     lat: Number(lat),
     lng: Number(lng)
   });
 }
-
 export async function getRequestStatus(postId) {
   return apiRequest(
     `/api/request/progress?postId=${encodeURIComponent(postId)}`,
