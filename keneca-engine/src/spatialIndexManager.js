@@ -51,6 +51,25 @@ async function moveUserLocation(oldUser, updatedUser) {
   });
 }
 
+// Retrieve every student currently registered
+// in the Redis H3 spatial index.
+async function getAllUsersInSpatialIndex() {
+  const userIds = new Set();
+
+  for await (const key of client.scanIterator({
+    MATCH: "h3:*",
+    COUNT: 100
+  })) {
+    const members = await client.sMembers(key);
+
+    for (const id of members) {
+      userIds.add(id);
+    }
+  }
+
+  return Array.from(userIds);
+}
+
 // --- READ / QUERY OPERATIONS ---
 
 // 1. Fetch all unique user IDs sitting in a list of H3 cells
@@ -97,5 +116,6 @@ export {
   removeUserFromSpatialIndex,
   moveUserLocation,
   getUsersInCells,
-  getCandidatesData
+  getCandidatesData,
+  getAllUsersInSpatialIndex
 };

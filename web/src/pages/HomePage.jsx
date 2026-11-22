@@ -23,12 +23,15 @@ import {
 import { useAuth } from "../context/AuthContext";
 import {
   activateLocation,
+    manualOffLocation,
   deactivateLocation,
   getUserStatus,
   submitHelpRequest,
   getRequestStatus,
   acceptOffer,
   passOffer,
+
+    getAvailabilityEligibility,
   cancelHelpRequest,
   getChatSession,
   sendChatMessage,
@@ -89,6 +92,8 @@ export default function HomePage() {
   const availabilityRef = useRef(false);
   const locationBusyRef = useRef(false);
   const availabilityGenerationRef = useRef(0);
+
+  const autoActivationAttemptedDateRef = useRef(null);
 
 
   // Incoming Help Offer State (Candidate mode)
@@ -187,7 +192,10 @@ export default function HomePage() {
 
       const response = await fetch(`${API_BASE_URL}/api/location/update`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+       headers: {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${localStorage.getItem("unstuck_token")}`
+},
         body: JSON.stringify({
           userId: user.id,
           oldLat: oldCoords.lat,
@@ -196,7 +204,23 @@ export default function HomePage() {
           newLng: newCoords.lng
         })
       });
-      if (!response.ok) throw new Error(`Location update failed (${response.status})`);
+   if (!response.ok) {
+  // Backend has confirmed that availability is no longer active.
+  if (response.status === 409) {
+    console.log("[Location] Availability is no longer active.");
+
+    stopLocationTracking();
+
+    showNotice(
+      "Availability ended",
+      "Your availability is now OFF. You can turn it ON again when eligible."
+    );
+
+    return;
+  }
+
+  throw new Error(`Location update failed (${response.status})`);
+}
       if (!availabilityRef.current || generation !== availabilityGenerationRef.current) return;
 
       lastLocationRef.current = newCoords;
@@ -210,67 +234,155 @@ export default function HomePage() {
     }
   };
 
-  // ---------------- 1. AVAILABILITY & REDIS SPATIAL TOGGLE ----------------
-  const handleToggleAvailable = async (e) => {
-    const nextState = e.target.checked;
-    if (!user?.id) return;
+ 
+  // Activate availability using fresh GPS coordinates.
+  const activateAvailability = async () => {
+    if (!user?.id || availabilityRef.current) return;
 
-    if (nextState) {
-      if (availabilityRef.current) return;
-      const generation = ++availabilityGenerationRef.current;
-      setLocationStatus("Locating...");
+    const generation = ++availabilityGenerationRef.current;
+    setLocationStatus("Locating...");
 
-      if (!("geolocation" in navigator)) {
-        setLocationStatus("Off");
-        showNotice("Location needed", "Your browser does not support location access.");
+    if (!("geolocation" in navigator)) {
+      setLocationStatus("Off");
+      showNotice("Location needed", "Your browser does not support location access.");
+      return;
+    }
+
+    try {
+      const pos = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: false,
+          timeout: 8000
+        });
+      });
+
+      if (!mountedRef.current ||
+          generation !== availabilityGenerationRef.current) return;
+
+      const coords = {
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude
+      };
+
+      await activateLocation({
+        userId: user.id,
+        lat: coords.lat,
+        lng: coords.lng
+      });
+
+      if (!mountedRef.current ||
+          generation !== availabilityGenerationRef.current) {
+        await deactivateLocation({ userId: user.id }).catch(() => {});
         return;
       }
 
-      try {
-        const pos = await new Promise((resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(resolve, reject, {
-            enableHighAccuracy: false,
-            timeout: 8000
-          });
-        });
-        if (!mountedRef.current || generation !== availabilityGenerationRef.current) return;
+      lastLocationRef.current = coords;
+      availabilityRef.current = true;
 
-        const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        await activateLocation({ userId: user.id, lat: coords.lat, lng: coords.lng });
-        if (!mountedRef.current || generation !== availabilityGenerationRef.current) {
-          await deactivateLocation({ userId: user.id }).catch(() => {});
-          return;
-        }
+      setCurrentCoords(coords);
+      setIsAvailable(true);
+      setLocationStatus("Active (Redis H3 Indexed)");
 
-        lastLocationRef.current = coords;
-        availabilityRef.current = true;
-        setCurrentCoords(coords);
-        setIsAvailable(true);
-        setLocationStatus("Active (Redis H3 Indexed)");
-        showNotice("Active in Keneca Mesh", `Your ID #${user.id} is now registered in the Redis H3 spatial index.`);
+      showNotice(
+        "Active in Keneca Mesh",
+        `Your ID #${user.id} is now registered in the Redis H3 spatial index.`
+      );
 
-        locationTimerRef.current = setInterval(() => {
-          syncLocation(generation);
-        }, LOCATION_SYNC_MS);
-      } catch (err) {
-        console.error("Failed to activate location:", err);
-        if (mountedRef.current && generation === availabilityGenerationRef.current) {
-          setIsAvailable(false);
-          setLocationStatus("Off");
-          showNotice("Location needed", "Enable location access and check your connection to receive nearby requests.");
-        }
-      }
-    } else {
-      stopLocationTracking();
-      try {
-        await deactivateLocation({ userId: user.id });
-        showNotice("Offline", "You have been safely removed from the Redis spatial index.");
-      } catch (err) {
-        console.error("Failed to deactivate in Redis:", err);
-        showNotice("Error", "Could not confirm deactivation in Redis.");
+      locationTimerRef.current = setInterval(() => {
+        syncLocation(generation);
+      }, LOCATION_SYNC_MS);
+
+    } catch (err) {
+      console.error("Failed to activate location:", err);
+
+      if (mountedRef.current &&
+          generation === availabilityGenerationRef.current) {
+        setIsAvailable(false);
+        setLocationStatus("Off");
+
+        showNotice(
+          "Location needed",
+          "Enable location access and check your connection to receive nearby requests."
+        );
       }
     }
   };
+
+  // Handle manual toggle changes.
+  const handleToggleAvailable = async (e) => {
+    if (e.target.checked) {
+      await activateAvailability();
+      return;
+    }
+
+    if (!user?.id) return;
+
+    stopLocationTracking();
+
+    try {
+      await manualOffLocation({ userId: user.id });
+
+      showNotice(
+        "Availability turned OFF",
+        "You won't receive help offers again today. Your weekday schedule resets tomorrow."
+      );
+
+    } catch (err) {
+      console.error("Failed to save manual OFF override:", err);
+
+      showNotice(
+        "Error",
+        "Could not save your availability preference. Please try again."
+      );
+    }
+  };
+
+
+  // Automatically activate when eligible.
+  // Recheck every minute so an already-open tab can activate at 8 AM.
+  useEffect(() => {
+    if (!user?.id) return;
+
+    let active = true;
+
+    const checkAutomaticAvailability = async () => {
+      try {
+        const eligibility = await getAvailabilityEligibility();
+
+        if (!active || !eligibility.canAutoActivate) return;
+        if (availabilityRef.current) return;
+
+        if (
+          autoActivationAttemptedDateRef.current === eligibility.date
+        ) {
+          return;
+        }
+
+        autoActivationAttemptedDateRef.current = eligibility.date;
+
+        await activateAvailability();
+
+      } catch (error) {
+        console.error(
+          "[Availability] Automatic activation check failed:",
+          error
+        );
+      }
+    };
+
+    checkAutomaticAvailability();
+
+    const timer = setInterval(
+      checkAutomaticAvailability,
+      60 * 1000
+    );
+
+    return () => {
+      active = false;
+      clearInterval(timer);
+    };
+  }, [user?.id]);
+
 
   // ---------------- 2. ACTIVE POLLING FOR CANDIDATE OFFERS ----------------
   useEffect(() => {
@@ -755,16 +867,60 @@ export default function HomePage() {
             </form>
           </section>
 
-          <section className="unstuck-simple-card unstuck-availability-card">
-            <div className="unstuck-availability-label">
-              <span className={`unstuck-status-dot ${isAvailable ? "active" : ""}`} />
-              <div><h2>Available to Help</h2><p>{isAvailable ? "You're available for nearby requests." : "Turn this on to help other students nearby."}</p></div>
-            </div>
-            <label className="unstuck-toggle" aria-label="Available to help">
-              <input type="checkbox" checked={isAvailable} onChange={handleToggleAvailable} />
-              <span className="unstuck-toggle-track" />
-            </label>
-          </section>
+          <section
+  className="unstuck-simple-card unstuck-availability-card"
+  style={{
+    display: "grid",
+    gridTemplateColumns: "1fr auto",
+    gap: "12px",
+    alignItems: "center"
+  }}
+>
+  <div className="unstuck-availability-label">
+    <span className={`unstuck-status-dot ${isAvailable ? "active" : ""}`} />
+
+    <div>
+      <h2>Availability</h2>
+      <p>{isAvailable
+        ? "You're available for nearby requests."
+        : "Turn this on to help other students nearby."}
+      </p>
+    </div>
+  </div>
+
+  <label className="unstuck-toggle" aria-label="Available to help">
+    <input
+      type="checkbox"
+      checked={isAvailable}
+      onChange={handleToggleAvailable}
+    />
+    <span className="unstuck-toggle-track" />
+  </label>
+
+  <div style={{
+    gridColumn: "1 / -1",
+    borderTop: "1px solid #e2e8f0",
+    paddingTop: "12px",
+    marginTop: "4px"
+  }}>
+    <strong style={{ color: "#182A58", fontSize: "0.85rem" }}>
+      Automatically scheduled
+    </strong>
+
+    <p style={{
+      color: "#64748b",
+      fontSize: "0.82rem",
+      lineHeight: "1.6",
+      marginTop: "5px",
+      marginBottom: 0
+    }}>
+      Mon–Fri, 8 AM–8 PM. Your availability automatically turns ON
+      during these hours. You can turn it OFF at any time during the day.
+      Weekend availability is normally OFF due to lower student
+      participation. You can still manually turn it ON whenever you're available.
+    </p>
+  </div>
+</section>
 
           <section className="unstuck-simple-card">
             <div className="unstuck-offer-heading">

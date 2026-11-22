@@ -47,8 +47,10 @@ import { db } from "./db.js";
 import {
   addUserToSpatialIndex,
   removeUserFromSpatialIndex,
-  moveUserLocation
+  moveUserLocation,
+  getAllUsersInSpatialIndex
 } from "../keneca-engine/src/spatialIndexManager.js";
+
 
 import {
   createChatSession,
@@ -129,6 +131,50 @@ app.get("/", (req, res) => {
 });
 
 const PORT = 2000;
+
+// ==========================================
+// AUTOMATIC AVAILABILITY SCHEDULER
+// ==========================================
+
+const AVAILABILITY_TIMEZONE = "America/Toronto";
+
+function getTorontoDateTime(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: AVAILABILITY_TIMEZONE,
+    weekday: "short",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23"
+}).formatToParts(now);
+
+  return Object.fromEntries(
+    parts
+      .filter(part => part.type !== "literal")
+      .map(part => [part.type, part.value])
+  );
+}
+
+function getAvailabilitySchedule(now = new Date()) {
+  const time = getTorontoDateTime(now);
+
+  const weekday = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+    .includes(time.weekday);
+
+  const hour = Number(time.hour);
+
+  const scheduled = weekday && hour >= 8 && hour < 20;
+
+  return {
+    date: `${time.year}-${time.month}-${time.day}`,
+    weekday,
+    scheduled
+  };
+}
+
+
 
 const CHAT_INACTIVITY_LIMIT = 60 * 60 * 1000;
 const activeChatTimers = new Map();
@@ -1254,13 +1300,28 @@ return res.status(200).json({
 
 // ---------------------- LOCATION ROUTES ----------------------
 
+
+
+
 // Activate Availability (Adds user to Redis Spatial Index)
-app.post("/api/location/activate", async (req, res) => {
+app.post("/api/location/activate", requireAuth, async (req, res) => {
   try {
     const { userId, lat, lng } = req.body;
+
+
+
+  
+
+if (String(userId) !== req.authUserId) {
+  return res.status(403).json({
+    message: "You cannot change another user's availability."
+  });
+}
     if (!userId || lat === undefined || lng === undefined) {
       return res.status(400).json({ message: "Missing userId or coordinates" });
     }
+
+
 
     await addUserToSpatialIndex({ id: userId, lat, lng });
 
@@ -1284,70 +1345,223 @@ app.post("/api/location/activate", async (req, res) => {
       });
 
 // Periodic Position Update
-app.put("/api/location/update", async (req, res) => {
+
+// Periodic Position Update
+app.put("/api/location/update", requireAuth, async (req, res) => {
   try {
     const { userId, oldLat, oldLng, newLat, newLng } = req.body;
+
+    if (String(userId) !== req.authUserId) {
+      return res.status(403).json({
+        message: "You cannot update another user's location."
+      });
+    }
+
+    // Only allow GPS updates while the student is AVAILABLE.
+    const currentStatus = await getUserStatus(String(userId));
+
+    if (
+  !currentStatus ||
+  !["AVAILABLE", "BUSY"].includes(currentStatus.status)
+) {
+      return res.status(409).json({
+        success: false,
+        message: "Location updates are not allowed while availability is inactive."
+      });
+    }
 
     const oldUser = { id: userId, lat: oldLat, lng: oldLng };
     const updatedUser = { id: userId, lat: newLat, lng: newLng };
 
     await moveUserLocation(oldUser, updatedUser);
+
     console.log(`User ${userId} position updated in spatial index`);
-    return res.status(200).json({ message: "Spatial index updated" });
+
+    return res.status(200).json({
+      message: "Spatial index updated"
+    });
+
   } catch (error) {
     console.error("Error updating location:", error);
-    return res.status(500).json({ message: "Failed to update location" });
+    return res.status(500).json({
+      message: "Failed to update location"
+    });
   }
 });
 
+
+// Reusable function to deactivate a student's availability.
+async function deactivateUserAvailability(userIdStr) {
+
+  // 1. Check whether the student has an active offer.
+  const currentStatus = await getUserStatus(userIdStr);
+  const activePostId = currentStatus?.postID || currentStatus?.postId;
+
+  if (activePostId) {
+    const job = await getDispatchJob(activePostId);
+
+    // Revoke a pending offer if this student is the candidate.
+    if (
+      job &&
+      job.status === "PENDING_CANDIDATE" &&
+      String(job.currentCandidateId) === userIdStr
+    ) {
+      await updateDispatchJob(activePostId, {
+        status: "SEARCHING",
+        currentCandidateId: "",
+        sentAt: "",
+        expiresAt: ""
+      });
+    }
+  }
+
+  // 2. Set student to OFFLINE.
+  await updateUserStatus(userIdStr, {
+    status: "OFFLINE",
+    postID: ""
+  });
+
+  // 3. Remove student from Redis spatial index.
+  await removeUserFromSpatialIndex({
+    id: userIdStr
+  });
+
+  console.log(`[Availability] User ${userIdStr} is now OFFLINE.`);
+}
+
+
 // Deactivate Availability (Removes user from Redis Spatial Index & releases active offers)
-app.post("/api/location/deactivate", async (req, res) => {
+
+app.post("/api/location/deactivate", requireAuth, async (req, res) => {
   try {
     const { userId } = req.body;
+
     if (!userId) {
-      return res.status(400).json({ message: "Missing userId" });
+      return res.status(400).json({
+        message: "Missing userId"
+      });
     }
 
-    const userIdStr = userId.toString();
-
-    // 1. Fetch user's status to see if they hold an active request offer
-    const currentStatus = await getUserStatus(userIdStr);
-    const activePostId = currentStatus?.postID || currentStatus?.postId;
-
-    if (activePostId) {
-      const job = await getDispatchJob(activePostId);
-
-      // If this user is the active pending candidate, kick the dispatch job back to SEARCHING
-          if (
-        job &&
-        job.status === "PENDING_CANDIDATE" &&
-        String(job.currentCandidateId) === userIdStr
-      ) {
-        console.log(`[Deactivate] Candidate ${userIdStr} deactivated location mid-offer. Revoking post ${activePostId}...`);
-
-        await updateDispatchJob(activePostId, {
-          status: "SEARCHING",
-          currentCandidateId: "",
-          sentAt: "",
-          expiresAt: ""
-        });
-      }
+    if (String(userId) !== req.authUserId) {
+      return res.status(403).json({
+        message: "You cannot change another user's availability."
+      });
     }
 
-    // 2. Clear candidate status back to OFFLINE
-    await updateUserStatus(userIdStr, {
-      status: "OFFLINE",
-      postID: ""
+    await deactivateUserAvailability(String(userId));
+
+    return res.status(200).json({
+      success: true,
+      message: "Availability deactivated successfully."
     });
 
-    // 3. Remove user from Redis Spatial Index
-    await removeUserFromSpatialIndex({ id: userIdStr });
-    console.log(`User ${userIdStr} deactivated and removed from spatial index`);
-
-    return res.status(200).json({ message: "Removed from spatial index and active offers revoked" });
   } catch (error) {
     console.error("Error deactivating location:", error);
-    return res.status(500).json({ message: "Failed to deactivate location" });
+
+    return res.status(500).json({
+      message: "Failed to deactivate location"
+    });
+  }
+});
+
+
+
+// Check whether a student is eligible for automatic availability.
+app.get("/api/location/availability-eligibility", requireAuth, async (req, res) => {
+  try {
+    const userId = String(req.authUserId);
+    const schedule = getAvailabilitySchedule();
+
+    const result = await db.query(
+      `SELECT
+         availability_manual_off_date = $1::date AS manually_turned_off_today
+       FROM users
+       WHERE id = $2`,
+      [schedule.date, userId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        message: "Student account not found."
+      });
+    }
+
+    const manuallyTurnedOff =
+      result.rows[0].manually_turned_off_today === true;
+
+    const canAutoActivate =
+      schedule.weekday &&
+      schedule.scheduled &&
+      !manuallyTurnedOff;
+
+    return res.status(200).json({
+      date: schedule.date,
+      weekday: schedule.weekday,
+      scheduled: schedule.scheduled,
+      manuallyTurnedOff,
+      canAutoActivate
+    });
+
+  } catch (error) {
+    console.error("[Availability] Eligibility check failed:", error);
+
+    return res.status(500).json({
+      message: "Could not check availability eligibility."
+    });
+  }
+});
+
+
+
+
+// Manually switch OFF availability for the rest of today.
+app.post("/api/location/manual-off", requireAuth, async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({
+        message: "Missing userId"
+      });
+    }
+
+    if (String(userId) !== req.authUserId) {
+      return res.status(403).json({
+        message: "You cannot change another user's availability."
+      });
+    }
+
+    // Get today's date using Toronto local time.
+    const { date } = getAvailabilitySchedule();
+
+    // Save today's manual OFF override.
+    await db.query(
+      `UPDATE users
+       SET availability_manual_off_date = $1
+       WHERE id = $2`,
+      [date, userId]
+    );
+
+    // Reuse existing Redis deactivation logic.
+    await deactivateUserAvailability(String(userId));
+
+    console.log(
+      `[Availability] User ${userId} manually switched OFF for ${date}.`
+    );
+
+    return res.status(200).json({
+      success: true,
+      manualOff: true,
+      date,
+      message: "Availability turned OFF for the rest of today."
+    });
+
+  } catch (error) {
+    console.error("[Availability] Manual OFF failed:", error);
+
+    return res.status(500).json({
+      message: "Failed to turn availability OFF."
+    });
   }
 });
 
@@ -3765,6 +3979,64 @@ return res.status(200).json({
 });
 
 
+// ==========================================
+// AUTOMATIC AVAILABILITY SCHEDULER
+// ==========================================
+
+let lastAutomaticDeactivationDate = null;
+
+async function runAvailabilityScheduler(now = new Date()) {
+  try {
+const schedule = getAvailabilitySchedule(now);
+
+    // Only automatically deactivate on weekdays after 8 PM.
+    const torontoTime = getTorontoDateTime(now);
+
+    const currentHour = Number(torontoTime.hour);
+
+    if (schedule.weekday && currentHour >= 20) {
+
+      // Run once per Toronto calendar day.
+      if (lastAutomaticDeactivationDate === schedule.date) {
+        return;
+      }
+
+      console.log(
+        `[Availability Scheduler] Starting weekday shutdown for ${schedule.date}`
+      );
+
+      const activeUsers = await getAllUsersInSpatialIndex();
+
+  
+
+      for (const userId of activeUsers) {
+        try {
+          await deactivateUserAvailability(String(userId));
+        } catch (error) {
+          console.error(
+            `[Availability Scheduler] Failed to deactivate user ${userId}:`,
+            error
+          );
+        }
+      }
+
+      lastAutomaticDeactivationDate = schedule.date;
+
+      console.log(
+        `[Availability Scheduler] Shutdown completed. Processed ${activeUsers.length} active users.`
+      );
+    }
+
+  } catch (error) {
+    console.error(
+      "[Availability Scheduler] Scheduler error:",
+      error
+    );
+  }
+}
+
+
+
 
 // Server Startup Routine
 async function startServer() {
@@ -3773,6 +4045,17 @@ async function startServer() {
             await client.connect();
         }
         console.log("Redis is fully ready!");
+
+        
+
+        // Start automatic availability checks every 60 seconds.
+          await runAvailabilityScheduler();
+
+          setInterval(() => {
+            runAvailabilityScheduler();
+          }, 60 * 1000);
+
+          console.log("[Availability Scheduler] Started.");
 
         app.listen(PORT, () => {
             console.log(`Our OT support app is running on port ${PORT}`);

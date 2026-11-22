@@ -135,6 +135,18 @@ export async function deactivateLocation({ userId }) {
   });
 }
 
+// Check whether automatic availability can be enabled.
+export async function getAvailabilityEligibility() {
+  return apiRequest("/api/location/availability-eligibility", "GET");
+}
+
+// Manually switch OFF availability for the rest of today.
+export async function manualOffLocation({ userId }) {
+  return apiRequest("/api/location/manual-off", "POST", {
+    userId
+  });
+}
+
 export async function updateLocation({ userId, oldLat, oldLng, newLat, newLng }) {
   return apiRequest("/api/location/update", "PUT", {
     userId,

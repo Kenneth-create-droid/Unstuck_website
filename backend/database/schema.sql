@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS user_skills (
         ON DELETE CASCADE
 );
 
-DELETE FROM users;
+
 
 SELECT
     u.id,
@@ -103,5 +103,10 @@ LEFT JOIN helper_events he
     ON u.id = he.helper_id
 GROUP BY u.id, u.firstname, u.lastname
 ORDER BY u.id;
+
+
+-- Add a daily manual availability override
+ALTER TABLE users
+ADD COLUMN IF NOT EXISTS availability_manual_off_date DATE DEFAULT NULL;
 
 
