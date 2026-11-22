@@ -58,6 +58,9 @@ export default function Navbar({ disableNavigation = false }) {
               <a href="/#spatial-engine" className="nav-link">
                 H3 Spatial Indexing
               </a>
+              <a href="/#mobile-install" className="nav-link">
+                Install Unstuck
+              </a>
             </div>
           )}
 

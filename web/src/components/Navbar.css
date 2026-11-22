@@ -1,5 +1,7 @@
 
-/* Unstuck Navigation */
+/* =========================================
+   UNSTUCK NAVIGATION
+========================================= */
 
 .unstuck-navbar {
   background: #ffffff;
@@ -10,9 +12,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 48px;
   min-height: 112px;
 }
+
+/* =========================================
+   BRANDING
+========================================= */
 
 .unstuck-navbar-brand {
   display: flex;
@@ -53,6 +59,55 @@
   color: #ed5c00;
 }
 
+/* =========================================
+   DESKTOP NAVIGATION LINKS
+========================================= */
+
+.nav-links-desktop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 2.5vw, 48px);
+  flex: 1;
+  min-width: 0;
+  margin-right: 24px;
+}
+
+.nav-links-desktop .nav-link {
+  color: #475569;
+  font-size: 1rem;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.nav-links-desktop .nav-link:hover {
+  color: #2455c5;
+}
+
+/* =========================================
+   LOGIN AND GET STARTED BUTTONS
+========================================= */
+
+.nav-auth-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.nav-auth-actions .btn {
+  white-space: nowrap;
+}
+
+/* =========================================
+   PROFILE
+========================================= */
+
 .unstuck-navbar-profile {
   display: inline-flex;
   align-items: center;
@@ -72,10 +127,91 @@
   color: white;
 }
 
+/* =========================================
+   SMALLER DESKTOP
+========================================= */
+
+@media (max-width: 1400px) {
+  .unstuck-navbar-inner {
+    gap: 24px;
+  }
+
+  .unstuck-navbar-brand {
+    gap: 12px;
+  }
+
+  .unstuck-navbar-icon {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+  }
+
+  .unstuck-navbar-title {
+    font-size: 2.1rem;
+  }
+
+  .unstuck-navbar-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-links-desktop {
+    gap: 18px;
+    margin-right: 8px;
+  }
+
+  .nav-links-desktop .nav-link {
+    font-size: 0.88rem;
+  }
+
+  .nav-auth-actions {
+    gap: 12px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+  .unstuck-navbar-inner {
+    gap: 14px;
+  }
+
+  .nav-links-desktop {
+    gap: 12px;
+    margin-right: 0;
+  }
+
+  .nav-links-desktop .nav-link {
+    font-size: 0.8rem;
+  }
+
+  .unstuck-navbar-title {
+    font-size: 1.9rem;
+  }
+
+  .unstuck-navbar-subtitle {
+    font-size: 0.68rem;
+  }
+
+  .nav-auth-actions {
+    gap: 8px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
 @media (max-width: 768px) {
   .unstuck-navbar-inner {
     min-height: 82px;
     gap: 12px;
+  }
+
+  .nav-links-desktop {
+    display: none;
   }
 
   .unstuck-navbar-brand {
@@ -99,15 +235,33 @@
     letter-spacing: 0.25px;
   }
 
+  .nav-auth-actions {
+    gap: 8px;
+  }
+
+  .nav-auth-actions .btn {
+    padding: 10px 13px;
+    font-size: 0.8rem;
+  }
+
   .unstuck-navbar-profile {
     padding: 11px 14px;
     font-size: 0.85rem;
   }
 }
 
+/* =========================================
+   SMALL PHONES
+========================================= */
+
 @media (max-width: 420px) {
   .unstuck-navbar-subtitle {
     font-size: 0.57rem;
+  }
+
+  .nav-auth-actions .btn {
+    padding: 9px 10px;
+    font-size: 0.75rem;
   }
 
   .unstuck-navbar-profile {

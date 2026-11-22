@@ -1,5 +1,4 @@
 import React from "react";
-import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { 
   ArrowRight, 
@@ -19,9 +18,6 @@ import Footer from "../components/Footer";
 import CampusHexMap from "../components/CampusHexMap";
 
 export default function LandingPage() {
-  const { user } = useAuth();
-  const isLoggedIn = Boolean(user?.id);
-
   return (
     <div className="web-viewport">
       <Navbar />
@@ -47,26 +43,15 @@ export default function LandingPage() {
                 the closest available peer to you in minutes—without broadcast notification spam.
               </p>
 
-             <div className="hero-cta-group">
-  <Link
-    to={isLoggedIn ? "/home" : "/signup"}
-    className="btn btn-primary"
-    style={{ padding: "0.85rem 1.75rem", fontSize: "1rem" }}
-  >
-    {isLoggedIn ? "Go to My Home" : "Join Campus Network"}
-    <ArrowRight size={18} />
-  </Link>
-
-  {!isLoggedIn && (
-    <Link
-      to="/login"
-      className="btn btn-secondary"
-      style={{ padding: "0.85rem 1.5rem", fontSize: "1rem" }}
-    >
-      Sign In with Student Email
-    </Link>
-  )}
-</div>
+              <div className="hero-cta-group">
+                <Link to="/signup" className="btn btn-primary" style={{ padding: "0.85rem 1.75rem", fontSize: "1rem" }}>
+                  Join Campus Network
+                  <ArrowRight size={18} />
+                </Link>
+                <Link to="/login" className="btn btn-secondary" style={{ padding: "0.85rem 1.5rem", fontSize: "1rem" }}>
+                  Sign In with Student Email
+                </Link>
+              </div>
 
               {/* Quick Metrics */}
               <div className="hero-stats-row">
@@ -174,6 +159,102 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+
+      {/* MOBILE INSTALLATION SECTION */}
+      <section id="mobile-install" className="features-section">
+        <div className="web-container">
+          <div className="section-head-center">
+            <span className="section-tag">Mobile Experience</span>
+
+            <h2 className="section-title">
+              Get Unstuck on Your Phone
+            </h2>
+
+            <p className="section-desc">
+              Access Unstuck directly from your home screen.
+              Follow the instructions below to install the
+              web app on your Android or iPhone.
+            </p>
+          </div>
+
+          <div className="features-grid-4">
+            <div className="feature-box">
+              <h3 className="feature-box-title">
+                Android Installation
+              </h3>
+
+              <p className="feature-box-desc">
+                1. Open unstuckapp.ca in Google Chrome.
+                <br />
+                2. Tap the three-dot menu.
+                <br />
+                3. Select Install App or Add to Home Screen.
+                <br />
+                4. Confirm the installation.
+              </p>
+            </div>
+
+            <div className="feature-box">
+              <h3 className="feature-box-title">
+                iPhone Installation
+              </h3>
+
+              <p className="feature-box-desc">
+                1. Open unstuckapp.ca in Safari.
+                <br />
+                2. Tap the Share button.
+                <br />
+                3. Select Add to Home Screen.
+                <br />
+                4. Tap Add to finish.
+              </p>
+            </div>
+            {/* Push Notifications */}
+            <div className="feature-box">
+              <h3 className="feature-box-title">
+                Enable Push Notifications
+              </h3>
+
+              <p className="feature-box-desc">
+                Stay updated when another student needs help.
+                <br /><br />
+                1. Install Unstuck on your phone.
+                <br />
+                2. Open Unstuck from your home screen.
+                <br />
+                3. Sign in to your student account.
+                <br />
+                4. Allow notifications if prompted.
+                <br />
+                5. Check your device's notification settings
+                if you don't receive alerts.
+              </p>
+            </div>
+            {/* Courses and Skills */}
+            <div className="feature-box">
+              <h3 className="feature-box-title">
+                Set Up Your Courses & Skills
+              </h3>
+
+              <p className="feature-box-desc">
+                Help Unstuck connect you with the right students.
+                <br /><br />
+                1. Create an account using your Ontario Tech email.
+                <br />
+                2. Open your profile settings.
+                <br />
+                3. Add the courses you're currently taking.
+                <br />
+                4. Select the subjects or skills you can help with.
+                <br />
+                5. Save your preferences to improve matching.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* TECHNOLOGY & ARCHITECTURE SECTION */}
       <section id="spatial-engine" style={{ backgroundColor: "#FFFFFF", padding: "5rem 0", borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0" }}>
