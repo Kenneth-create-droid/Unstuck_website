@@ -29,11 +29,39 @@ function ProtectedRoute({ children }) {
   }
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/l" replace />;
   }
 
   return children;
 }
+
+
+function PublicLandingRoute() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div
+        className="app-container"
+        style={{
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <div style={{ color: "#182A58", fontWeight: "600" }}>
+          Loading Unstuck...
+        </div>
+      </div>
+    );
+  }
+
+  if (user) {
+    return <Navigate to="/home" replace />;
+  }
+
+  return <LandingPage />;
+}
+
 
 export default function App() {
   return (
@@ -42,14 +70,21 @@ export default function App() {
         <ScrollToTop />
 
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+         <Route path="/" element={<PublicLandingRoute />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/verify-email" element={<VerifyEmailPage />} />
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/verify-reset-code" element={<VerifyResetCodePage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
 
           <Route

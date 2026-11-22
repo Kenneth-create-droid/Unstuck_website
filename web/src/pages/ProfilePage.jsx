@@ -16,7 +16,6 @@ import {
 import { useAuth } from "../context/AuthContext";
 import {
   apiRequest,
-  deactivateLocation,
   getMyCourses,
 } from "../api";
 import COURSES from "../data/courses.json";
@@ -160,12 +159,8 @@ const [skillSearch, setSkillSearch] = useState("");
 }, [user?.id]);
 
   const handleBack = () => {
-    if (window.history.state?.idx > 0) {
-      navigate(-1);
-    } else {
-      navigate("/home");
-    }
-  };
+  navigate("/home", { replace: true });
+};
 
   const handleEditCourses = () => {
   setSelectedCourses([...myCourses]);
@@ -270,27 +265,25 @@ const handleSaveSkills = async () => {
   }
 };
 
-  const handleLogout = async () => {
-    if (loggingOut) return;
+  
+const handleLogout = async () => {
+  if (loggingOut) return;
 
-    setLoggingOut(true);
+  setLoggingOut(true);
 
-    try {
-      if (user?.id) {
-        await deactivateLocation({ userId: user.id });
-      }
-    } catch (err) {
-      console.error("Failed to deactivate location:", err);
-    } finally {
-      if (typeof logout === "function") {
-        logout();
-      } else {
-        localStorage.removeItem("unstuck_user");
-      }
+  try {
+    await logout();
 
-      navigate("/", { replace: true });
-    }
-  };
+    // Authentication is now cleared.
+    // Return to the public landing page.
+    navigate("/", { replace: true });
+
+  } catch (err) {
+    console.error("Logout failed:", err);
+  } finally {
+    setLoggingOut(false);
+  }
+};
 
   return (
     <main className="unstuck-profile-page">
